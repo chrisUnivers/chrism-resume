@@ -67,3 +67,4 @@ dist-ssr
 *.local
 # Config file
 config.env
+firebase.config.js
