@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import {gradTri as colorfulTri} from "./exs-modules/mod-triangle.js"
+import { gradTri } from "./exs-modules/modTriange.js"
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -13,8 +13,7 @@ const geometry = new THREE.BoxGeometry( 1, 1, 1 );
 const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
 const cube = new THREE.Mesh( geometry, material );
 // cube.position(1, 1, 1);
-// let gTri = colorfulTri();
-
+const gTri = new gradTri();
 let positionBuffer = new Float32Array([
 	-2, -2, // v1
 	2, -2, // v2
@@ -38,7 +37,9 @@ let lineMaterial = new THREE.LineBasicMaterial({
 	linewidth: 3,
 	vertexColors: true
 });
-let triangle = new THREE.LineLoop(lineGeometry, lineMaterial)
+let triangle = new THREE.LineLoop(gTri.lineGeometry, gTri.lineMaterial)
+let scn_bck_c = new THREE.Color(1,1,1);
+// scene.background = scn_bck_c;
 scene.add( cube, triangle );
 
 camera.position.z = 5;

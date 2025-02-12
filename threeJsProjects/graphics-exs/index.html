@@ -8,7 +8,22 @@
 		</style>
 	</head>
 	<body>
-		<script type="module" src="/main.js"></script>
+		
+		<h2>Diskworld #1: Hierarchical Modeling in Three.js</h2>
+
+		<p><b>Use Arrow, PageUp, PageDown, and Home keys to rotate the model.</b></p>
+		
+		<p><label><input type="checkbox" id="animate">Animate</label>
+		   <label style="margin-left: 80px"><input type="radio" id="axle" name="model">Show Axle</label>
+		   <label style="margin-left: 20px"><input type="radio" id="car" name="model">Show Car</label>
+		   <label style="margin-left: 20px"><input type="radio" id="diskworld" name="model">Show Diskworld</label>
+		</p>
+		
+		<div id="canvas-holder">
+			<canvas id="glcanvas" width="600" height="600"></canvas>
+		</div>
+		<!-- <script type="module" src="/main.js"></script> -->
+		<script type="module" src="./codeSamples/diskworld-1.js"></script>
 	</body>
 </html>
 
