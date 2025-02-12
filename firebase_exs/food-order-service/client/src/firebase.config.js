@@ -3,7 +3,7 @@ import {getFirestore} from 'firebase/firestore'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCQnKQnzIA1Ocg81tWBbV5ohRaCpgoKueI",
+  // nolonger active. deleted project
   authDomain: "food-ordering-service-ad6bb.firebaseapp.com",
   projectId: "food-ordering-service-ad6bb",
   storageBucket: "food-ordering-service-ad6bb.firebasestorage.app",
