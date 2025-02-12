@@ -212,5 +212,3 @@ function init() {
 }
 
 window.onload = init;  // Arranges for init() to be called after page is loaded.
-
-// need to load from different html file
