@@ -20,6 +20,7 @@ let model;  // Content of the scene, either the reflectiveObject or a container 
 
 let rotateX = 0;   // rotation of object about its x-axis
 let rotateY = 0;   // rotation of object about its y-axis
+let moveX   = 0;   // translation of object about x-axis
 
 let controls;  // an OrbitControls object for rotating the view.
 
@@ -116,6 +117,7 @@ function installModel(modelNum) {
     let material = makeReflectionMaterial();
     model = new THREE.Mesh(geometry, material);
     rotateX = rotateY = 0;
+    moveX = 0;
     defaultRotation = [0,0];
     scene.add(model);
     reflectiveObject = model;

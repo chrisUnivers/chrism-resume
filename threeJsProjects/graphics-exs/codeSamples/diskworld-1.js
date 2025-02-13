@@ -31,9 +31,10 @@ let diskworldAxle1, diskworldAxle2;  // The two axles in the car that is part of
 let growingTree;  // The tree in the center of diskworld that grows.
 let carRotator;  // An object at the origin that has the diskworld car as its child;
                  // rotating this object about the y-axis drives the car aroudn the disk.
-
+let groundRotator;
 let animating = false;  // This is set to true when an animation is running.
 
+let nwPink;
 
 /*  Create the scene graph.  This function is called once, as soon as the page loads.
  *  The renderer has already been created before this function is called.
@@ -91,6 +92,12 @@ function createWorld() {
 		shininess: 8,
 		flatShading: true
 	});
+	nwPink = new THREE.MeshPhongMaterial({
+	    color: 0xD51EA4,
+		specular: 0x006000,
+		shininess: 8,
+		flatShading: true
+	});
 	let body = new THREE.Mesh(new THREE.BoxGeometry(6,1.2,3), red);
 	body.position.y = 0.6;
 	let hood = new THREE.Mesh(new THREE.BoxGeometry(3,1,2.8), red);
@@ -118,8 +125,9 @@ function createWorld() {
 	    new THREE.CylinderGeometry(5.5, 5.5, 0.5, 64, 1),
 		new THREE.MeshLambertMaterial( { color: 0x00CC55 } )
 	);
+	let groundModel = new THREE.Object3D();
 	ground.position.y = -0.3; // Puts top of cylinder just below the xz-plane.
-	diskworldModel.add(ground);
+	groundModel.add(ground);
 	let road = new THREE.Mesh(
 	    new THREE.RingGeometry(3.3,4.8,64,1),
 		new THREE.MeshLambertMaterial( { color: 0x777799 })
@@ -127,14 +135,18 @@ function createWorld() {
 	road.rotation.x = -Math.PI/2;
 	diskworldModel.add(road);
 	let diskCar = carModel.clone();
+	let diskGround = groundModel.clone();
     // Note that the original carModel is not part of the diskworld; it is a separate model.
 	diskworldAxle1 = diskCar.children[0];  // First two children are the axles; we need these to animate them.
 	diskworldAxle2 = diskCar.children[1];
 	diskCar.scale.set(0.3,0.3,0.3);
 	diskCar.position.set(0,0.3,-4);  // puts car on the road, near the edge of the disk.
 	carRotator = new THREE.Object3D();  // rotating carRotator about the y-axis will move the car along the road.
+	groundRotator = new THREE.Object3D()
 	carRotator.add(diskCar);
+	groundRotator.add(diskGround);
 	diskworldModel.add(carRotator);
+	diskworldModel.add(groundRotator);
 	
 	// Make a tree model, consisting of a brown cylinder and a green cone.
 	let tree = new THREE.Object3D();
@@ -183,7 +195,7 @@ function createWorld() {
 	// The final tree, at the center of the disk, starts off very small but its size will be animated.
 	tree.scale.set(0.1,0.1,0.1);
 	tree.position.set(0,0,0);
-	growingTree = tree;
+	growingTree = tree.clone();
 	diskworldModel.add(growingTree);
 	
 	axleModel.scale.set(2,2,2);  // Needs to be bigger when it's displayed alone.
@@ -208,16 +220,17 @@ function render() {
  */
 function updateForFrame() {
 	if (currentModel == axleModel) {
-		axleModel.rotation.z += 0.05;
+		axleModel.rotation.z -= 0.05;
 	}
 	else if (currentModel == carModel) {
 		carAxle1.rotation.z += 0.05;
 		carAxle2.rotation.z += 0.05;
 	}
 	else {
-		diskworldAxle1.rotation.z += 0.05;
-		diskworldAxle2.rotation.z += 0.05;
+		diskworldAxle1.rotation.z -= 0.05;
+		diskworldAxle2.rotation.z -= 0.05;
 		carRotator.rotation.y += 0.007;
+		groundRotator.rotation.y -= 0.007;
 		let treeScale = growingTree.scale.x;
 		if (treeScale < 1.5) {
 			treeScale += 0.0005;
