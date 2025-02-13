@@ -3,27 +3,24 @@
 	<head>
 		<meta charset="utf-8">
 		<title>My first three.js app</title>
+		
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<link type="text/css" rel="stylesheet" href="main.css">
 		<style>
-			body { margin: 0; }
+			body {background-color: black; color:rgb(255, 255, 255);}
+			#info a {
+				color:#1ed583;
+			}
 		</style>
 	</head>
 	<body>
 		
-		<h2>Three.js:  Using An Array of Materials</h2>
-
-		<p><b>Use Arrow, PageUp, PageDown, and Home keys to rotate the models.</b></p>
-
-		<p>
-		<label><input type="radio" name="material" id="white">White Material</label>
-		<label style ="margin-left:25px"><input type="radio" name="material" id="multi">Array of Colored Materials</label>
-		<label style ="margin-left:60px"><input type="checkbox" id="wireframe">Show Edges</label>
-		</p>
-
-		<div id="canvas-holder">
-		<canvas id="glcanvas" width="600" height="300"></canvas>
+		<div id="info">
+			
+			Simple animated example <a href="diskworld-1.html" target="_blank" rel="noopener">diskworld-1 example</a><br />Vertex groups example <a href="vertex-groups.html" target="_blank" rel="noopener">Vertex-groups</a>
 		</div>
-		<!-- <script type="module" src="/main.js"></script> -->
+		<script type="module" src="/main.js"></script>
 		<!-- <script type="module" src="./codeSamples/diskworld-1.js"></script> -->
-		<script type="module" src="./codeSamples/meshGeometry/vertex-groups.js"></script>
+		<!-- <script type="module" src="./codeSamples/meshGeometry/vertex-groups.js"></script> -->
 	</body>
 </html>
