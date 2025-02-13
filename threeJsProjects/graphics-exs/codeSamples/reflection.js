@@ -4,7 +4,7 @@ import {GLTFLoader} from "./script/loaders/GLTFLoader.js";
 
 /*  This page shows a reflecting object inside a skybox. An environment
  *  map is used on the object to make it refract the skybox.  No lighting
- *  is used since object uses MeshBasicMaterial. 
+ *  is used since object uses MeshBasicMaterial.
  */
 
 "use strict";
