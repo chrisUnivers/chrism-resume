@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { margin: 0; }
+		</style>
+	</head>
+	<body>
+		<h2>Three.js Reflection Demo</h2>
+
+        <noscript>
+            <p style="color: #AA0000; font-weight: bold">Sorry, but this page requires JavaScript!</p>
+        </noscript>
+
+        <p>Cube maps used on this page are by <a href="http://www.humus.name/index.php?page=Textures">Emil Persson</a>,
+        but with resolution reduced to 512-by-512.</p>
+
+        <p style="color:#AA0000; font-weight: bold" id="message">Drag on the scene to rotate the view.</p>
+
+        <p style="color:#AA0000; font-weight: bold" >Arrow keys rotate the object about its x- and y-axes.<br>
+        Return key or HOME key sets both rotations to zero.</p>
+
+        <div style="float:left">
+            <canvas width=600 height=600 id="glcanvas"></canvas>
+        </div>
+
+        <div style="float:left; margin-left:30px">
+            <p style="margin-top:0"><b>Skybox:</b><br>
+                <label><input type=radio name="pickskybox" id=s0>Park</label><br>
+                <label><input type=radio name="pickskybox" id=s1>Pond</label><br>
+                <label><input type=radio name="pickskybox" id=s2>Yokahama At Night</label><br>
+                <label><input type=radio name="pickskybox" id=s3>The Colosseum</label>
+            </p>
+            <p style="margin-top:20px"><b>Object:</b><br>
+                <label><input type=radio name="pickmodel" id=g0>Arrowhead</label><br>
+                <label><input type=radio name="pickmodel" id=g1>Horse</label><br>
+                <label><input type=radio name="pickmodel" id=g2>Blender Monkey</label><br>
+                <label><input type=radio name="pickmodel" id=m0>Cube</label><br>
+                <label><input type=radio name="pickmodel" id=m1>Cylinder</label><br>
+                <label><input type=radio name="pickmodel" id=m2>Torus</label><br>
+                <label><input type=radio name="pickmodel" id=m3>Sphere</label>
+            </p>
+            <p style="margin-top:20px; margin-bottom:0"><b>Base Color:</b><br>
+                <label><input type=radio name="pickcolor" id=c0>White</label><br>
+                <label><input type=radio name="pickcolor" id=c1>Blue</label><br>
+                <label><input type=radio name="pickcolor" id=c2>Pink</label><br>
+                <label><input type=radio name="pickcolor" id=c3>Green</label>
+            </p>
+            <p style="margin-top:30px"><button id="bttn">Reset Rotation</button>
+            </p>
+        </div>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "./script/three.module.min.js"
+                }
+            }
+        </script>
+        <script type="module" src="reflection.js"></script>
+	</body>
+</html>

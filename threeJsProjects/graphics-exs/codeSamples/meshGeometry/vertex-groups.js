@@ -1,4 +1,4 @@
-import * as THREE from "./script/three.module.min.js";
+import * as THREE from "../script/three.module.min.js";
 
 /* Shows a pyramid and a cube.  The pyramid is constructed
  * as a polygonal mesh.  Both objects can be displayed with
