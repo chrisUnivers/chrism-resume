@@ -1,5 +1,5 @@
 ## Purpose
-  * This folder follows the tutorial in the link below
+  * This folder follows the tutorial from the link below
     + https://www.mongodb.com/developer/products/connectors/leverage-mongodb-data-kafka-tutorials/
   * The tutorial is a step-up from the `go` tutorial as it uses `docker` and a `source connector`.
   * See also [moreInfo](#usefull-info)
@@ -23,3 +23,4 @@
 ### Tips
   * mongodb://localhost:35001/?directConnection=true
     + connects to the MongoDB cluster running in the development environment.
+mongodb-kafka-exs/mongodbDocker-exs/README.md
