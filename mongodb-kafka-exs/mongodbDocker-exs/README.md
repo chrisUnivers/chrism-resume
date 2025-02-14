@@ -10,8 +10,8 @@
 
 ## Usefull info
   1. For simplicity, I will not include the git repository needed to run the example, link below.
-    + https://www.mongodb.com/docs/kafka-connector/current/tutorials/tutorial-setup/#std-label-kafka-tutorials-docker-setup
-  2. The files in here assume that the git repository from `1.` is available. Might change latter depending on how large the tutorial ends up being.
+    `*` https://www.mongodb.com/docs/kafka-connector/current/tutorials/tutorial-setup/#std-label-kafka-tutorials-docker-setup
+  2. The files in here assume that the git repository from `1.` is available. Might change later depending on final size.
 
 
 ## [Setup-1](#usefull-info)
