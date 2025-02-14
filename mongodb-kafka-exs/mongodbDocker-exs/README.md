@@ -14,7 +14,7 @@
   2. The files in here assume that the git repository from `1.` is available. Might change latter depending on how large the tutorial ends up being.
 
 
-## The Guide
+## [Setup-1](#usefull-info)
 ### Steps
   * cd kafka-edu/docs-examples/mongodb-kafka-base/
   * docker-compose -p mongo-kafka up -d --force-recreate
