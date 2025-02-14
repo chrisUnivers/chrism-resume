@@ -1,0 +1,2 @@
+## Info
+  * The tutorial from the link below seem to be similar to the project in `this.github.repo.backend_spbootDev` but `confluent` is used instead of `apache kafka`. This tutorial is better since it uses a database `mongodb` instead of writing to files. The mongodb tutorial also uses docker locally instead of using it in the cloud.
