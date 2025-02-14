@@ -5,6 +5,7 @@ build/
 bin/
 public/
 exs-show/
+kafka-edu/
 
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
