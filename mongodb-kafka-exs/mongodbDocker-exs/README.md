@@ -14,13 +14,23 @@
   2. The files in here assume that the git repository from `1.` is available. Might change later depending on final size.
 
 
-## [Setup-1](#usefull-info)
+## [Setup-1](#links)
 ### Steps
   * cd kafka-edu/docs-examples/mongodb-kafka-base/
   * docker-compose -p mongo-kafka up -d --force-recreate
   * docker exec mongo1 status
     + check for successful setup
+
+## [Explore](#links)
+### Steps
+  * See link for more info.
+
+
 ### Tips
   * mongodb://localhost:35001/?directConnection=true
     + connects to the MongoDB cluster running in the development environment.
 mongodb-kafka-exs/mongodbDocker-exs/README.md
+
+### Links
+  1. https://www.mongodb.com/docs/kafka-connector/current/tutorials/tutorial-setup/#std-label-kafka-tutorials-docker-setup
+  2. https://www.mongodb.com/docs/kafka-connector/current/tutorials/explore-change-streams/
