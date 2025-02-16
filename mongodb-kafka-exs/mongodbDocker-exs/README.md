@@ -28,7 +28,7 @@
 ## [Replicate-Link-3](#links)
 ### Notes
   * The logic and implementions are in the docker image downloaded. For example monitoring kafka topics. This tutorial `replicate-with-cdc` is mostly on how to configure the `sink and source connectors`
-  * Recall mongodb commands can be used in a javascript file by using `mongoose`. The `mongooseExpress` repo at the root of this github repository has example on how to use mongoose.
+  * Recall mongodb commands can be used in a javascript file by using `mongoose`. The `chrism-resume/mongooseExpress` repo an example on how to use mongoose.
 
 ## [Time-Serie-Ex-Link-4](#links)
 ### Notes
