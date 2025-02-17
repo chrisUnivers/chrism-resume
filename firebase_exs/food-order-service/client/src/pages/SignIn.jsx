@@ -1,10 +1,11 @@
 import {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+import OAuth from '../components/OAuth'
 import ArrowRightIcon from '../assets/svg/keyboardArrowRightIcon.svg?react'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 
-function SingIn() {
+function SignIn() {
     const [showPassword, setShowPassword] = useState(false)
     const [formData, setFormData] = useState({
         email: '',
@@ -62,11 +63,11 @@ function SingIn() {
                     </div>
                 </form>
 
-                {/* Google OAuth */}
+                <OAuth />
                 <Link to='/sign-up' className='registerLink'>Sign Up Instead</Link>
             </div>
         </>
     )
 }
 
-export default SingIn
+export default SignIn
