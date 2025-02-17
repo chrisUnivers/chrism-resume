@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import {Link, useNavigate} from 'react-router-dom'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import ArrowRightIcon from '../assets/svg/keyboardArrowRightIcon.svg?react'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 
@@ -18,6 +19,24 @@ function SingIn() {
             ...prevState, [e.target.id]: e.target.value,
         }))
     }
+
+    const onSubmit = async (e) => {
+        e.preventDefault()
+
+        try {
+            const auth = getAuth()
+
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+
+            if(userCredential.user) {
+                navigate('/')
+            }
+        } catch (error) {
+            console.log(error);
+        }
+
+    }
+
     return (
         <>
             <div className='pageContainer'>
@@ -25,7 +44,7 @@ function SingIn() {
                     <p className='pageHeader'>Welcome Back!</p>
                 </header>
 
-                <form>
+                <form onSubmit={onSubmit}>
                     <input type='email' className='emailInput' placeholder='Email' id='email' value={email} onChange={onChange}/>
                     
                     <div className='passwordInputDiv'>
