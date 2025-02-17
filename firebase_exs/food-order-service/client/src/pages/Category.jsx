@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { collection, getDocs, query, where, orderBy, limit, startAfter } from 'firebase/firestore'
 import { db } from '../firebase.config'
 import Spinner from '../components/Spinner'
+import ListingItem from '../components/ListingItem'
 
 function Category() {
     const [listings, setListings] = useState(null)
@@ -22,7 +23,7 @@ function Category() {
                 // Executye query
                 const querySnap = await getDocs(q)
 
-                let listings = []
+                const listings = []
 
                 querySnap.forEach((doc) => {
                     // console.log(doc.data())
@@ -38,7 +39,7 @@ function Category() {
             }
         }
         fetchListings()
-    }, [])
+    }, [params.categoryName])
     
     return <div className='categoty'>
         <header>
@@ -52,7 +53,7 @@ function Category() {
                 <main>
                     <ul className='categoryListings'>
                         {listings.map((listing) => (
-                            <h3>{listing.data.name}</h3>
+                            <ListingItem listing={listing.data} id={listing.id} key={listing.id}/>
                         ))}
                     </ul>
                 </main>
