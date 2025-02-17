@@ -27,7 +27,7 @@ function OAuth() {
                 })
             }
         } catch (error) {
-            
+            console.log('Coud not authorize with Google')
         }
     }
     
