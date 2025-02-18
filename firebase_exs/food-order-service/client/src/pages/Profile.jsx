@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { getAuth, updateProfile } from 'firebase/auth'
 import { updateDoc, doc } from 'firebase/firestore'
-import {db} from '../firebase.config'
-import {Link, useNavigate} from 'react-router-dom'
+import { db } from '../firebase.config'
+import { useNavigate } from 'react-router-dom'
+import arrowRight from '../assets/svg/keyboardArrowRightIcon.svg'
+import homeIcon from '../assets/svg/homeIcon.svg'
 
 
 
@@ -53,7 +56,7 @@ function Profile() {
         <div className='profile'>
             <header className='profileHeader'>
                 <p className='pageHeader'>My profile</p>
-                <button type='button' className="logOut" onClick={onLogout}></button>
+                <button type='button' className="logOut" onClick={onLogout}>Logout</button>
             </header>
 
             <main>
@@ -73,6 +76,12 @@ function Profile() {
                         disabled={!changeDetails} value={email} onChange={onChange} />
                     </form>
                 </div>
+
+                <Link to='/create-listing' className='createListing'>
+                    <img src={homeIcon} alt='home'/>
+                    <p>Add a new product</p>
+                    <img src={arrowRight} alt='arrow-right'/>
+                </Link>
             </main>
         </div>
     )

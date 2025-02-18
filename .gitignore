@@ -67,5 +67,6 @@ lerna-debug.log*
 dist-ssr
 *.local
 # Config file
+.env
 config.env
 firebase.config.js

@@ -18,24 +18,24 @@ function Offers() {
                 const listingsRef = collection(db, 'listings')
 
                 // Create a query
-                const q = query(listingsRef, where('offer', '==', true), orderBy('timestamp', 'desc'), limit(10))
+                const q = query(listingsRef, where('type', '==', 'pastry'), orderBy('timestamp', 'desc'), limit(10))
 
                 // Executye query
                 const querySnap = await getDocs(q)
 
-                const listings = []
+                const listing = []
 
                 querySnap.forEach((doc) => {
                     // console.log(doc.data())
-                    return listings.push({
+                    return listing.push({
                         id: doc.id,
                         data: doc.data()
                     })
                 })
-                setListings(listings)
+                setListings(listing)
                 setLoading(false)
             } catch (error) {
-                console.log('Could not fetch listings')
+                console.log(error)
             }
         }
         fetchListings()
