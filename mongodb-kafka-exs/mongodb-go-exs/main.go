@@ -14,7 +14,6 @@ type Message struct {
   Size float64
   Time int64
 }
-
 // Creating the Confluent cloud credentials and DNS information to use
 const (
    bootstrapServers = "<SERVER-DNS>:<SERVER-PORT>"

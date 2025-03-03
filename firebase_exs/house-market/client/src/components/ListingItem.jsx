@@ -7,7 +7,7 @@ function ListingItem({ listing, id, onDelete}) {
     return (
         <li className='categoryListing'>
             <Link to={`/category/${listing.type === 'pastry' ? 'rent' : listing.type}/${id}`} className='categoryListingLink'>
-                <img src={listing.imgUrl[0]} alt={listing.name} className='categoryListingImg' />
+                <img src={listing.imgUrls[0]} alt={listing.name} className='categoryListingImg' />
                 <div className='categoryListingDetails'>
                     <p className='categoryListingLocation'>
                         {listing.location}

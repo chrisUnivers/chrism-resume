@@ -64,9 +64,10 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Other folders /files
 dist-ssr
 *.local
-# Config file
+# Config files
 .env
 config.env
 firebase.config.js
