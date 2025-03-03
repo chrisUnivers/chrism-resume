@@ -41,7 +41,7 @@ function Listing() {
 
     return (
         <main>
-            <Swiper slidesPerView={1} pagination={{clickable: true}}>
+            {/* <Swiper slidesPerView={1} pagination={{clickable: true}}>
                 {listing.imgUrls.map((url, index) => (
                     <SwiperSlide key={index}>
                         <div style={{background: `url(${listing.imgUrls[index]}) center no-repeat`, backgroundSize: 'cover',}} className='swiperSlideDiv'>
@@ -49,7 +49,7 @@ function Listing() {
                         </div>
                     </SwiperSlide>
                 ))}
-            </Swiper>
+            </Swiper> */}
 
 
             <div className="shareIconDiv" onClick={() => {
