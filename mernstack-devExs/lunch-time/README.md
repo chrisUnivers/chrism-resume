@@ -1,0 +1,2 @@
+## Lunch Time School Clubs Project
+  * This project is mernstack project. The application allows student at a given school to post and see what clubs are active during lunch time. It will use redux for state management
