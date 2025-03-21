@@ -1,0 +1,2 @@
+## Info
+  * The lunch-time folder contains a mernstack project and uses redux for state management. It's inteded to allow students in high school to create clubs and join active school clubs which take place at lunch time.
