@@ -74,6 +74,11 @@ ul {
   border-bottom: 1px solid #bc5454;
 }
 
+.credits {
+  font-size: medium;
+  color: #bc5454
+}
+
 .homeright {
   /* min-height: 875px; */
   display: flex;
@@ -109,7 +114,7 @@ ul {
   max-width: 425px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 145px 0px;
   flex-direction: column;
   border: 5px solid #58cf76;
 }
@@ -178,6 +183,10 @@ ul {
   margin-bottom: 20px;
 }
 
+.btnbwsm {
+  padding: 5px 15px;
+  font-size: 13px;
+}
 .btn:hover {
   transform: scale(0.98);
 }
@@ -209,3 +218,96 @@ ul {
   margin: 0 0 5px 3px;
 }
 
+
+.clubvis{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.clubvis label{
+  flex: 1 1 280px;
+  margin-right: 20px;
+}
+
+.clubvis select{
+  flex: 1 1 280px;
+  margin-right: 20px;
+}
+
+.clubpost,
+.clubpost-headings {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  background: #f4f4f4;
+  padding: 10px 15px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.clubpost-headings {
+  font-weight: 700;
+}
+
+.clubinfo {
+  width: 80%;
+  height: 75%;
+  margin-top: 20px;
+  padding-left: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+
+.club-info-id {
+  background-color: #f4f4f4;
+  border: 1px #ccc solid;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.club-info-id .status {
+  margin-left: 20px;
+}
+
+.club-info-desc {
+  margin: 20px 0;
+  font-size: 17px;
+  background-color: #f4f4f4;
+  border: 1px #ccc solid;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.status {
+  background-color: #333;
+  color: #fff;
+  width: 100px;
+  padding: 0 20px;
+  justify-self: center;
+  border-radius: 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.status-new {
+  background-color: green;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.status-open {
+  background-color: steelblue;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.status-closed {
+  background-color: darkred;
+  color: #fff;
+  border-radius: 10px;
+}

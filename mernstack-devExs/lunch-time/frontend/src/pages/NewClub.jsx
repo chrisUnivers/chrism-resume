@@ -14,8 +14,9 @@ function NewClub() {
     const [name] = useState(user.name)
     const [email] = useState(user.email)
     
-    const [club, setClub] = useState('Math')
+    const [club, setClub] = useState('math')
     const [description, setDescription] = useState(user.description)
+    const [clubtype, setClubType] = useState('private')
     const [clubCreated, setClubCreated] = useState(false)
 
     const dispatch = useDispatch()
@@ -37,7 +38,7 @@ function NewClub() {
     const onSubmit = (e) => {
         e.preventDefault()
         setClubCreated(true) // prevents empty clubs from being created
-        dispatch(createClub({ club, description }))
+        dispatch(createClub({ club, clubtype, description }))
         if(isLoading) {
             return <Spinner />
         }
@@ -45,7 +46,7 @@ function NewClub() {
 
     return (
         <>
-            {/* {console.log(name)} */}
+            {console.log(name)}
             <div className="back-btn">
                 <BackButton url='/' />
             </div>
@@ -63,14 +64,20 @@ function NewClub() {
                         <input type="text" className="form-control" value={email} disabled />
                     </div> 
                     <form onSubmit={onSubmit}>
-                        <div className="form-group">
+                        <div className="form-group clubvis">
                             <label htmlFor="club">Club</label>
+                            <label htmlFor="club">Visibility</label>
                             <select name="club" id="club" value={club} onChange={(e) => setClub(e.target.value)}>
                                 <option value="math">Math Club</option>
                                 <option value="biology">Biology Club</option>
                                 <option value="chess">Chess Club</option>
                                 <option value="chemistry">Chemistry Club</option>
                                 <option value="physics">Physics Club</option>
+                            </select>
+                            
+                            <select name="type" id="type" value={clubtype} onChange={(e) => setClubType(e.target.value)}>
+                                <option value="private">Private</option>
+                                <option value="Public">Public</option>
                             </select>
                         </div>
                         <div className="form-group">

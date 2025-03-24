@@ -9,12 +9,23 @@ const clubSchema = mongoose.Schema(
         },
         club: {
             type: String,
-            required: [true, 'Please select a club'],
-            enum: ['Math Club', 'Biology Club', 'Chess Club', 'Chemistry Club', 'Physics Club'],
+            required: [true, 'Please select a subject'],
+            enum: ['math', 'biology', 'chemistry', 'physics', 'chess'],
+        },
+        clubname: {
+            type: String,
+            required: [true, 'Please enter the name of you club'],
+            default: 'before-names'
+        },
+        clubtype: {
+            type: String,
+            required: [true, 'Set visibility options'],
+            default: 'public',
+            enum: ['private', 'public']
         },
         description: {
             type: String,
-            required: [true, 'Please enter a description today\'s itinerary.']
+            required: [true, 'Please enter a description today\'s itinerary.'],
         },
         status: {
             type: String,

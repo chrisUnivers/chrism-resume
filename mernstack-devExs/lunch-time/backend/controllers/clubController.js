@@ -1,21 +1,35 @@
 const User = require('../models/userModel')
 const Club = require('../models/clubModel')
-
 // @desc Get user clubs
 // @route GET /api/clubs
 // @access Private
-
 const getClubs = async (req, res, next) => {
     try {
         const user = await User.findById(req.user.id)
-
+        // console.log()
         if(!user) {
             res.status(401)
             throw new Error('User not found')
         }
 
         const clubs = await Club.find({user: req.user.id})
+        // const clubs = await Club.find({clubtype: 'public'})
         res.status(200).json(clubs)
+        // res.status(200).json({ message: 'Get club'})
+    } catch (error) {
+        console.error('Login User error')
+        next(error)
+    }
+}
+
+// @desc Get user clubs
+// @route GET /api/clubs
+// @access Public
+const getPublicClubs = async (req, res, next) => {
+    try {
+        const clubs = await Club.find({clubtype: 'public'})
+        res.status(200).json(clubs)
+        console.log("Hello from getPublic")
         // res.status(200).json({ message: 'Get club'})
     } catch (error) {
         console.error('Login User error')
@@ -60,7 +74,6 @@ const getClub = async (req, res, next) => {
 // @access Private
 const deleteClub = async (req, res, next) => {
     try {
-
         const user = await User.findById(req.user.id)
 
         if(!user) {
@@ -130,11 +143,12 @@ const updateClub = async (req, res, next) => {
 // @access Private
 const createClub = async (req, res, next) => {
     try {
-        const {club, description} = req.body
+
+        const {club, clubtype, description} = req.body
 
         if(!club || !description) {
             res.status(400)
-            throw new Error('Please add a description of the club')
+            throw new Error('Please add a club and a description of the club')
         }
 
         const user = await User.findById(req.user.id)
@@ -143,18 +157,18 @@ const createClub = async (req, res, next) => {
             res.status(401)
             throw new Error('User not found')
         }
-
-        const clubPost = await Club.create({
+        const newclub = await Club.create({
             user: req.user.id,
             club,
+            clubtype,
             description,
             status: 'new'
         })
-        
+
         // 201 for create response
-        res.status(201).json(clubPost)
+        res.status(201).json(newclub)
     } catch (error) {
-        console.error('Login User error')
+        console.error(error)
         next(error)
     }
 }
@@ -162,6 +176,7 @@ const createClub = async (req, res, next) => {
 module.exports = {
     getClubs,
     getClub,
+    getPublicClubs,
     createClub,
     deleteClub,
     updateClub,

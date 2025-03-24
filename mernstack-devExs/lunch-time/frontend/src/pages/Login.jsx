@@ -25,11 +25,9 @@ function Login() {
 
     useEffect(() => {
         if(isError) {
-            // message set in redux(authSlice.js)
             toast.error(message)
         }
 
-        // Redirect when logged in
         if(isSuccess || user) {
             navigate('/')
         }
@@ -40,7 +38,6 @@ function Login() {
     const onChange = (e) => {
         setFormData((prevState) => ({
             ...prevState,
-            // set the name state from the form to be the value entered.
             [e.target.name]: e.target.value,
         }))
     }
@@ -48,7 +45,6 @@ function Login() {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        // email and password from the form data
         const userData = {
             email,
             password

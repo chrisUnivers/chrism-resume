@@ -32,4 +32,17 @@ const protect = async (req, res, next) => {
     }
 }
 
-module.exports = { protect }
+const notprotect = async (req, res, next) => {
+    try {
+        let notToken
+        try {
+            next()
+        } catch (ntError) {
+            console.log("not protect middleware")
+        }
+    } catch (error) {
+        console.log("not protect middleware no token")
+    }
+}
+
+module.exports = { protect, notprotect }

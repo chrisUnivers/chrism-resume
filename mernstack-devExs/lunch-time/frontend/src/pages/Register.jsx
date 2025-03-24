@@ -21,17 +21,14 @@ function Register() {
     const navigate = useNavigate()
 
     const { user, isLoading, isError, isSuccess, message } = useSelector(
-        // auth is defined in src/app/store.js
         (state) => state.auth
     )
 
     useEffect(() => {
         if(isError) {
-            // message set in redux(authSlice.js)
             toast.error(message)
         }
 
-        // Redirect when logged in
         if(isSuccess || user) {
             navigate('/')
         }
@@ -48,8 +45,6 @@ function Register() {
 
     const onSubmit = (e) => {
         e.preventDefault()
-
-
         if(password !== password2) {
             toast.error('Passwords do not match')
         } else {
@@ -58,7 +53,6 @@ function Register() {
                 email,
                 password
             }
-            // register from features/auth/authSlice
             dispatch(register(userData))
         }
     }

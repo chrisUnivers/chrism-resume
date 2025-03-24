@@ -9,14 +9,10 @@ const User = require('../models/userModel')
 const registerUser = async (req, res, next) => {
     try {
         const {name, email, password} = req.body
-        // Validation
         if(!name || !email || !password){
-            // res.status(400).json({ message: 'Please include all fields'})
             res.status(400)
             throw new Error('Please include all fields')
         }
-        
-        // Find if user already exists
         const userExists = await User.findOne({email})
 
         if(userExists) {
@@ -39,7 +35,7 @@ const registerUser = async (req, res, next) => {
             res.status(201).json({
                 _id: user._id,
                 name: user.name,
-                emai: user.email,
+                email: user.email,
                 token: generateToken(user._id),
             })
         } else {
@@ -80,24 +76,6 @@ const loginUser = async (req, res, next) => {
     }
 }
 
-// @desc get current user
-// @route /api/users/me
-// @access Public
-const getMe = async (req, res, next) => {
-    try {
-        const user = {
-            id: req.user._id,
-            email: req.user.email,
-            name: req.user.name
-        }
-        
-        res.status(200).json(user)
-    } catch (error) {
-        console.error('Login User error')
-        next(error)
-    }
-}
-
 const generateToken = (id) => {
     return jwt.sign({ id }, process.env.JWT_SECRET, {
         expiresIn: '30d'
@@ -107,5 +85,4 @@ const generateToken = (id) => {
 module.exports = {
     registerUser,
     loginUser,
-    getMe,
 }

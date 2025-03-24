@@ -19,12 +19,12 @@ function SideBarNav() {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/my-clubs" className="btn btn-block">
-                                    <FaTicketAlt /> See My Clubs
+                                <Link to="/clubs" className="btn btn-block">
+                                    <FaTicketAlt /> View My Clubs
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/clubs" className="btn btn-block">
+                                <Link to="/pclubs" className="btn btn-block">
                                     <FaTicketAlt /> See Active Clubs
                                 </Link>
                             </li>
@@ -33,7 +33,7 @@ function SideBarNav() {
                 ) : (
                     <ul className='sidebarout'>
                         <li>
-                            <Link to="/clubs" className="btn btn-block">
+                            <Link to="/pclubs" className="btn btn-block">
                                 <FaTicketAlt /> See Active Clubs
                             </Link>
                         </li>

@@ -3,10 +3,10 @@ function Home() {
     return (
         <>
             <section className="heading">
-                <h1>What do you need help with?</h1>
-                <p>Please choose from an option below</p>
+                <h1>Are you ready to have fun?</h1>
+                <p>Begin by browsing active clubs</p>
+                <div className="credits">Background image is from Blender Studio website</div>
             </section>
-            {/* /new-club is set up in App.jsx */}
             
         </>
     )
