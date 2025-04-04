@@ -2,6 +2,7 @@
   * This repository will contain threejs skeleton animation and inverse kinematics projects.
   * This directory contains vanilla javascript with threejs projects.
     + Reason being, projects built on top on react require external libraries, like fiber and drei. Otherwise, they're a nightmare to configure
+  * The current repository is `amy-explores-vite`. The switch is to make scroll based animations easier using  `gsap`. 
   * Models used:
     + Amy: 
       - https://www.mixamo.com/#/?page=1&type=Character
