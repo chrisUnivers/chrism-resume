@@ -13,16 +13,25 @@ import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
 import * as GeometryUtils from 'three/addons/utils/GeometryUtils.js';
 
-const canvas = document.querySelector("#experience");
+const canvas = document.querySelector("#experience-canvas");
 
 
 // Models
-let amyModel;
+let amyModel, linePoints;
 
-// Models Animation
-let amyAnimations;
+let modelActions = []
+let isLoaded, isMixed, pauseScroll = false;
+let rotateme = true;
+let FADESTEPS = 0.001;
+const origin = new THREE.Vector3(0, 0, 0);
+const entryPos = new THREE.Vector3(-3.8, 0.3, 2);
 
-const mixers = [];
+let bodyHeight = document.body.scrollHeight;
+
+let line, lineDistance;
+let prevScroll = 0;
+let timeoutId;
+let mixer;
 
 const clock = new THREE.Clock();
 
@@ -36,13 +45,24 @@ const textureLoader = new THREE.TextureLoader();
 
 // Model Loader
 const dracoLoader = new DRACOLoader();
-dracoLoader.setDecoderPath("./libs/draco/");
+dracoLoader.setDecoderPath("../libs/draco/");
 
 const loader = new GLTFLoader();
 loader.setDRACOLoader(dracoLoader);
 
 const scenetexture = textureLoader.load("./textures/scene_texture.jpg");
 scenetexture.flipY = false;
+
+/**
+ * Object.entries(textureMap).forEach(([key, path]) => {
+ * const dayTexture = textureLoader.load(paths.day);
+ * 
+ * loadedTextures.day[key] = dayTexture;
+ * 
+ * const nightTexture = textureLoader.load(paths.night);
+ * loadedTextures.night[key] = dayTexture;
+ * })
+ */
 
 loader.load("./models/gltf/scenetwo.glb", (glb)=>{
 
@@ -51,6 +71,9 @@ loader.load("./models/gltf/scenetwo.glb", (glb)=>{
             const material = new THREE.MeshBasicMaterial({
                 map: scenetexture
             });
+            if (child.animations.length > 0) {
+                // console.log(child);
+            }
             child.material = material;
         }
 
@@ -58,20 +81,32 @@ loader.load("./models/gltf/scenetwo.glb", (glb)=>{
     });
 });
 
-loader.load("./models/gltf/amydances.glb", (nglb)=> {
+loader.load("./models/gltf/amymovestwo.glb", (nglb)=> {
 
     amyModel = nglb.scene
     amyModel.position.y = 0.05;
     scene.add(amyModel);
-    amyAnimations = nglb.animations;
+    
     amyModel.traverse((object) => {
         if (object.isMesh) {
             object.castShadow = true;
         }
     });
 
+    const animations = nglb.animations;
+    mixer = new THREE.AnimationMixer( amyModel );
+
+    animations.forEach((anim) => {
+        modelActions.push(mixer.clipAction(anim));
+    })
+    console.log(modelActions);
+    // modelActions[2].play();
+    modelActions[1].play();
+    modelActions[4].loop = THREE.LoopOnce;
+    isLoaded = true;
     
-    
+    window.scrollTo(0,0);
+
     setupDefaultScene();
     
 });
@@ -98,23 +133,31 @@ scene.add( ex_sphere );
 const boxg = new THREE.BoxGeometry(0.2, 0.2, 0.2);
 const boxM = new THREE.MeshStandardMaterial( { color: 0xff0000 } );
 const c1 = new THREE.Mesh(boxg, boxM);
-c1.position.set(-3.8, 0.3, 2);
+c1.position.set(0.7, 0.3, 0.6);
 
 const c2 = new THREE.Mesh(boxg, boxM);
-c2.position.set(-3.0, 0.3, 3.1);
+c2.position.set(1.4, 0.3, 0.8);
 
 const c3 = new THREE.Mesh(boxg, boxM);
-c3.position.set(-1.8, 0.3, 3.3);
+c3.position.set(2.6, 0.3, 0.0);
 
 const c4 = new THREE.Mesh(boxg, boxM);
-c4.position.set(-0.3, 0.3, 2);
+c4.position.set(3.5, 0.3, -1.2);
 
 const c5 = new THREE.Mesh(boxg, boxM);
-c5.position.set(-0, 0.3, 0.8);
+c5.position.set(3.8, 0.3, -2.5);
+
+const c6 = new THREE.Mesh(boxg, boxM);
+c6.position.set(3.2, 0.3, -3);
+// 3.60, y: 0.3, z: -2.76
+const c7 = new THREE.Mesh(boxg, boxM);
+c7.position.set(-3.8, 0.3, 2);
 
 const LINE_NB_POINTS = 42;
 
 const entrycurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(2.8, 0.3, -3),
+    new THREE.Vector3(-2.8, 0.3, -3),
     new THREE.Vector3(-3.8, 0.3, 2),
     new THREE.Vector3(-3.0, 0.3, 3.1),
     new THREE.Vector3(-1.8, 0.3, 3.3),
@@ -130,12 +173,18 @@ const exitcurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(3.5, 0.3, -1.2),
     new THREE.Vector3(3.8, 0.3, -2.5),
     new THREE.Vector3(3.2, 0.3, -3),
+    new THREE.Vector3(2.6, 0.3, -3),
+    new THREE.Vector3(2.0, 0.3, -3),
 ], false, "catmullrom", 0.5);
 
-amyspath(entrycurve);
+const walkWays = {
+    exit: exitcurve,
+    entry: entrycurve,
+}
 amyspath(exitcurve);
-
-scene.add(c1, c2, c3, c4, c5);
+amyspath(entrycurve);
+// c1, c2, c3, c4,
+scene.add(c6, c7);
 
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true;
@@ -145,15 +194,11 @@ controls.update()
 // Functions
 
 function setupDefaultScene() {
-
-    const mixer = new THREE.AnimationMixer( amyModel );
-
-    mixer.clipAction(amyAnimations[0]).play();
-    mixers.push(mixer);
+    isMixed = true;
 }
 
 function amyspath(curve) {
-    let linePoints = curve.getPoints(LINE_NB_POINTS);
+    linePoints = curve.getPoints(LINE_NB_POINTS);
     let geometry = new LineGeometry();
     let color = new THREE.Color();
     let colors = [];
@@ -163,6 +208,8 @@ function amyspath(curve) {
     Object.entries(linePoints).forEach(([key, pos])=> {
         positions.push(pos.x, pos.y, pos.z);
     })
+
+    // console.log(linePoints);
 
     geometry.setPositions( positions );
     geometry.setColors( colors );
@@ -178,11 +225,46 @@ function amyspath(curve) {
 
     } );
 
-    let line = new Line2( geometry, matLine );
-    line.computeLineDistances();
+    
+    line = new Line2( geometry, matLine );
+    lineDistance = line.computeLineDistances();
     line.scale.set( 1, 1, 1 );
-
     scene.add(line);
+}
+
+function moveAmy() {
+    
+    let street;
+    const xDiff = amyModel.position.x < 2.8 ? true : false;
+    let zDiff = amyModel.position.z <= -3  ? true : false;
+    if (xDiff && zDiff) {
+        amyModel.position.set(entryPos.x, entryPos.y, entryPos.z);
+        amyModel.rotation.y = Math.PI;
+        console.log(amyModel.position.z);
+        pauseScroll = true;
+    }
+
+    if (amyModel.position == origin) {
+        pauseScroll = false;
+    }
+    if (!pauseScroll) {
+        const targetScroll = window.pageYOffset;
+        if (targetScroll > prevScroll) {
+            const moveStep = targetScroll / bodyHeight
+            const t = FADESTEPS > 0 ? (moveStep + FADESTEPS) : moveStep;
+            const newPos = exitcurve.getPoint(t);
+            const tangent = new THREE.Vector3();
+            exitcurve.getTangentAt(t, tangent);
+            tangent.normalize();
+            const lookAtPosition = new THREE.Vector3().addVectors(newPos, tangent);
+            amyModel.position.x = newPos.x;
+            amyModel.position.y = newPos.y;
+            amyModel.position.z = newPos.z;
+            amyModel.lookAt(lookAtPosition);
+        }
+        prevScroll = targetScroll;
+    }
+    // prevAngle = newRot
 }
 
 // Event Listeners
@@ -198,12 +280,36 @@ window.addEventListener("resize", ()=>{
     renderer.setSize( sizes.width, sizes.height );
 })
 
+window.addEventListener('scroll', () => {
+    clearTimeout(timeoutId);
+    if (isLoaded) {
+        // mixers[0]._actions[4].loop = THREE.LoopOnce;
+        // mixers[0]._actions[4].play();
+        // modelActions[4].reset();
+        modelActions[1].stop();
+        modelActions[4].play();
+        FADESTEPS = 0;
+        moveAmy();
+        timeoutId = setTimeout(() => {
+            FADESTEPS = 0.001;
+            moveAmy();
+            modelActions[4].stop();
+            modelActions[4].reset();
+            modelActions[1].play();
+        }, 30);
+    }    
+});
+
+
+
 const render = () => {
     controls.update();
     const delta = clock.getDelta();
+    if (isLoaded) {
+        mixer.update(delta);
+        // nextAnimation(delta);
+    }
     
-    for ( const mixer of mixers ) mixer.update( delta );
-
     renderer.render( scene, camera );
 
     window.requestAnimationFrame(render);
