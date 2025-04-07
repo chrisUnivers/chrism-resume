@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 
+import Stats from 'three/addons/libs/stats.module.js';
+
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
@@ -9,11 +11,12 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls';
 import { Line2 } from 'three/addons/lines/Line2.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
-
+import * as GeometryUtils from 'three/addons/utils/GeometryUtils.js';
 
 const canvas = document.querySelector("#experience-canvas");
 
 
+// Models
 let amyModel, linePoints;
 
 let modelActions = []
@@ -55,6 +58,17 @@ loader.setDRACOLoader(dracoLoader);
 const scenetexture = textureLoader.load("./textures/scene_texture.jpg");
 scenetexture.flipY = false;
 
+/**
+ * Object.entries(textureMap).forEach(([key, path]) => {
+ * const dayTexture = textureLoader.load(paths.day);
+ * 
+ * loadedTextures.day[key] = dayTexture;
+ * 
+ * const nightTexture = textureLoader.load(paths.night);
+ * loadedTextures.night[key] = dayTexture;
+ * })
+ */
+
 loader.load("./models/gltf/scenetwo.glb", (glb)=>{
 
     glb.scene.traverse((child) => {
@@ -90,7 +104,6 @@ loader.load("./models/gltf/amymovestwo.glb", (nglb)=> {
     animations.forEach((anim) => {
         modelActions.push(mixer.clipAction(anim));
     })
-    console.log(modelActions);
     // modelActions[2].play();
     modelActions[ANIM_INDEX].play();
     modelActions[4].loop = THREE.LoopOnce;
@@ -172,8 +185,8 @@ const exitcurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(0, 0.3, 0),
 ], false, "catmullrom", 0.5);
 
-amyspath(exitcurve);
-scene.add(c6, c7);
+// amyspath(exitcurve);
+// scene.add(c6, c7);
 
 const controls = new OrbitControls( camera, renderer.domElement );
 controls.enableDamping = true;
@@ -283,7 +296,7 @@ window.addEventListener('scroll', () => {
             if (amyModel.position.distanceTo(initPos) > 1.03) {
                 ANIM_INDEX = 1;
             } else {
-                console.log(PREV_ANIM_INDEX, amyModel.position.distanceTo(initPos));
+                // console.log(PREV_ANIM_INDEX, amyModel.position.distanceTo(initPos));
             }
             
             modelActions[ANIM_INDEX].play();
