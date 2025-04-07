@@ -1,7 +1,5 @@
 import * as THREE from 'three';
 
-import Stats from 'three/addons/libs/stats.module.js';
-
 import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js'
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
@@ -11,25 +9,29 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls';
 import { Line2 } from 'three/addons/lines/Line2.js';
 import { LineMaterial } from 'three/addons/lines/LineMaterial.js';
 import { LineGeometry } from 'three/addons/lines/LineGeometry.js';
-import * as GeometryUtils from 'three/addons/utils/GeometryUtils.js';
+
 
 const canvas = document.querySelector("#experience-canvas");
 
 
-// Models
 let amyModel, linePoints;
 
 let modelActions = []
-let isLoaded, isMixed, pauseScroll = false;
-let rotateme = true;
+let isLoaded, isMixed, isReset = false;
 let FADESTEPS = 0.001;
-const origin = new THREE.Vector3(0, 0, 0);
-const entryPos = new THREE.Vector3(-3.8, 0.3, 2);
+let ANIM_INDEX = 1;
+let PREV_ANIM_INDEX = 1;
+let WALK_INDEX = 4;
+const WALK_SPEED = 1.136;
+let can_scroll = true;
+let multiple = 1;
+const initPos = new THREE.Vector3(0, 0.3, 0);
+const scrollwalkend = new THREE.Vector3(2.511, 0.3, -3);
 
 let bodyHeight = document.body.scrollHeight;
 
 let line, lineDistance;
-let prevScroll = 0;
+let prevScroll, prevStep = 0;
 let timeoutId;
 let mixer;
 
@@ -52,17 +54,6 @@ loader.setDRACOLoader(dracoLoader);
 
 const scenetexture = textureLoader.load("./textures/scene_texture.jpg");
 scenetexture.flipY = false;
-
-/**
- * Object.entries(textureMap).forEach(([key, path]) => {
- * const dayTexture = textureLoader.load(paths.day);
- * 
- * loadedTextures.day[key] = dayTexture;
- * 
- * const nightTexture = textureLoader.load(paths.night);
- * loadedTextures.night[key] = dayTexture;
- * })
- */
 
 loader.load("./models/gltf/scenetwo.glb", (glb)=>{
 
@@ -101,13 +92,11 @@ loader.load("./models/gltf/amymovestwo.glb", (nglb)=> {
     })
     console.log(modelActions);
     // modelActions[2].play();
-    modelActions[1].play();
+    modelActions[ANIM_INDEX].play();
     modelActions[4].loop = THREE.LoopOnce;
     isLoaded = true;
     
     window.scrollTo(0,0);
-
-    setupDefaultScene();
     
 });
 
@@ -153,18 +142,7 @@ c6.position.set(3.2, 0.3, -3);
 const c7 = new THREE.Mesh(boxg, boxM);
 c7.position.set(-3.8, 0.3, 2);
 
-const LINE_NB_POINTS = 42;
-
-const entrycurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(2.8, 0.3, -3),
-    new THREE.Vector3(-2.8, 0.3, -3),
-    new THREE.Vector3(-3.8, 0.3, 2),
-    new THREE.Vector3(-3.0, 0.3, 3.1),
-    new THREE.Vector3(-1.8, 0.3, 3.3),
-    new THREE.Vector3(-0.3, 0.3, 2),
-    new THREE.Vector3(0, 0.3, 0.8),
-    new THREE.Vector3(0, 0.3, 0),
-], false, "catmullrom", 0.5);
+const LINE_NB_POINTS = 40;
 
 const exitcurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(0.7, 0.3, 0.6),
@@ -173,17 +151,28 @@ const exitcurve = new THREE.CatmullRomCurve3([
     new THREE.Vector3(3.5, 0.3, -1.2),
     new THREE.Vector3(3.8, 0.3, -2.5),
     new THREE.Vector3(3.2, 0.3, -3),
-    new THREE.Vector3(2.6, 0.3, -3),
-    new THREE.Vector3(2.0, 0.3, -3),
+    new THREE.Vector3(2.6, 0.3, -3.06),
+    new THREE.Vector3(2.0, 0.3, -3.06),
+    new THREE.Vector3(1.6, 0.3, -3.06),
+    new THREE.Vector3(0, 0.3, -3.08),
+    new THREE.Vector3(-1, 0.3, -3.08),
+    new THREE.Vector3(-2.8, 0.3, -3.08),
+    new THREE.Vector3(-3.6, 0.3, -2.82),
+    new THREE.Vector3(-3.7, 0.3, -2.42),
+    new THREE.Vector3(-3.7, 0.3, 0.42),
+    new THREE.Vector3(-3.7, 0.3, 2.26),
+    new THREE.Vector3(-3.7, 0.3, 3.27),
+    new THREE.Vector3(-3.4, 0.3, 3.47),
+    new THREE.Vector3(-3.0, 0.3, 3.47),
+    new THREE.Vector3(-1.7, 0.3, 3.47),
+    new THREE.Vector3(-1.0, 0.3, 3.0),
+    new THREE.Vector3(-0.63, 0.3, 2.4),
+    new THREE.Vector3(-0.42, 0.3, 2.0),
+    new THREE.Vector3(-0.2, 0.3, 1.3),
+    new THREE.Vector3(0, 0.3, 0),
 ], false, "catmullrom", 0.5);
 
-const walkWays = {
-    exit: exitcurve,
-    entry: entrycurve,
-}
 amyspath(exitcurve);
-amyspath(entrycurve);
-// c1, c2, c3, c4,
 scene.add(c6, c7);
 
 const controls = new OrbitControls( camera, renderer.domElement );
@@ -192,32 +181,24 @@ controls.dampingFactor = 0.05;
 controls.update()
 
 // Functions
-
-function setupDefaultScene() {
-    isMixed = true;
-}
-
 function amyspath(curve) {
     linePoints = curve.getPoints(LINE_NB_POINTS);
     let geometry = new LineGeometry();
     let color = new THREE.Color();
     let colors = [];
     let positions = [];
-    color.setHSL( 1, 1.0, 0.5, THREE.SRGBColorSpace );
+    color.setHSL( 0.2, 1.0, 0.5, THREE.SRGBColorSpace );
     colors.push( color.r, color.g, color.b );
     Object.entries(linePoints).forEach(([key, pos])=> {
         positions.push(pos.x, pos.y, pos.z);
     })
-
-    // console.log(linePoints);
-
     geometry.setPositions( positions );
     geometry.setColors( colors );
 
     let matLine = new LineMaterial( {
 
         color: 0xffffff,
-        linewidth: 5, // in world units with size attenuation, pixels otherwise
+        linewidth: 5, 
         vertexColors: true,
 
         dashed: false,
@@ -225,46 +206,53 @@ function amyspath(curve) {
 
     } );
 
-    
     line = new Line2( geometry, matLine );
     lineDistance = line.computeLineDistances();
     line.scale.set( 1, 1, 1 );
     scene.add(line);
 }
-
 function moveAmy() {
-    
-    let street;
-    const xDiff = amyModel.position.x < 2.8 ? true : false;
-    let zDiff = amyModel.position.z <= -3  ? true : false;
-    if (xDiff && zDiff) {
-        amyModel.position.set(entryPos.x, entryPos.y, entryPos.z);
-        amyModel.rotation.y = Math.PI;
-        console.log(amyModel.position.z);
-        pauseScroll = true;
+    const targetScroll = window.pageYOffset;
+    if (targetScroll > prevScroll) {
+        const moveStep = targetScroll / bodyHeight
+        let t = FADESTEPS > 0 ? (moveStep + FADESTEPS) : moveStep;
+        prevStep = t;
+        t = t > 1 ? 1 : t;
+        amyMoves(t * WALK_SPEED);
+        // console.log(amyModel.position);
     }
+    prevScroll = targetScroll;
+    if (isReset) {
+        prevScroll = 0;
+        ANIM_INDEX = ANIM_INDEX !== 3 && PREV_ANIM_INDEX !== 3 ? PREV_ANIM_INDEX + 1 : 1;
+        PREV_ANIM_INDEX = ANIM_INDEX;
+        window.scrollTo(0, 0);
+        isReset = false;
+    }
+}
 
-    if (amyModel.position == origin) {
-        pauseScroll = false;
+function amyMoves(t) {
+    t = t > 1 ? 1 : t;
+    const newPos = exitcurve.getPoint(t);
+    const tangent = new THREE.Vector3();
+    if (newPos.distanceTo(initPos) < 1) {
+        newPos.x = initPos.x;
+        newPos.y = initPos.y;
+        newPos.z = initPos.z;
+        isReset = true;
+        tangent.set(0, 0, 0)
+    } else {
+        exitcurve.getTangentAt(t, tangent);
+        tangent.normalize();
     }
-    if (!pauseScroll) {
-        const targetScroll = window.pageYOffset;
-        if (targetScroll > prevScroll) {
-            const moveStep = targetScroll / bodyHeight
-            const t = FADESTEPS > 0 ? (moveStep + FADESTEPS) : moveStep;
-            const newPos = exitcurve.getPoint(t);
-            const tangent = new THREE.Vector3();
-            exitcurve.getTangentAt(t, tangent);
-            tangent.normalize();
-            const lookAtPosition = new THREE.Vector3().addVectors(newPos, tangent);
-            amyModel.position.x = newPos.x;
-            amyModel.position.y = newPos.y;
-            amyModel.position.z = newPos.z;
-            amyModel.lookAt(lookAtPosition);
-        }
-        prevScroll = targetScroll;
-    }
-    // prevAngle = newRot
+    
+    const lookAtPosition = new THREE.Vector3().addVectors(newPos, tangent);
+     
+    amyModel.position.x = newPos.x;
+    amyModel.position.y = newPos.y;
+    amyModel.position.z = newPos.z;
+    
+    amyModel.lookAt(lookAtPosition);
 }
 
 // Event Listeners
@@ -283,19 +271,22 @@ window.addEventListener("resize", ()=>{
 window.addEventListener('scroll', () => {
     clearTimeout(timeoutId);
     if (isLoaded) {
-        // mixers[0]._actions[4].loop = THREE.LoopOnce;
-        // mixers[0]._actions[4].play();
-        // modelActions[4].reset();
-        modelActions[1].stop();
-        modelActions[4].play();
+        modelActions[ANIM_INDEX].stop();
+        modelActions[WALK_INDEX].play();
         FADESTEPS = 0;
         moveAmy();
         timeoutId = setTimeout(() => {
             FADESTEPS = 0.001;
             moveAmy();
-            modelActions[4].stop();
-            modelActions[4].reset();
-            modelActions[1].play();
+            modelActions[WALK_INDEX].stop();
+            modelActions[WALK_INDEX].reset();
+            if (amyModel.position.distanceTo(initPos) > 1.03) {
+                ANIM_INDEX = 1;
+            } else {
+                console.log(PREV_ANIM_INDEX, amyModel.position.distanceTo(initPos));
+            }
+            
+            modelActions[ANIM_INDEX].play();
         }, 30);
     }    
 });
@@ -305,14 +296,18 @@ window.addEventListener('scroll', () => {
 const render = () => {
     controls.update();
     const delta = clock.getDelta();
+    
     if (isLoaded) {
         mixer.update(delta);
-        // nextAnimation(delta);
     }
     
     renderer.render( scene, camera );
 
     window.requestAnimationFrame(render);
 }
+
+window.addEventListener("mousemove", (e) => {
+    
+})
 
 render();
