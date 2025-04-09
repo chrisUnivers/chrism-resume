@@ -10,4 +10,5 @@
       - Need a free account to see models
     + office: https://github.com/wass08/r3f-portfolio-responsive
       - Only the office model and textures were used.
-      - From this video: https://www.youtube.com/watch?v=1c6LqdsbY5A&t=65s
+      - git repo for the texture and office: https://github.com/wass08/r3f-portfolio-responsive
+      - video: https://www.youtube.com/watch?v=1c6LqdsbY5A&t=65s
