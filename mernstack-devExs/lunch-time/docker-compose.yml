@@ -1,0 +1,50 @@
+name: lunch-time-app
+
+services:
+  mongo:
+    image: mongo:7.0.18
+    ports:
+      - 27017:27017
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - lunch-time-app
+
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: ./.env
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    networks:
+      - lunch-time-app
+    ports:
+      - 5000:5000
+    depends_on:
+      - mongo
+  
+  frontend:
+    build: 
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - lunch-time-app
+    ports:
+      - 5173:5173
+    command: npm run dev
+    depends_on:
+      - api
+
+volumes:
+  mongo_data:
+networks:
+  lunch-time-app:
+    driver: bridge
+      
