@@ -20,6 +20,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/users', require('./routes/userRoutes'))
 
+// Call last. Otherwise some errors escape.
 app.use(errorHandler)
 
 app.listen(PORT, () => console.log(`Server Started on port ${PORT}`))
