@@ -10,7 +10,6 @@ const softwareSchema = mongoose.Schema(
         softwarename: {
             type: String,
             required: [true, 'Please enter the name of you software'],
-            default: 'before-names'
         },
         description: {
             type: String,
