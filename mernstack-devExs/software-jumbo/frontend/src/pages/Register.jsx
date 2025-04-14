@@ -86,10 +86,10 @@ function Register() {
                         <input type="password" className="form-control" id="password2" name="password2" value={password2} onChange={onChange} placeholder="Confirm password" required />
                     </div>
                     <select name="type" id="type" value={clubtype} onChange={(e) => setuserRole(e.target.value)}>
-                        <option value="private">User</option>
-                        <option value="Public">Vendor</option>
+                        <option value="user">User</option>
+                        <option value="vendor">Vendor</option>
                     </select>
-                    {userRole === "Vendor" && (
+                    {userRole === "vendor" && (
                         <div className="form-group">
                             <input className="form-control" type="text" id="role" name="name" value={name} onChange={onChange} placeholder="Enter your vendor's code" required/>
                         </div>

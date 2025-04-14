@@ -19,7 +19,6 @@ function Login() {
     const navigate = useNavigate()
 
     const { user, isLoading, isError, isSuccess, message } = useSelector(
-        // auth is from features
         (state) => state.auth
     )
 
