@@ -74,6 +74,27 @@ const loginUser = async (req, res, next) => {
     }
 }
 
+const resetPasswordRequest = async (req, res, next) => {
+    try {
+        const {email} = req.body
+        const user = await User.findOne({email})
+
+        const expires = new Date(Date.now() + 60 * 60 * 1000);
+        const verificationCode = await VerificationCodeM.create({
+            userId: user._id,
+            type: "PassWordReset",
+            expires
+        });
+
+        const url = `/password/reset?code=${verificationCode._id}&exp=${expires.getTime()}`;
+
+        const { error } = await sendMail
+
+    } catch (error) {
+        
+    }
+}
+
 const getMe = async (req, res, next) => {
     try {
         const user = {

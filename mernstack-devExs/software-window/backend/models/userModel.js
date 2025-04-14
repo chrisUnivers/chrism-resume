@@ -13,6 +13,11 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Please add a password']
+    },
+    isDistributor: { // to use later for access.
+        type: Boolean,
+        required: false,
+        default: false
     }
 },
 {

@@ -7,11 +7,8 @@ const protect = async (req, res, next) => {
 
         if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
             try {
-                // Get token from Header
                 token = req.headers.authorization.split(' ')[1]
-                // Verify token
                 const decoded = jwt.verify(token, process.env.JWT_SECRET)
-                // Get user from token
                 req.user = await User.findById(decoded.id).select('-password')
 
                 next() // possibly a better way to do this.
@@ -31,18 +28,4 @@ const protect = async (req, res, next) => {
         next(error)
     }
 }
-
-const notprotect = async (req, res, next) => {
-    try {
-        let notToken
-        try {
-            next()
-        } catch (ntError) {
-            console.log("not protect middleware")
-        }
-    } catch (error) {
-        console.log("not protect middleware no token")
-    }
-}
-
-module.exports = { protect, notprotect }
+module.exports = { protect }
