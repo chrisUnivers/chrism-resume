@@ -11,15 +11,13 @@ function App() {
   return (
     <>
       <Router>
-      <div className='leftright'>
+      <div className='container'>
         <Header />
-        <div className="homeright">
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-          </Routes>
-        </div>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/register' element={<Register />} />
+        </Routes>
       </div>
     </Router>
     <ToastContainer />

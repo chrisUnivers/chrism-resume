@@ -18,6 +18,7 @@ function Register() {
     const {name, email, password, password2} = formData
 
     const [userRole, setuserRole] = useState('user')
+    const [vendorId, setVendorId] = useState('')
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -85,15 +86,16 @@ function Register() {
                     <div className="form-group">
                         <input type="password" className="form-control" id="password2" name="password2" value={password2} onChange={onChange} placeholder="Confirm password" required />
                     </div>
-                    <select name="type" id="type" value={clubtype} onChange={(e) => setuserRole(e.target.value)}>
-                        <option value="user">User</option>
-                        <option value="vendor">Vendor</option>
-                    </select>
-                    {userRole === "vendor" && (
-                        <div className="form-group">
-                            <input className="form-control" type="text" id="role" name="name" value={name} onChange={onChange} placeholder="Enter your vendor's code" required/>
-                        </div>
-                    )}  
+                    <div className="form-group signup">
+                        <select name="role" id="role" value={userRole} onChange={(e) => setuserRole(e.target.value)}>
+                            <option value="user">User</option>
+                            <option value="vendor">Vendor</option>
+                        </select>
+                        {userRole === "vendor" && (
+                            <input className="form-control" type="text" id="role" name="role" value={vendorId} onChange={(e) => setVendorId(e.target.value)} placeholder="Enter your vendor's code" required/>
+                        )}
+                    </div>
+                    
                     <div className="form-group">
                         <button className="btn btn-block">Submit</button>
                     </div>
