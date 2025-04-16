@@ -21,20 +21,6 @@ const getSoftwares = async (req, res, next) => {
     }
 }
 
-// @desc Get user softwares
-// @route GET /api/softwares
-// @access Public
-const getPublicSoftwares = async (req, res, next) => {
-    try {
-        const softwares = await Software.find({softwaretype: 'public'})
-        res.status(200).json(softwares)
-        console.log("Hello from getPublic")
-    } catch (error) {
-        console.error('Login User error')
-        next(error)
-    }
-}
-
 // @desc   Get user software
 // @route  GET /api/softwares/:id
 // @access Private
@@ -94,7 +80,7 @@ const deleteSoftware = async (req, res, next) => {
         res.status(200).json({ success: true })
         
     } catch (error) {
-        console.error('delete softwares error')
+        console.error('delete software error')
         next(error)
     }
 }
@@ -127,7 +113,7 @@ const updateSoftware = async (req, res, next) => {
         
         res.status(200).json(updatedSoftware)
     } catch (error) {
-        console.error('deleteSoftware error')
+        console.error('Software name error')
         next(error)
     }
 }
@@ -138,9 +124,9 @@ const updateSoftware = async (req, res, next) => {
 const createSoftware = async (req, res, next) => {
     try {
 
-        const {software, softwaretype, description} = req.body
+        const {softwarename, description, imageurl} = req.body
 
-        if(!software || !description) {
+        if(!softwarename || !description) {
             res.status(400)
             throw new Error('Please add a software and a description of the software')
         }
@@ -153,10 +139,10 @@ const createSoftware = async (req, res, next) => {
         }
         const newsoftware = await Software.create({
             user: req.user.id,
-            software,
-            softwaretype,
+            softwarename,
             description,
-            status: 'new'
+            status: 'LTS',
+            imageurl
         })
         res.status(201).json(newsoftware)
     } catch (error) {
@@ -168,7 +154,6 @@ const createSoftware = async (req, res, next) => {
 module.exports = {
     getSoftwares,
     getSoftware,
-    getPublicSoftwares,
     createSoftware,
     deleteSoftware,
     updateSoftware,

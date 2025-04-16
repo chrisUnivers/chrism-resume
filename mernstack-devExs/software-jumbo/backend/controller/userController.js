@@ -5,7 +5,7 @@ const User = require('../models/userModel')
 
 const registerUser = async (req, res, next) => {
     try {
-        const {name, email, password} = req.body
+        const {name, email, password, role} = req.body
         if(!name){
             res.status(400)
             throw new Error('Please enter your name')
@@ -31,7 +31,8 @@ const registerUser = async (req, res, next) => {
         const user = await User.create({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
+            role
         })
 
         if(user) {
@@ -39,6 +40,7 @@ const registerUser = async (req, res, next) => {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
+                role: user.role,
                 token: generateToken(user._id),
             })
         } else {
@@ -61,6 +63,7 @@ const loginUser = async (req, res, next) => {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
+                role: user.role,
                 token: generateToken(user._id),
             })
         } else {

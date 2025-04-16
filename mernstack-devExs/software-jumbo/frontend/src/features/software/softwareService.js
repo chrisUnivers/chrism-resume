@@ -41,6 +41,13 @@ const getSoftware = async (softwareId, token) => {
     return response.data
 }
 
+// Get home page softwares
+const getPublicSoftwares = async () => {
+    const response = await axios.get(API_URL + 'softwares') 
+
+    return response.data
+}
+
 // Remove software(meaning full if purchased and now returned)
 const removeSoftware = async (softwareId, token) => {
     const config = {

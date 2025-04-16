@@ -14,13 +14,20 @@ const softwareSchema = mongoose.Schema(
         description: {
             type: String,
             required: [true, 'Provide a description for this software.'],
+            default: '',
         },
         status: {
             type: String,
             required: true,
             enum: ['Beta', 'LTS', 'New Update', 'Archived'],
-            default: 'Beta'
-        }
+            default: 'LTS'
+        },
+        imageurl: {
+            type: String,
+            required: true,
+            enum: ['machine', 'analytics', 'distribution', 'functions'],
+            default: '',
+        } // use firebase for uploading images.
     },
     {
         timestamps: true,
