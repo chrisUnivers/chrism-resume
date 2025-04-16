@@ -11,7 +11,7 @@ const initialState = {
 }
 
 // Create new softwares
-export const createSoftware = createAsyncThunk('softwares/create', 
+export const createSoftware = createAsyncThunk('software/create', 
     async (softwareData, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
@@ -25,7 +25,7 @@ export const createSoftware = createAsyncThunk('softwares/create',
 )
 
 // Get user softwares
-export const getSoftwares = createAsyncThunk('softwares/getAll', 
+export const getSoftwares = createAsyncThunk('software/getAll', 
     async (_, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
@@ -40,7 +40,7 @@ export const getSoftwares = createAsyncThunk('softwares/getAll',
 
 
 // Get user software
-export const getSoftware = createAsyncThunk('softwares/get', 
+export const getSoftware = createAsyncThunk('software/get', 
     async (softwareId, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
@@ -54,10 +54,10 @@ export const getSoftware = createAsyncThunk('softwares/get',
 )
 
 // Get home page softwares
-export const getPublicSoftwares = createAsyncThunk('softwares/getPublic', 
+export const getAllSoftwares = createAsyncThunk('software/getAllSoftwares', 
     async (_, thunkAPI) => {
         try {
-            return await softwareService.getPublicSoftwares()
+            return await softwareService.getAllSoftwares()
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
 
@@ -67,7 +67,7 @@ export const getPublicSoftwares = createAsyncThunk('softwares/getPublic',
 )
 
 // Remove software
-export const removeSoftware = createAsyncThunk('softwares/remove', 
+export const removeSoftware = createAsyncThunk('software/remove', 
     async (softwareId, thunkAPI) => {
         try {
             const token = thunkAPI.getState().auth.user.token
@@ -126,14 +126,14 @@ export const softwareSlice = createSlice({
             state.isError = true
             state.message = action.payload
         })
-        .addCase(getPublicSoftwares.pending, (state) => {
+        .addCase(getAllSoftwares.pending, (state) => {
             state.isLoading = true
         })
-        .addCase(getPublicSoftwares.fulfilled, (state, action) => {
+        .addCase(getAllSoftwares.fulfilled, (state, action) => {
             state.isLoading = false
             state.softwares = action.payload
         })
-        .addCase(getPublicSoftwares.rejected, (state, action) => {
+        .addCase(getAllSoftwares.rejected, (state, action) => {
             state.isLoading = false
             state.isError = true
             state.message = action.payload

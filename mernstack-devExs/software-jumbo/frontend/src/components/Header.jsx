@@ -1,7 +1,8 @@
-import {FaSignInAlt, FaSignOutAlt, FaUser} from 'react-icons/fa'
+import {FaSignInAlt, FaSignOutAlt, FaUser, FaNodeJs} from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch  } from 'react-redux'
 import {logout, reset} from '../features/auth/authSlice'
+import { createSoftware, reset as sReset } from '../features/software/softwareSlice'
 
 function Header() {
     const navigate = useNavigate()
@@ -13,6 +14,7 @@ function Header() {
         dispatch(reset())
         navigate('/')
     }
+
     return (
         <header className='header'>
             <div className='logo'>
@@ -20,9 +22,16 @@ function Header() {
             </div>
             <ul>
                 {user ? (
-                    <li>
-                        <button className='btn' onClick={onLogout}><FaSignOutAlt /> Logout</button>
-                    </li>
+                        <ul className='hdrIn'>
+                            <li>
+                                <button className='btn' onClick={onLogout}><FaSignOutAlt /> Logout</button>
+                            </li>
+                            <li>
+                                <Link to="/create-software" className="btn btn-reverse btn-block">
+                                    <FaQuestionCircle /> Create A New Software Post
+                                </Link>
+                            </li>
+                        </ul>
                 ) : (
                     <>
                         <li>

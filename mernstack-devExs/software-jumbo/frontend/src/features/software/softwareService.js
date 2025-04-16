@@ -42,7 +42,7 @@ const getSoftware = async (softwareId, token) => {
 }
 
 // Get home page softwares
-const getPublicSoftwares = async () => {
+const getAllSoftwares = async () => {
     const response = await axios.get(API_URL + 'softwares') 
 
     return response.data
@@ -66,6 +66,7 @@ const softwareService = {
     getSoftwares,
     getSoftware,
     removeSoftware,
+    getAllSoftwares,
 }
 
 export default softwareService

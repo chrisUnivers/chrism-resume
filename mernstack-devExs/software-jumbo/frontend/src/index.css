@@ -1,5 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Winky+Sans:ital,wght@300;400;600;700&display=swap');
+
+
 body {
+  font-family: 'Winky+Sans', sans-serif;
   height: 100vh;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+ul {
+  list-style: none;
 }
 
 .header {

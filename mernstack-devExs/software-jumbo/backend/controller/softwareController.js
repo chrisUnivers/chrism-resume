@@ -52,6 +52,19 @@ const getSoftware = async (req, res, next) => {
     }
 }
 
+// @desc   Get all softwares
+// @route  GET /api/all/softwares
+// @access Private
+const getAllSoftwares = async (req, res, next) => {
+    try {
+        const softwares = await Software.find({status: {$ne: 'Archived'}})
+        res.status(200).json(softwares)
+    } catch (error) {
+        console.error('Home page softwares error')
+        next(error)
+    }
+}
+
 // @desc   Delete user Software
 // @route  DELETE /api/Softwares/:id
 // @access Private
@@ -157,4 +170,5 @@ module.exports = {
     createSoftware,
     deleteSoftware,
     updateSoftware,
+    getAllSoftwares,
 }

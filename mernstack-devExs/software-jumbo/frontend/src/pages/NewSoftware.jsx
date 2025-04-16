@@ -30,7 +30,7 @@ function NewSoftware() {
 
         if(isSuccess && softwareCreated) {
             dispatch(reset())
-            navigate('/softwares')
+            navigate('/')
         }
 
         dispatch(reset())
