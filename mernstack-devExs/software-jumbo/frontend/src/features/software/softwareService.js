@@ -9,9 +9,7 @@ const createSoftware = async (softwareData, token) => {
             Authorization: `Bearer ${token}`,
         },
     }
-
     const response = await axios.post(API_URL, softwareData, config)
-
     return response.data
 }
 
@@ -22,9 +20,7 @@ const getSoftwares = async (token) => {
             Authorization: `Bearer ${token}`,
         },
     }
-
     const response = await axios.get(API_URL, config)
-
     return response.data
 }
 

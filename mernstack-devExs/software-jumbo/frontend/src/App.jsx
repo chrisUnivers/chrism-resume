@@ -6,6 +6,7 @@ import Register from './pages/Register'
 import NewSoftware from './pages/NewSoftware'
 import PrivateRoute from './components/PrivateRoute'
 import Header from './components/Header'
+import NavBar from './components/NavBar'
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
       <Router>
       <div className='container'>
         <Header />
+        <NavBar />
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
@@ -22,6 +24,9 @@ function App() {
           <Route Route path='/create-software' element={<PrivateRoute />}>
             <Route path='/create-software' element={<NewSoftware />} />
           </Route>
+          {/* <Route path='/software/:softwareId' element={<PrivateRoute />}>
+              <Route path='/software/:softwareId' element={<SoftwareInfo />} />
+          </Route> */}
         </Routes>
       </div>
     </Router>

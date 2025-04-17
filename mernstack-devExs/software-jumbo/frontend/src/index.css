@@ -21,7 +21,7 @@ ul {
   align-items: center;
   padding: 20px 0;
   border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 60px;
+  margin-bottom: 30px;
 }
 
 .header ul {
@@ -45,6 +45,21 @@ ul {
 
 .header ul li a svg {
   margin-right: 5px;
+}
+
+nav {
+  border-bottom: 1px solid black;
+}
+
+.navbar-items {
+  display: flex;
+  justify-content: space-around;
+}
+
+.navbar-item {
+  display: flex;
+  /* color: #777; */
+  padding: 0 3px;
 }
 
 .form {
@@ -103,6 +118,34 @@ ul {
 .btn-block {
   width: 100%;
   margin-bottom: 20px;
+}
+
+
+.moreoptions-items {
+  width: 200px;
+  height: 300px;
+  /* overflow: hidden; */
+  background-color: darkslategray;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: center;
+}
+
+.moreoptions-toggle {
+  height: 30%;
+  /* margin: 0px 0px 20px 0px; */
+}
+
+.option-item {
+  min-width: 100px;
+  /* margin-left: 20px; */
+  margin-bottom: 30px;
+  background-color: #fff;
+}
+
+.moreoptions-hidden {
+  display: none;
 }
 
 .form-group {

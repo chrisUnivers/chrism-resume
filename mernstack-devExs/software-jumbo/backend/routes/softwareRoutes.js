@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const {getSoftwares, getSoftware, getAllSoftwares, createSoftware, deleteSoftware, updateSoftware} = require('../controllers/softwareController')
+const {getSoftwares, getSoftware, getAllSoftwares, createSoftware, deleteSoftware, updateSoftware} = require('../controller/softwareController')
 
 const {protect} = require('../middleware/authMiddleware')
 

@@ -1,14 +1,16 @@
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { getAllSoftwares, reset } from "../features/software/softwareSlice"
+import SoftwareCard from "../components/SoftwareCard"
 import Spinner from "../components/Spinner"
 
 
 function Home() {
     const { softwares, isLoading, isSuccess } = useSelector((state) => state.softwares)
-
+    
     const dispatch = useDispatch()
-
+    const { user } = useSelector((state) => state.auth)
+    const [name] = useState(user.name);
     useEffect(() => {
         return () => {
             if(isSuccess) {
@@ -29,19 +31,11 @@ function Home() {
 
     return (
         <>
-            <section className="heading">
-                <h1>Welcome to the world of Software</h1>
-            </section>
-            <h1>All The Softwares In The World</h1>
             <div className="softwares">
                 <div className="software-headings">
-                    <div>Date</div>
-                    <div>Product</div>
-                    <div>Status</div>
-                    <div></div>
+                    {console.log(name)}
                 </div>
                 {softwares.map((software) => (
-                    console.log(software),
                     <SoftwareCard key={software._id} software={software} />
                 ))}
             </div>

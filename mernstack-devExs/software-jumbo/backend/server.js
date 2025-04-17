@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/users', require('./routes/userRoutes'))
+app.use('/api/software', require('./routes/softwareRoutes'))
 
 // Call last. Otherwise some errors will not be handled.
 app.use(errorHandler)

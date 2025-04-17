@@ -138,7 +138,6 @@ const createSoftware = async (req, res, next) => {
     try {
 
         const {softwarename, description, imageurl} = req.body
-
         if(!softwarename || !description) {
             res.status(400)
             throw new Error('Please add a software and a description of the software')

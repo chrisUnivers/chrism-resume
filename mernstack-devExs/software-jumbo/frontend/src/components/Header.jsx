@@ -1,4 +1,4 @@
-import {FaSignInAlt, FaSignOutAlt, FaUser, FaNodeJs} from 'react-icons/fa'
+import {FaSignInAlt, FaSignOutAlt, FaUser, FaQuestionCircle} from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch  } from 'react-redux'
 import {logout, reset} from '../features/auth/authSlice'
@@ -20,18 +20,23 @@ function Header() {
             <div className='logo'>
                 <Link to='/'>Software Jumbo</Link>
             </div>
+            <section className="heading">
+                <h1>Welcome to the world of Software</h1>
+            </section>
             <ul>
                 {user ? (
-                        <ul className='hdrIn'>
-                            <li>
-                                <button className='btn' onClick={onLogout}><FaSignOutAlt /> Logout</button>
-                            </li>
-                            <li>
-                                <Link to="/create-software" className="btn btn-reverse btn-block">
-                                    <FaQuestionCircle /> Create A New Software Post
-                                </Link>
-                            </li>
-                        </ul>
+                        <>
+                            <ul className='SignedInHdr'>
+                                <li>
+                                    <button className='btn' onClick={onLogout}><FaSignOutAlt /> Logout</button>
+                                </li>
+                                <li>
+                                    <Link to='/create-software'>
+                                        <FaSignInAlt /> New Software
+                                    </Link>
+                                </li>
+                            </ul>
+                        </>
                 ) : (
                     <>
                         <li>
@@ -46,7 +51,6 @@ function Header() {
                         </li>
                     </>
                 )}
-                
             </ul>
         </header>
     )

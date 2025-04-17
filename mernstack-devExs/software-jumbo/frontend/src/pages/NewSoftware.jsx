@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { toast } from "react-toastify"
 import { createSoftware, reset } from "../features/software/softwareSlice"
 import Spinner from "../components/Spinner"
-// import BackButton from "../components/BackButton"
+import BackButton from "../components/BackButton"
 // softwarename, description, status, imageurl
 
 function NewSoftware() {
@@ -14,9 +14,9 @@ function NewSoftware() {
     const [name] = useState(user.name)
     const [email] = useState(user.email)
     
-    const [software, setSoftwarename] = useState('firebase')
+    const [softwarename, setSoftwarename] = useState('functions')
     // For now I'm using static images. This is a work around for now. Need to set up firestore to upload images.
-    const [imgUrl, setImgUrl] = useState('null')
+    const [imageurl, setImgUrl] = useState('null')
     const [description, setDescription] = useState('')
     const [softwareCreated, setSoftwareCreated] = useState(false)
 
@@ -40,7 +40,7 @@ function NewSoftware() {
         e.preventDefault()
         setSoftwareCreated(true)
 
-        dispatch(createSoftware({ software, description,  imgUrl}))
+        dispatch(createSoftware({ softwarename, description,  imageurl}))
         if(isLoading) {
             return <Spinner />
         }
@@ -48,7 +48,7 @@ function NewSoftware() {
 
     return (
         <>
-            {console.log(name)}
+            {/* {console.log(user)} */}
             <div className="back-btn">
                 <BackButton url='/' />
             </div>
@@ -69,19 +69,19 @@ function NewSoftware() {
                         <div className="form-group">
                             <div className="form-group">
                                 <label htmlFor="name">Software Name</label>
-                                <input className="form-control" type="text" id="softwarename" name="softwarename" value={software} onChange={(e) => setSoftwarename(e.target.value)} placeholder="Enter the name of this software" required/>
+                                <input className="form-control" type="text" id="softwarename" name="softwarename" value={softwarename} onChange={(e) => setSoftwarename(e.target.value)} placeholder="Enter the name of this software" required/>
                             </div>
-                            <label htmlFor="imgUrl">Choose An Icon for Your Software</label>
-                            <select name="imgUrl" id="imgUrl" value={imgUrl} onChange={(e) => setImgUrl(e.target.value)}>
+                            <label htmlFor="imageurl">Choose An Icon for Your Software</label>
+                            <select name="imageurl" id="imageurl" value={imageurl} onChange={(e) => setImgUrl(e.target.value)}>
                                 <option value="machine">ML Software</option>
                                 <option value="analytics">Analytics Software</option>
                                 <option value="distribution">Distribution Software</option>
                                 <option value="functions">Functions Software</option>
                             </select>
-                            {imgUrl !== 'null' && (
+                            {imageurl !== 'null' && (
                                 <div className="img-url-container">
                                     <div className="img-url-icon-bg">
-                                        <img src={`../assets/software_svg/firebase_${imgUrl}.svg`} alt={`firebase_${imgUrl}`} className="img-url-icon" />
+                                        <img src="/assets/software_svg/firebase_machine.svg" alt= "firebase_" className="img-url-icon" />
                                     </div>
                                 </div>
                             )}
