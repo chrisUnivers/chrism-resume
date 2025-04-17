@@ -5,7 +5,7 @@ import softwareReducer from '../features/software/softwareSlice'
 const store = configureStore({
     reducer: {
         auth: authReducer,
-        softwarestate: softwareReducer,
+        softwarestore: softwareReducer,
     },
 });
 

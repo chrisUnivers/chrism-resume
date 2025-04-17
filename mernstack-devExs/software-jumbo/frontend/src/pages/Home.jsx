@@ -6,7 +6,7 @@ import Spinner from "../components/Spinner"
 
 
 function Home() {
-    const { softwares, isLoading, isSuccess } = useSelector((state) => state.softwares)
+    const { softwares, isLoading, isSuccess } = useSelector((state) => state.softwarestore)
     
     const dispatch = useDispatch()
     const { user } = useSelector((state) => state.auth)
@@ -32,11 +32,8 @@ function Home() {
     return (
         <>
             <div className="softwares">
-                <div className="software-headings">
-                    {console.log(name)}
-                </div>
                 {softwares.map((software) => (
-                    <SoftwareCard key={software._id} software={software} />
+                    <SoftwareCard key={software._id} software={software}  className="software-item"/>
                 ))}
             </div>
             

@@ -9,14 +9,14 @@ import BackButton from "../components/BackButton"
 
 function NewSoftware() {
     const {user} = useSelector((state) => state.auth)
-    const {isLoading, isError, isSuccess, message} = useSelector((state) => state.softwarestate)
+    const {isLoading, isError, isSuccess, message} = useSelector((state) => state.softwarestore)
 
     const [name] = useState(user.name)
     const [email] = useState(user.email)
     
     const [softwarename, setSoftwarename] = useState('functions')
     // For now I'm using static images. This is a work around for now. Need to set up firestore to upload images.
-    const [imageurl, setImgUrl] = useState('null')
+    const [imageurl, setImgUrl] = useState('functions')
     const [description, setDescription] = useState('')
     const [softwareCreated, setSoftwareCreated] = useState(false)
 
@@ -72,16 +72,16 @@ function NewSoftware() {
                                 <input className="form-control" type="text" id="softwarename" name="softwarename" value={softwarename} onChange={(e) => setSoftwarename(e.target.value)} placeholder="Enter the name of this software" required/>
                             </div>
                             <label htmlFor="imageurl">Choose An Icon for Your Software</label>
-                            <select name="imageurl" id="imageurl" value={imageurl} onChange={(e) => setImgUrl(e.target.value)}>
+                            <select name="imageurl" id="imageurl" value={imageurl ==='' ? 'functions' : imageurl} onChange={(e) => setImgUrl(e.target.value)}>
                                 <option value="machine">ML Software</option>
                                 <option value="analytics">Analytics Software</option>
                                 <option value="distribution">Distribution Software</option>
                                 <option value="functions">Functions Software</option>
                             </select>
-                            {imageurl !== 'null' && (
+                            {imageurl !== '' && (
                                 <div className="img-url-container">
                                     <div className="img-url-icon-bg">
-                                        <img src="/assets/software_svg/firebase_machine.svg" alt= "firebase_" className="img-url-icon" />
+                                        <img src={`/assets/software_svg/firebase_${imageurl}.svg`} alt= "firebase_" className="img-url-icon" />
                                     </div>
                                 </div>
                             )}

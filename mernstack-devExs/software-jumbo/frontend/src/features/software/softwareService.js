@@ -39,7 +39,7 @@ const getSoftware = async (softwareId, token) => {
 
 // Get home page softwares
 const getAllSoftwares = async () => {
-    const response = await axios.get(API_URL + 'softwares') 
+    const response = await axios.get(API_URL + 'softwares/all') 
 
     return response.data
 }
