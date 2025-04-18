@@ -10,14 +10,8 @@ export const MoreOptions = (optionToggles) => {
 
     return (
         <>
-            <div className={optionShow ? "moreoptions-items" : "moreoptions-hidden"} >
-                <Link to="/create-software" className="btn btn-reverse btn-block option-item">
-                    <FaWeibo /> Create A New Software Post
-                </Link>
-                <Link to="/create-software" className="btn btn-reverse btn-block option-item">
-                    <FaWeibo /> Create A New Software Post
-                </Link>
-                <Link to="/create-software" className="btn btn-reverse btn-block option-item">
+            <div className="moreoptions-items" >
+                <Link to="/create-software" className="btn btn-block">
                     <FaWeibo /> Create A New Software Post
                 </Link>
             </div>

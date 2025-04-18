@@ -39,8 +39,7 @@ function NavBar() {
                                 Music Creation Software
                             </Link>
                         </li>
-                    </ul> 
-                    {/* <MoreOptions optionShow={true}/>            */}
+                    </ul>            
                 </nav>
         </>
     )

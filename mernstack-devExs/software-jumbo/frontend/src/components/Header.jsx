@@ -1,8 +1,9 @@
-import {FaSignInAlt, FaSignOutAlt, FaUser, FaQuestionCircle} from 'react-icons/fa'
+import {FaSignInAlt, FaSignOutAlt, FaUser, FaAlignLeft} from 'react-icons/fa'
 import { Link, useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch  } from 'react-redux'
 import {logout, reset} from '../features/auth/authSlice'
 import { createSoftware, reset as sReset } from '../features/software/softwareSlice'
+import { MoreOptions } from './MoreOptions'
 
 function Header() {
     const navigate = useNavigate()
@@ -27,13 +28,13 @@ function Header() {
                 {user ? (
                         <>
                             <ul className='SignedInHdr'>
-                                <li>
-                                    <button className='btn' onClick={onLogout}><FaSignOutAlt /> Logout</button>
+                                <li className='more-options-li'>
+                                    <button className='btn' onClick={onLogout}><FaAlignLeft /> More Options</button>
+                                    <MoreOptions optionShow={true}/>
+                                    
                                 </li>
                                 <li>
-                                    <Link to='/create-software'>
-                                        <FaSignInAlt /> New Software
-                                    </Link>
+                                    <button className='btn' onClick={onLogout}><FaSignOutAlt /> Logout</button>
                                 </li>
                             </ul>
                         </>

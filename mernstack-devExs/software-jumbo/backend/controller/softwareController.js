@@ -52,6 +52,26 @@ const getSoftware = async (req, res, next) => {
     }
 }
 
+// @desc   Get software public access
+// @route  GET /api/software/:id/0
+// @access Public
+const getSoftwareOut = async (req, res, next) => {
+    try {
+        const software = await Software.findById(req.params.id)
+        // console.log("software gotten", software)
+        if(!software) {
+            res.status(404)
+            throw new Error('Software not found')
+        }
+        
+        res.status(200).json(software)
+        
+    } catch (error) {
+        console.error('getSoftwareOut')
+        next(error)
+    }
+}
+
 // @desc   Get all softwares
 // @route  GET /api/all/softwares
 // @access Private
@@ -166,6 +186,7 @@ const createSoftware = async (req, res, next) => {
 module.exports = {
     getSoftwares,
     getSoftware,
+    getSoftwareOut,
     createSoftware,
     deleteSoftware,
     updateSoftware,

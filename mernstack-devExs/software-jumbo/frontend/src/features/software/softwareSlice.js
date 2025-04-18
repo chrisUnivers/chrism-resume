@@ -43,8 +43,26 @@ export const getSoftwares = createAsyncThunk('software/getAll',
 export const getSoftware = createAsyncThunk('software/get', 
     async (softwareId, thunkAPI) => {
         try {
+            console.log("used token", thunkAPI)
             const token = thunkAPI.getState().auth.user.token
+            
             return await softwareService.getSoftware(softwareId, token)
+        } catch (error) {
+            const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+
+            return thunkAPI.rejectWithValue(message)
+        }
+    }
+)
+
+
+// Get softwareOut
+export const getSoftwareOut = createAsyncThunk('software/less', 
+    async (softwareId, thunkAPI) => {
+        try {
+            // console.log("used id", softwareId)
+            
+            return await softwareService.getSoftwareOut(softwareId)
         } catch (error) {
             const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
 
@@ -125,6 +143,18 @@ export const softwareSlice = createSlice({
             state.isLoading = false
             state.isError = true
             state.message = action.payload
+        }).addCase(getSoftwareOut.pending, (state) => {
+            state.isLoading = true
+        })
+        .addCase(getSoftwareOut.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.software = action.payload
+        })
+        .addCase(getSoftwareOut.rejected, (state, action) => {
+            state.isLoading = false
+            state.isError = true
+            state.message = action.payload
         })
         .addCase(getAllSoftwares.pending, (state) => {
             state.isLoading = true
@@ -147,3 +177,4 @@ export const softwareSlice = createSlice({
 
 export const { reset } = softwareSlice.actions
 export default softwareSlice.reducer
+getSoftwareOut

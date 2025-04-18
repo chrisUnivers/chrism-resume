@@ -37,6 +37,12 @@ const getSoftware = async (softwareId, token) => {
     return response.data
 }
 
+// Get software when logged out
+const getSoftwareOut = async (softwareId) => {
+    const response = await axios.get(API_URL + softwareId + "/0")
+    return response.data
+}
+
 // Get home page softwares
 const getAllSoftwares = async () => {
     const response = await axios.get(API_URL + 'softwares/all') 
@@ -61,6 +67,7 @@ const softwareService = {
     createSoftware,
     getSoftwares,
     getSoftware,
+    getSoftwareOut,
     removeSoftware,
     getAllSoftwares,
 }

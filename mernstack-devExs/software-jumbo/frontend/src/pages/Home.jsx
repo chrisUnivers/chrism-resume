@@ -9,8 +9,8 @@ function Home() {
     const { softwares, isLoading, isSuccess } = useSelector((state) => state.softwarestore)
     
     const dispatch = useDispatch()
-    const { user } = useSelector((state) => state.auth)
-    const [name] = useState(user.name);
+    // const { user } = useSelector((state) => state.auth)
+    // const [name] = useState(user.name);
     useEffect(() => {
         return () => {
             if(isSuccess) {
