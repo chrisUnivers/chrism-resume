@@ -4,6 +4,9 @@ import { toast } from 'react-toastify'
 import { FaUser } from "react-icons/fa"
 import { useSelector, useDispatch } from 'react-redux'
 import { register, reset } from '../features/auth/authSlice'
+import {getAuth, createUserWithEmailAndPassword, updateProfile} from 'firebase/auth'
+import { setDoc, doc, serverTimestamp } from 'firebase/firestore'
+import { db } from '../firebase.config'
 import Spinner from '../components/Spinner'
 
 
@@ -46,18 +49,42 @@ function Register() {
         }))
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
-        if(password !== password2) {
-            toast.error('Passwords do not match')
-        } else {
-            const userData = {
-                name,
-                email,
-                password
+
+        try {
+            if(password !== password2) {
+                toast.error('Passwords do not match')
+            } else {
+                const userData = {
+                    name,
+                    email,
+                    password
+                }
+                const auth = getAuth()
+            
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+
+                const user = userCredential.user
+
+                updateProfile(auth.currentUser, {
+                    displayName: name
+                })
+
+                const formDataCopy = {...userData}
+                delete formDataCopy.password
+                formDataCopy.timestamp = serverTimestamp()
+
+                await setDoc(doc(db, 'users', user.uid), formDataCopy)
+
+                dispatch(register(userData))
             }
-            dispatch(register(userData))
+            
+
+        } catch (error) {
+            console.log(error)
         }
+        
     }
 
     if(isLoading) {

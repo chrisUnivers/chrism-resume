@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { toast } from "react-toastify"
+import { getAuth } from 'firebase/auth'
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
+import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { createSoftware, reset } from "../features/software/softwareSlice"
+import {db} from '../firebase.config'
+import { v4 as uuidv4 } from 'uuid'
+import { toast } from "react-toastify"
 import Spinner from "../components/Spinner"
 import BackButton from "../components/BackButton"
 // softwarename, description, status, imageurl
@@ -13,15 +18,25 @@ function NewSoftware() {
 
     const [name] = useState(user.name)
     const [email] = useState(user.email)
+
+    const [formData, setFormData] = useState({
+        softwarename: '',
+        imageurl: 'functions',
+        description: '',
+        images: {}
+    })
+
+    const {softwarename, imageurl, images, description} =  formData
     
-    const [softwarename, setSoftwarename] = useState('functions')
+    
     // For now I'm using static images. This is a work around for now. Need to set up firestore to upload images.
-    const [imageurl, setImgUrl] = useState('functions')
-    const [description, setDescription] = useState('')
     const [softwareCreated, setSoftwareCreated] = useState(false)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
+
+    const auth = getAuth()
+
 
     useEffect(() => {
         if(isError) {
@@ -35,20 +50,77 @@ function NewSoftware() {
 
         dispatch(reset())
     }, [dispatch, isError, isSuccess, navigate, message])
+
     
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         setSoftwareCreated(true)
 
+        // Store image in firebase
+        const storeImage = async (image) => {
+            return new Promise((resolve, reject) => {
+                const storage = getStorage()
+                const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
+
+                const storageRef = ref(storage, 'images/' + fileName)
+
+                const uploadTask = uploadBytesResumable(storageRef, image)
+
+                uploadTask.on('state_changed',  
+                    (error) => {
+                        reject(error)
+                    }, 
+                    () => {
+                        //successful uploads on complete
+                        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                        resolve(downloadURL);
+                        });
+                    }
+                    );                  
+            } )
+        }
+
+        const imgUpUrls = await Promise.all(
+            [...images].map((image) => storeImage(image))
+        ).catch(() => {
+            console.log('Images did not uploaded')
+        })
+
+        const formDataUpload = {
+            ...formData, imgUpUrls, timestamp: serverTimestamp()
+        }
+
+        // since uploaded
+        delete formDataUpload.images
+
+        const docRef = await addDoc(collection(db, 'listings'), formDataUpload)
+
+        // For mongodb since still using it for now
         dispatch(createSoftware({ softwarename, description,  imageurl}))
         if(isLoading) {
             return <Spinner />
         }
     }
 
+    const onChange = (e) => {
+        if(e.target.files) {
+            setFormData((prevState) => ({
+                ...prevState,
+                images: e.target.files
+            }))
+        }
+        
+        if(!e.target.files) {
+            setFormData((prevState) => ({
+                ...prevState,
+                [e.target.id]: e.target.value,
+            }))
+        }
+    }
+
     return (
         <>
-            {/* {console.log(user)} */}
+            {console.log(user)}
             <div className="back-btn">
                 <BackButton url='/' />
             </div>
@@ -69,10 +141,10 @@ function NewSoftware() {
                         <div className="form-group">
                             <div className="form-group">
                                 <label htmlFor="name">Software Name</label>
-                                <input className="form-control" type="text" id="softwarename" name="softwarename" value={softwarename} onChange={(e) => setSoftwarename(e.target.value)} placeholder="Enter the name of this software" required/>
+                                <input className="form-control" type="text" id="softwarename" name="softwarename" value={softwarename} onChange={onChange} placeholder="Enter the name of this software" required/>
                             </div>
                             <label htmlFor="imageurl">Choose An Icon for Your Software</label>
-                            <select name="imageurl" id="imageurl" value={imageurl ==='' ? 'functions' : imageurl} onChange={(e) => setImgUrl(e.target.value)}>
+                            <select name="imageurl" id="imageurl" value={imageurl ==='' ? 'functions' : imageurl} onChange={onChange}>
                                 <option value="machine">ML Software</option>
                                 <option value="analytics">Analytics Software</option>
                                 <option value="distribution">Distribution Software</option>
@@ -88,7 +160,10 @@ function NewSoftware() {
                         </div>
                         <div className="form-group">
                             <label htmlFor="description">Give your software a description</label>
-                            <textarea name="description" id="description"className="form-control" placeholder="Description" value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+                            <textarea name="description" id="description"className="form-control" placeholder="Description" value={description} onChange={onChange}></textarea>
+                            <label className="formLabel">Software Image</label>
+                            <p className="imageurl">Please provide one image for your software.</p>
+                            <input className="imageFile" type="file" id="images"  onChange={onChange}max="1" accept=".jpg,.png,.jpeg,.svg" required/>
                         </div>
                         <div className="form-group">
                             <button className="btn btn-block">Submit</button>
