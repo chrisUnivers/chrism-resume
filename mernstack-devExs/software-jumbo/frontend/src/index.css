@@ -185,6 +185,7 @@ nav {
 
 .software-card {
   margin-right: 30px;
+  margin-bottom: 20px;
 }
 .sw-link {
   max-width: 200px;
@@ -209,4 +210,9 @@ nav {
 }
 .software-actions-item {
   margin-bottom: 5px;
+}
+
+.software-bg {
+  max-width: 200px;
+  background-color: #000;
 }

@@ -61,21 +61,21 @@ function Register() {
                     email,
                     password
                 }
-                const auth = getAuth()
+                // const auth = getAuth()
             
-                const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+                // const userCredential = await createUserWithEmailAndPassword(auth, email, password)
 
-                const user = userCredential.user
+                // const user = userCredential.user
 
-                updateProfile(auth.currentUser, {
-                    displayName: name
-                })
+                // updateProfile(auth.currentUser, {
+                //     displayName: name
+                // })
 
-                const formDataCopy = {...userData}
-                delete formDataCopy.password
-                formDataCopy.timestamp = serverTimestamp()
+                // const formDataCopy = {...userData}
+                // delete formDataCopy.password
+                // formDataCopy.timestamp = serverTimestamp()
 
-                await setDoc(doc(db, 'users', user.uid), formDataCopy)
+                // await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
                 dispatch(register(userData))
             }

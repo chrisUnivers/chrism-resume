@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import {toast} from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { FaSignInAlt } from "react-icons/fa"
 import { useSelector, useDispatch } from 'react-redux'
 import { login, reset} from '../features/auth/authSlice'
@@ -12,6 +13,8 @@ function Login() {
         email: '',
         password: '',
     })
+
+    const [firebaseLogin, setFirebaseLogin] = useState(false)
 
     const {email, password} = formData
 
@@ -27,7 +30,7 @@ function Login() {
             toast.error(message)
         }
 
-        if(isSuccess || user) {
+        if((isSuccess || user) && firebaseLogin) {
             navigate('/')
         }
 
@@ -41,15 +44,27 @@ function Login() {
         }))
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
 
-        const userData = {
-            email,
-            password
-        }
+        try {
+            const auth = getAuth()
 
-        dispatch(login(userData))
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+
+            const userData = {
+                email,
+                password
+            }
+
+            if(userCredential.user) {
+                setFirebaseLogin(true)
+            }
+
+            dispatch(login(userData))
+        } catch (error) {
+            console.log(error);
+        }
     
     }
 

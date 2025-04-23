@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import { getAuth } from 'firebase/auth'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
 import { getStorage, ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage'
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import { createSoftware, reset } from "../features/software/softwareSlice"
@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { toast } from "react-toastify"
 import Spinner from "../components/Spinner"
 import BackButton from "../components/BackButton"
-// softwarename, description, status, imageurl
+
 
 function NewSoftware() {
     const {user} = useSelector((state) => state.auth)
@@ -23,6 +23,7 @@ function NewSoftware() {
         softwarename: '',
         imageurl: 'functions',
         description: '',
+        status: '',
         images: {}
     })
 
@@ -52,6 +53,25 @@ function NewSoftware() {
     }, [dispatch, isError, isSuccess, navigate, message])
 
     
+    const isMounted = useRef(true)
+
+    useEffect(() => {
+        if(isMounted) {
+            onAuthStateChanged(auth, (user) => {
+                if(user) {
+                    setFormData({...formData, userRef: user.uid})
+                } else {
+                    navigate('/login')
+                }
+            })
+        }
+
+        return () => {
+            isMounted.current = false
+        }
+        // eslingt-disable-next-line react-hooks/exhaustive-deps
+    }, [isMounted])
+
     const onSubmit = async (e) => {
         e.preventDefault()
         setSoftwareCreated(true)
@@ -60,6 +80,7 @@ function NewSoftware() {
         const storeImage = async (image) => {
             return new Promise((resolve, reject) => {
                 const storage = getStorage()
+                console.log(image.name)
                 const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
 
                 const storageRef = ref(storage, 'images/' + fileName)
@@ -67,6 +88,18 @@ function NewSoftware() {
                 const uploadTask = uploadBytesResumable(storageRef, image)
 
                 uploadTask.on('state_changed',  
+                    (snapshot) => {
+                        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log('Upload is ' + progress + '% done');
+                        switch (snapshot.state) {
+                        case 'paused':
+                            console.log('Upload is paused');
+                            break;
+                        case 'running':
+                            console.log('Upload is running');
+                            break;
+                        }
+                    }, 
                     (error) => {
                         reject(error)
                     }, 
@@ -76,24 +109,26 @@ function NewSoftware() {
                         resolve(downloadURL);
                         });
                     }
-                    );                  
+                );                  
             } )
         }
 
-        const imgUpUrls = await Promise.all(
+        const imgUrls = await Promise.all(
             [...images].map((image) => storeImage(image))
         ).catch(() => {
-            console.log('Images did not uploaded')
+            console.log('Image did not upload')
         })
 
         const formDataUpload = {
-            ...formData, imgUpUrls, timestamp: serverTimestamp()
+            ...formData, imgUrls, timestamp: serverTimestamp()
         }
 
         // since uploaded
         delete formDataUpload.images
 
-        const docRef = await addDoc(collection(db, 'listings'), formDataUpload)
+        console.log(imgUrls)
+
+        const docRef = await addDoc(collection(db, 'softwares'), formDataUpload)
 
         // For mongodb since still using it for now
         dispatch(createSoftware({ softwarename, description,  imageurl}))
@@ -120,7 +155,7 @@ function NewSoftware() {
 
     return (
         <>
-            {console.log(user)}
+            
             <div className="back-btn">
                 <BackButton url='/' />
             </div>
