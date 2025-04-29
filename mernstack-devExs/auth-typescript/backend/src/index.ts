@@ -1,6 +1,20 @@
-import express from 'express'
+import "dotenv/config";
+import connectDB from "./config/db";
+import cors from "cors";
+import express from 'express';
+import { APP_ORIGIN, PORT } from "./constants/env";
+import errorHandler from "./middleware/errorHandler";
 
-const app = express()
+const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+    cors({
+      origin: APP_ORIGIN,
+      credentials: true,
+    })
+  );
 
 app.get("/", 
     (req, res) => {
@@ -8,4 +22,10 @@ app.get("/",
         status: "OK!",
     })
 });
-app.listen(5000, () => {console.log('Server started on port 5000')})
+
+app.use(errorHandler);
+
+app.listen(PORT, async () => {
+    console.log(`Server started on port ${PORT}`);
+    await connectDB();
+});
