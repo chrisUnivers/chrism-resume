@@ -1,4 +1,4 @@
-package mainRep;
+package ForkJoin;
 
 import java.util.concurrent.ForkJoinPool;
 

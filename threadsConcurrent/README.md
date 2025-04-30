@@ -1,0 +1,2 @@
+## Info
+  * The project in `BestPrice` is from a book I used to learn mutlithreading and concurrency in java. I'm comfortable with the concepts covered in that project and will be adding onto the project.

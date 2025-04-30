@@ -1,15 +1,16 @@
+package SubscribePublish;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Flow.Publisher;
 import java.util.concurrent.Flow.Subscriber;
 import java.util.concurrent.Flow.Subscription;
 
-public class SubPubExample {
-    
+public class SubscribePublish {
 
     // Section 15.5.1 spreadshee cell3 = cell1 +cell2
     int flowId;
-    public SubPubExample(int flowId)
+    public SubscribePublish(int flowId)
     {
         this.flowId = flowId;
     }
@@ -76,7 +77,7 @@ public class SubPubExample {
     
 
     public static void main(String[] args) {
-        SubPubExample flow = new SubPubExample(0);
+        SubscribePublish flow = new SubscribePublish(0);
         SimpleCell c3 = flow.new SimpleCell("C3");
         SimpleCell c2 = flow.new SimpleCell("C2");
         SimpleCell c1 = flow.new SimpleCell("C1");
@@ -87,3 +88,4 @@ public class SubPubExample {
         c2.onNext(20); // update value of C2 to 20
     }
 }
+
