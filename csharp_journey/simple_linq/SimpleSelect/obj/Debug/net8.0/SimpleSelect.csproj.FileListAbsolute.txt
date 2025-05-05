@@ -1,0 +1,15 @@
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\bin\Debug\net8.0\SimpleSelect.exe
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\bin\Debug\net8.0\SimpleSelect.deps.json
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\bin\Debug\net8.0\SimpleSelect.runtimeconfig.json
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\bin\Debug\net8.0\SimpleSelect.dll
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\bin\Debug\net8.0\SimpleSelect.pdb
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\SimpleSelect.GeneratedMSBuildEditorConfig.editorconfig
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\SimpleSelect.AssemblyInfoInputs.cache
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\SimpleSelect.AssemblyInfo.cs
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\SimpleSelect.csproj.CoreCompileInputs.cache
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\SimpleSelect.sourcelink.json
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\SimpleSelect.dll
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\refint\SimpleSelect.dll
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\SimpleSelect.pdb
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\SimpleSelect.genruntimeconfig.cache
+C:\maya_dev\vscode_resProjects\resumekdot\csharp_journey\simple_linq\SimpleSelect\obj\Debug\net8.0\ref\SimpleSelect.dll
