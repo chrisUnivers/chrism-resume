@@ -1,18 +1,20 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-namespace StephenToubLINQ
+namespace Simple_Select
 {
     class Program
     {
         static void Main(string[] args)
         {
-            //var account = new BanksOnThe("Chris", 12);
+
+            //var account = new BanksOnThe("Em", 12);
             //Console.WriteLine($"Account {account.Number} was created for {account.Owner} with {account.Balance}.");
 
             //Console.WriteLine(gettingStarted());
 
             //foreach (int i in getValues())
             //    Console.WriteLine(i);
+            Console.WriteLine("Good Morning!");
             onEnumerable();
             tryExamples();
         }
