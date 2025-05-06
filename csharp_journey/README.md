@@ -1,3 +1,7 @@
 ## Repo Info
   * This repo will contain my csharp projects.
-    + Currently, it only contains a simple linq file which querys names of a person object and a simple mock bank class.
+  * **NetHotel project** The project NetHotel is inteded to be a donet webApi project. It will also have a database to store data and for this I will use a MS SQL Server Express LocalDB.
+    + The main features of the app will be to book hotel rooms through a web api. Once a room is booked, it will not be available to book again until the most recent booking ends.
+    + Another api end point will be one that retrieves all available rooms to book.
+    + 
+  * **simple_linq** The simple_linq directory contains a simple mock bank class and a file that uses the select function from linq.
