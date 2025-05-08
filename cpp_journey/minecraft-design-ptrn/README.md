@@ -1,2 +1,2 @@
 # Repo Info
-  * Factory Method design patterns from a minecraft perspective
+  * Factory Method design patterns from a minecraft perspective.
