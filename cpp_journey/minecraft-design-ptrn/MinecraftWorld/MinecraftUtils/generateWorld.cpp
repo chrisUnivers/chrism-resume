@@ -11,7 +11,6 @@ void MineCraftWorld::generateDiamonds() {
     }
 }
 
-// source: https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
 int MineCraftWorld::randId()
 {
     std::random_device dev;

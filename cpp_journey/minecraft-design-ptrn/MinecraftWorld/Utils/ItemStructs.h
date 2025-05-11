@@ -2,16 +2,15 @@
 #define ITEM_STRUCTS_H
 
 #include <string>
+/**
+ * @param biomeBlocksSurface The biome surface of the blocks
+ * @param bimomeBlocksColour The biome colour of the blocks
+ */
+struct BiomeTexture {
+    std::string biomeBlocksSurface_;
+    std::string biomeBlocksColour_;
 
-struct Texture {
-    std::string texture_;
-    int         texture_id;
+    BiomeTexture(const std::string& biomeBlocksSurface, const std::string& bimomeBlocksColour) : biomeBlocksSurface_{biomeBlocksSurface}, biomeBlocksColour_{bimomeBlocksColour} {} 
 };
-
-// std::vector<std::pair<std::string, double>> 
-// struct Person {
-//     std::string name;
-//     int age;
-// };
 
 #endif 

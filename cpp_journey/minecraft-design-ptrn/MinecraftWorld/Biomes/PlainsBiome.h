@@ -6,15 +6,14 @@
 #include <memory>
 
 #include "../Utils/ItemNames.h"
-#include "PureBiome.h"
 #include "BiomeCreator.h"
 
-class PlainsBiome : public BiomeCreator {
+class PlainsBiome : public PureBiome {
 public:
-    PlainsBiome() {}
+    PlainsBiome();
+    PlainsBiome(std::string biome_name, double world_percentage);
+    std::unique_ptr<PureBiome> getBiome() const;
     virtual ~PlainsBiome() = default;
-
-    std::unique_ptr<PureBiome> createBiome(std::string biomeName);
 };
 
 #endif

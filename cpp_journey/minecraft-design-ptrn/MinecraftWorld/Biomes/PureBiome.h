@@ -5,16 +5,20 @@
 #include <vector>
 
 #include "../Utils/ItemNames.h"
+#include "../Utils/ItemStructs.h"
 
 class PureBiome {
 protected:
     int          BiomeId_;
     BiomeName    BiomeName_;
     BiomeTexture BiomeTexture_;
-    std::string  BlockType_;
+    double      BiomeWorldPercentage_;
+    
 public:
-    PureBiome() {}
+    PureBiome() : BiomeTexture_("none", "none") {}
     virtual ~PureBiome() = default;
+
+    virtual std::unique_ptr<PureBiome> getBiome() const;
 };
 
 #endif
