@@ -6,6 +6,7 @@
 #include <memory>
 
 #include "../Utils/ItemNames.h"
+#include "../Utils/ItemStructs.h"
 
 class PureItem {
 protected:
@@ -16,7 +17,6 @@ protected:
     ItemMake      itemMake_;
     std::unique_ptr<ItemPosition> itemPosition_; 
 public:
-    PureItem() {}
     virtual ~PureItem() = default;
 };
 

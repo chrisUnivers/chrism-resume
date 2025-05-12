@@ -1,7 +1,11 @@
+#include <memory>
+
 #include "PlainsBiome.h"
+#include "../Utils/MineUtils.h"
 #include "../Utils/ItemNames.h"
 
-PlainsBiome::PlainsBiome() : PlainsBiome::PlainsBiome("plains", 6.0) {}
+PlainsBiome::PlainsBiome() : PlainsBiome::PlainsBiome("plains", 6.0) {
+}
 
 PlainsBiome::PlainsBiome(std::string biome_name, double world_percentage) {
     BiomeId_ = MineUtils::generateRandomId();
@@ -20,9 +24,13 @@ PlainsBiome::PlainsBiome(std::string biome_name, double world_percentage) {
     }
 }
 
-std::unique_ptr<PureBiome> PlainsBiome::getBiome() const {
-    std::unique_ptr<PureBiome> rtdBiome = std::make_unique<PureBiome>(this->BiomeId_);
-    return rtdBiome;
+BiomeTexture PlainsBiome::getBiomeTexture() {
+    return this->BiomeTexture_;
+}
+
+PureBiome* PlainsBiome::getBiome() const {
+    std::unique_ptr<PlainsBiome> rtdBiome = std::make_unique<PlainsBiome>();
+    return rtdBiome.get();
 }
 
 

@@ -1,3 +1,9 @@
+## To run the project
+  * change into the `minecraft-design-ptrn` directory, then change into the `MinecraftWorld` directory. In this last directory has a make file.
+    + The project, currently only the biomes factory, is ran through a make file. To run simply type in the command line the following commands:
+    - make
+    - ./biomeTest
+
 ## Repo info
   * This repository contains c++ code that's not apart of any school projects. It's meant to demostrate non trivial, std::vector<int> x = {1}; c++ concepts I know.
     + To see my person c++ or c projects please see:

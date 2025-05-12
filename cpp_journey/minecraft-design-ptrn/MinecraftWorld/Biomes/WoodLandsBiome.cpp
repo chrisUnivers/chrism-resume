@@ -1,12 +1,9 @@
+#include <memory>
+
 #include "WoodLandsBiome.h"
 #include "../Utils/ItemNames.h"
 
-WoodLandsBiome::WoodLandsBiome() : WoodLandsBiome::WoodLandsBiome("birch forest", 3.0) {
-    // BiomeId_ = 0;
-    // BiomeName_ = BIOME_FOREST_WDLS;
-    // BiomeTexture_ = BiomeTexture("default", "default");
-    // BiomeWorldPercentage_ = 3.0;
-}
+WoodLandsBiome::WoodLandsBiome() : WoodLandsBiome::WoodLandsBiome("birch forest", 3.0) {}
 
 WoodLandsBiome::WoodLandsBiome(std::string biome_name, double world_percentage) {
     BiomeId_ = MineUtils::generateRandomId();
@@ -26,7 +23,7 @@ WoodLandsBiome::WoodLandsBiome(std::string biome_name, double world_percentage) 
 }
 
 std::unique_ptr<PureBiome> WoodLandsBiome::getBiome() const {
-    std::unique_ptr<PureBiome> rtdBiome = std::make_unique<PureBiome>(this->BiomeId_);
+    std::unique_ptr<WoodLandsBiome> rtdBiome = std::make_unique<WoodLandsBiome>();
     return rtdBiome;
 }
 

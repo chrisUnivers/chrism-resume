@@ -3,17 +3,22 @@
 
 #include <string>
 #include <vector>
-#include <memory>
 
 #include "../Utils/ItemNames.h"
-#include "BiomeCreator.h"
+#include "../Utils/ItemStructs.h"
+#include "PureBiome.h"
 
 class PlainsBiome : public PureBiome {
 public:
     PlainsBiome();
     PlainsBiome(std::string biome_name, double world_percentage);
-    std::unique_ptr<PureBiome> getBiome() const;
+    BiomeTexture getBiomeTexture();
+
     virtual ~PlainsBiome() = default;
+    PureBiome* getBiome() const override;
+protected:
+    BiomeTexture BiomeTexture_;
 };
+
 
 #endif

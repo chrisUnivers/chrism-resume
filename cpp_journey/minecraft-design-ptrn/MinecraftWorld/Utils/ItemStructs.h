@@ -6,11 +6,12 @@
 struct BiomeTexture {
     std::string biomeBlocksSurface_;
     std::string biomeBlocksColour_;
-
+    
+    BiomeTexture() : BiomeTexture("default", "default") {};
     BiomeTexture(const std::string& biomeBlocksSurface, const std::string& bimomeBlocksColour) : biomeBlocksSurface_{biomeBlocksSurface}, biomeBlocksColour_{bimomeBlocksColour} {} 
 };
 
-class ItemPosition {
+struct ItemPosition {
     double x_pos, y_pos, z_pos;
     ItemPosition(double x, double y, double z) : x_pos{x}, y_pos{y}, z_pos{z} {}
 };
