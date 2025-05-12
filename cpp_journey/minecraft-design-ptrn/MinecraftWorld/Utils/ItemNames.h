@@ -1,28 +1,23 @@
 #ifndef ITEM_NAMES_H
 #define ITEM_NAMES_H
 
-enum BlockName {
-    DIAMOND,
-    IRON,
-    REDSTONE,
-    STONE,
-    DIRT,
-    GOLD,
-    EMERALD,
-    COAL,
-    WOOD,
-    COBBLESTONE,
-    OBSDIAN,
-
-};
-
-enum BlockTexture {
+enum ItemTextures {
     DIAMOND_TEXTURE,
+    GOLD_TEXTURE,
 };
 
-enum BlockTypes {
-    DIAMOND_STONE,
-    DIAMOND_BLOCK,
+enum ItemTypes {
+    FOOD_TYPE,
+    TOOL_TYPE,
+    ELEMENT_TYPE,
+};
+
+enum ItemMake {
+    DIAMOND_MAKE,
+    GOLD_MAKE,
+    IRON_MAKE,
+    DEFAULT_MAKE,
+    WHEAT_MAKE,
 };
 
 enum BiomeName {
@@ -41,3 +36,7 @@ enum BiomeName {
 };
 
 #endif
+
+//ItemName_; // potato cake, apple
+//ItemTexture_; // Stone, Block, gravel
+//ItemType_; // Food, Block, Tool

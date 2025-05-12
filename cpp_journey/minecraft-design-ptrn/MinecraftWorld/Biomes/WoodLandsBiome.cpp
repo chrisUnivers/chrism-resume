@@ -1,15 +1,15 @@
 #include "WoodLandsBiome.h"
 #include "../Utils/ItemNames.h"
 
-WoodLandsBiome::WoodLandsBiome() {
-    BiomeId_ = 0;
-    BiomeName_ = BIOME_FOREST_WDLS;
-    BiomeTexture_ = BiomeTexture("default", "default");
-    BiomeWorldPercentage_ = 3.0;
+WoodLandsBiome::WoodLandsBiome() : WoodLandsBiome::WoodLandsBiome("birch forest", 3.0) {
+    // BiomeId_ = 0;
+    // BiomeName_ = BIOME_FOREST_WDLS;
+    // BiomeTexture_ = BiomeTexture("default", "default");
+    // BiomeWorldPercentage_ = 3.0;
 }
 
 WoodLandsBiome::WoodLandsBiome(std::string biome_name, double world_percentage) {
-    BiomeId_ = 1;
+    BiomeId_ = MineUtils::generateRandomId();
     BiomeWorldPercentage_ = world_percentage; // to be used in for world creation
     if (biome_name == "birch forest") {
         BiomeName_ = BIOME_BIRCH_FOREST_WDLS;

@@ -1,15 +1,10 @@
 #include "PlainsBiome.h"
 #include "../Utils/ItemNames.h"
 
-PlainsBiome::PlainsBiome() {
-    BiomeId_ = 0;
-    BiomeName_ = BIOME_PLAINS;
-    BiomeTexture_ = BiomeTexture("default", "default");
-    BiomeWorldPercentage_ = 6.0;
-}
+PlainsBiome::PlainsBiome() : PlainsBiome::PlainsBiome("plains", 6.0) {}
 
 PlainsBiome::PlainsBiome(std::string biome_name, double world_percentage) {
-    BiomeId_ = 0;
+    BiomeId_ = MineUtils::generateRandomId();
     BiomeWorldPercentage_ = world_percentage; // to be used in for world creation
     if (biome_name == "plains") {
         BiomeName_ = BIOME_PLAINS;
