@@ -13,7 +13,7 @@ protected:
     // something like uuid can be used instead of a normal int.
     int          BiomeId_;
     BiomeName    BiomeName_;
-    BiomeTexture BiomeTexture_;
+    std::unique_ptr<BiomeTexture> BiomeTexture_;
     double       BiomeWorldPercentage_; 
 public:
     virtual ~PureBiome() = default;
