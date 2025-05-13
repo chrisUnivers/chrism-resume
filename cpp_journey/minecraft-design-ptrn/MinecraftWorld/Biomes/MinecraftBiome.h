@@ -5,7 +5,7 @@
 
 class MinecraftBiome : public PureBiome {
 public:
-    virtual ~MinecraftBiome() = 0;
+    virtual ~MinecraftBiome() = default;
 };
 
 #endif

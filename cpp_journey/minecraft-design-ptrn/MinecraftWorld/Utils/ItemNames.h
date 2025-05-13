@@ -20,7 +20,7 @@ enum ItemMake {
     WHEAT_MAKE,
 };
 
-enum BiomeName {
+enum BiomeNames {
     BIOME_PLAINS, // PLAINS BIOMES
     BIOME_ICE_PLAINS,
     BIOME_ICE_SPIKE_PLAINS,

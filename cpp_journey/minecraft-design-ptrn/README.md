@@ -6,3 +6,4 @@
     + cd MinecraftWorld/
     + make
     + ./biomeTest
+  * The Biome Factory, in the Factory Method, works as intended.

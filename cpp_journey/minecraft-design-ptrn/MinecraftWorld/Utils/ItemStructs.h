@@ -8,12 +8,7 @@ struct BiomeTexture {
     std::string biomeBlocksColour_;
     
     BiomeTexture() : BiomeTexture("default", "default") {};
-    BiomeTexture(const std::string& biomeBlocksSurface, const std::string& bimomeBlocksColour) : biomeBlocksSurface_{biomeBlocksSurface}, biomeBlocksColour_{bimomeBlocksColour} {} // stored as strings since i've std::vectors require a lot of memory. This means that I would need to create a method to process the string. since not a vector can't index biome_surf[0] or biome_surf[1]
-
-    BiomeTexture& BiomeTexture::operator=(const BiomeTexture& rhs) {
-        biomeBlocksSurface_ = rhs.biomeBlocksSurface_;
-        biomeBlocksColour_ = rhs.biomeBlocksColour_;
-    }
+    BiomeTexture(const std::string& biomeBlocksSurface, const std::string& bimomeBlocksColour) : biomeBlocksSurface_{biomeBlocksSurface}, biomeBlocksColour_{bimomeBlocksColour} {} // stored as strings since std::vectors requires a lot of memory. This means that I would need to create a method to process the string. since not a vector can't index biome_surf[0] or biome_surf[1]
 };
 
 struct ItemPosition {

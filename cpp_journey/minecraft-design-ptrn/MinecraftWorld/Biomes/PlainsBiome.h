@@ -5,7 +5,7 @@
 #include "../Utils/ItemNames.h"
 #include "../Utils/ItemStructs.h"
 #include "Biome.h"
-
+#include "MinecraftBiome.h"
 
 class PlainsBiome : public Biome {
 public:

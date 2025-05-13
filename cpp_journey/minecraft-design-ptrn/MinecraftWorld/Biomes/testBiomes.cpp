@@ -1,13 +1,13 @@
 #include <iostream>
 
+
 #include "PlainsBiome.h"
+#include <memory>
 
 int main() {
-    
-    PlainsBiome* ol = new PlainsBiome();
-    // PlainsBiome* ol = new PlainsBiome("ice spike", 8.8);
-
-    std::cout << "plains biome surface: " << ol->getBiomeTexture().biomeBlocksSurface_ << std::endl;
-
+    // plains, ice plains, ice spike plains
+    std::unique_ptr<PlainsBiome> biome = std::make_unique<PlainsBiome>();
+    PureBiome* plains_biome = biome->CreateBiome("ice plains");
+    std::cout << "plains biome surface: " << "genius" << std::endl;
     return 0;
 }

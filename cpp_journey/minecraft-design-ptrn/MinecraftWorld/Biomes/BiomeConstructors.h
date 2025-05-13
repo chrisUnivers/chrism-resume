@@ -4,40 +4,45 @@
 #include <memory>
 #include "MinecraftBiome.h"
 #include "../Utils/ItemStructs.h"
-// BIOME_ICE_SPIKE_PLAINS
+#include <iostream>
 
-class BiomePlains : public MinecraftBiome {
+class BiomePlains_Biome : public MinecraftBiome {
 public:
-    BiomePlains() : BiomePlains(0, BIOME_PLAINS) {}
-    BiomePlains(int biome_id, BiomeName biome_name){
+    BiomePlains_Biome() : BiomePlains_Biome(0, BIOME_PLAINS) {}
+    BiomePlains_Biome(int biome_id, BiomeNames biome_name){
         BiomeId_ = biome_id;
         BiomeName_ = biome_name;
-        BiomeTexture_ = std::make_unique<BiomeTexture>("solid ice", "clear baby-blue");
+        BiomeTexture_ = std::make_unique<BiomeTexture>("default", "default");
         BiomeWorldPercentage_ = 3.0;
     }
 };
 
-class BiomeIcePlains : public MinecraftBiome {
+class BiomeIcePlains_Biome : public MinecraftBiome {
 public:
-    BiomeIcePlains() : BiomeIcePlains(0, BIOME_ICE_PLAINS) {}
-    BiomeIcePlains(int biome_id, BiomeName biome_name){
+    BiomeIcePlains_Biome() : BiomeIcePlains_Biome(0, BIOME_ICE_PLAINS) {}
+    BiomeIcePlains_Biome(int biome_id, BiomeNames biome_name){
         BiomeId_ = biome_id;
         BiomeName_ = biome_name;
         BiomeTexture_ = std::make_unique<BiomeTexture>("solid-ice snow", "clear baby-blue");
+        std::cout << "texture colour: " << BiomeTexture_->biomeBlocksColour_ << std::endl;
         BiomeWorldPercentage_ = 3.0;
     }
 };
 
-class BiomeIceSpikePlains : public MinecraftBiome {
+class BiomeIceSpikePlains_Biome : public MinecraftBiome {
 public:
-    BiomeIceSpikePlains() : BiomeIceSpikePlains(0, BIOME_ICE_SPIKE_PLAINS) {}
-    BiomeIceSpikePlains(int biome_id, BiomeName biome_name){
+    BiomeIceSpikePlains_Biome() : BiomeIceSpikePlains_Biome(0, BIOME_ICE_SPIKE_PLAINS) {}
+    BiomeIceSpikePlains_Biome(int biome_id, BiomeNames biome_name){
         BiomeId_ = biome_id;
         BiomeName_ = biome_name;
         BiomeTexture_ = std::make_unique<BiomeTexture>("solid-ice ice-spikes snow", "clear baby-blue");
         BiomeWorldPercentage_ = 3.0;
     }
 };
+
+// BIOME_FOREST_WDLS, WOODLANDS
+// BIOME_FLOWER_FOREST_WDLS,
+// BIOME_SNOWY_PLAINS_WDLS,
 // int          BiomeId_;
 // BiomeName    BiomeName_;
 // BiomeTexture BiomeTexture_;
