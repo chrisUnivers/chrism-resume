@@ -1,0 +1,2 @@
+## Some design decisions
+  * Although I used a lot of enums, found in `./Utils/ItemNames.h`, in my opinion from a design point of view it allows me to know which names can be used. This way I have one file to manage most of what would otherwise be strings. When a std::cout is need a std::string can be used then.  

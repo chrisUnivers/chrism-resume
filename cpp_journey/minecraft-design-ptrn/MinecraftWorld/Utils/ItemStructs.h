@@ -19,16 +19,20 @@ struct ItemPosition {
 };
 
 struct FoodItem {
-    int                           itemId_;      // random int generated
-    double                        regen_effect_;
+    int                           foodItemId_;      // random int generated
+    double                        regenEffect_;
     SpawnItem                     spawnItem_;  // generated, crafted, or drop(leaves or apples)
+    FoodItems                     foodItem_;
     ItemTypes                     itemType_;
-    ItemMake                      itemMake_;
-    std::string                   itemName_;
+    std::string                   foodName_;
     std::unique_ptr<ItemPosition> itemPosition_;
-    FoodItem() : FoodItem("default-food-name") {};
+    FoodItem() : FoodItem(0, 0.0, GENERATED_ITEM, FOOD_FOOD) {};
 
-    FoodItem(std::string food_name) : itemName_{food_name} {} 
+    FoodItem(int food_id, SpawnItem spawn_item, FoodItems food_item) : foodItemId_{food_id}, spawnItem_{spawn_item}, foodItem_{food_item} {
+        foodName_ = FOODITEMS_MAP.count(food_item) ? FOODITEMS_MAP.at(food_item) : "";
+        regenEffect_ = FOODREGEN_MAP.count(food_item) ? FOODREGEN_MAP.at(food_item) : 0.0;
+        itemPosition_->x_pos = 0.0; itemPosition_->y_pos = 0.0; itemPosition_->z_pos = 0.0; // set to player's height when not in plyrs invetory.
+    }
 };
 
 struct FoodEffect {

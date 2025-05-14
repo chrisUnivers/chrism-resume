@@ -28,7 +28,14 @@ enum SpawnItem {
     DROP_ITEM
 };
 
-
+enum FoodItems {
+    FOOD_APPLE,
+    FOOD_WHEAT,
+    FOOD_POTATO,
+    FOOD_FISH,
+    FOOD_CHICKEN,
+    FOOD_FOOD,
+};
 
 enum BiomeNames {
     BIOME_PLAINS, // PLAINS BIOMES
