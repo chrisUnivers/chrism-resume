@@ -6,4 +6,5 @@
     + cd MinecraftWorld/
     + make
     + ./biomeTest
+  * Currently the make file can only build one factory. Either biomeTest or foodTest.
   * The Biome Factory, in the Factory Method, works as intended.
