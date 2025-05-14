@@ -16,11 +16,13 @@ const std::map<std::string, BiomeNames> WOODLANDSBIOME_MAP = {
     {"birch forest", BIOME_BIRCH_FOREST_WDLS}
 };
 
-const std::map<FoodItems, std::string> FOODITEMS_MAP = {
-    {FOOD_APPLE, "apple"},
-    {FOOD_WHEAT, "wheat"},
-    {FOOD_POTATO, "potato"},
-    {FOOD_CHICKEN, "chicken"}
+
+const std::map<std::string, FoodItems> FOODITEMS_MAP = {
+    {"apple", FOOD_APPLE},
+    {"apple", FOOD_DIAMOND_APPLE},
+    {"wheat", FOOD_WHEAT},
+    {"potato", FOOD_POTATO},
+    {"chicken", FOOD_CHICKEN}
 };
 
 const std::map<FoodItems,double> FOODREGEN_MAP = {

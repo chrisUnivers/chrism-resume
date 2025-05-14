@@ -30,6 +30,7 @@ enum SpawnItem {
 
 enum FoodItems {
     FOOD_APPLE,
+    FOOD_DIAMOND_APPLE,
     FOOD_WHEAT,
     FOOD_POTATO,
     FOOD_FISH,
@@ -50,6 +51,12 @@ enum BiomeNames {
     BIOME_TAIGA_WDLS,
     BIOME_FROZEN_PEAKS_MNTS, // MOUNTAIN BIOMES
     BIOME_SNOWY_SLOPES_MNTS
+};
+
+enum EffectName {
+    LIFE_REGEN,
+    JUMP_MULTIPLE,
+    NO_EFFECT,
 };
 
 #endif

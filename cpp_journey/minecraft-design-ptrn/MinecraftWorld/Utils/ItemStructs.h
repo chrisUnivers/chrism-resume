@@ -26,18 +26,21 @@ struct FoodItem {
     ItemTypes                     itemType_;
     std::string                   foodName_;
     std::unique_ptr<ItemPosition> itemPosition_;
-    FoodItem() : FoodItem(0, 0.0, GENERATED_ITEM, FOOD_FOOD) {};
+    std::unique_ptr<FoodEffect>   foodEffect_;
+    FoodItem() : FoodItem(0, GENERATED_ITEM, FOOD_FOOD, NO_EFFECT) {};
 
-    FoodItem(int food_id, SpawnItem spawn_item, FoodItems food_item) : foodItemId_{food_id}, spawnItem_{spawn_item}, foodItem_{food_item} {
+    FoodItem(int food_id, SpawnItem spawn_item, FoodItems food_item, EffectName ef_name) : foodItemId_{food_id}, spawnItem_{spawn_item}, foodItem_{food_item} {
         foodName_ = FOODITEMS_MAP.count(food_item) ? FOODITEMS_MAP.at(food_item) : "";
         regenEffect_ = FOODREGEN_MAP.count(food_item) ? FOODREGEN_MAP.at(food_item) : 0.0;
         itemPosition_->x_pos = 0.0; itemPosition_->y_pos = 0.0; itemPosition_->z_pos = 0.0; // set to player's height when not in plyrs invetory.
+        foodEffect_->effectName_ = ef_name;
     }
 };
 
 struct FoodEffect {
-    double life_regen_multiple;
+    EffectName effectName_;
     double duration;
+    FoodEffect() : effectName_{NO_EFFECT} {};
     // struct: potion
 };
 
