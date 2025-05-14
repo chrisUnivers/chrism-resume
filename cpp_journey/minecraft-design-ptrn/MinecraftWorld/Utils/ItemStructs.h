@@ -30,7 +30,7 @@ struct FoodItem {
     FoodItem() : FoodItem(0, GENERATED_ITEM, FOOD_FOOD, NO_EFFECT) {};
 
     FoodItem(int food_id, SpawnItem spawn_item, FoodItems food_item, EffectName ef_name) : foodItemId_{food_id}, spawnItem_{spawn_item}, foodItem_{food_item} {
-        foodName_ = FOODITEMS_MAP.count(food_item) ? FOODITEMS_MAP.at(food_item) : "";
+        foodName_ = FOODITEMSINV_MAP.count(food_item) ? FOODITEMSINV_MAP.at(food_item) : "";
         regenEffect_ = FOODREGEN_MAP.count(food_item) ? FOODREGEN_MAP.at(food_item) : 0.0;
         itemPosition_->x_pos = 0.0; itemPosition_->y_pos = 0.0; itemPosition_->z_pos = 0.0; // set to player's height when not in plyrs invetory.
         foodEffect_->effectName_ = ef_name;

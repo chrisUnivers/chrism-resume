@@ -14,7 +14,7 @@ public:
         int food_id = MineUtils::generateRandomId();
         FoodItem_ = std::make_unique<FoodItem>(food_id, spaw_item, FOOD_APPLE);
         // FoodItem(int food_id, SpawnItem spawn_item, FoodItems food_item)
-    }
+    }// (CRAFTED_ITEM, FOOD_APPLE, LIFE_REGEN)
     AppleFood_Food(SpawnItem spaw_item, FoodItems food_item) : AppleFood_Food(spaw_item, food_item, NO_EFFECT) {}
 
     AppleFood_Food(SpawnItem spaw_item, FoodItems food_item, EffectName ef_name) {

@@ -14,8 +14,9 @@ protected:
     std::unique_ptr<FoodEffect>   FoodEffect_;
 public:
     virtual ~PureFood() = default;
-    void getFood() { 
-        std::cout << "I'am a food item: " << std::endl; 
+    std::string getFoodItemName() { 
+        std::cout << "I'am a food item: " << std::endl;
+        return FoodItem_->foodName_;
     }
 };
 
