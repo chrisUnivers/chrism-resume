@@ -3,7 +3,9 @@
 
 
 #include <string>
+#include <memory>
 #include "ItemNames.h"
+// #include "defaults.h"
 /** * @brief struct for the biome blocks textures*/
 struct BiomeTexture {
     std::string biomeBlocksSurface_;
@@ -14,8 +16,18 @@ struct BiomeTexture {
 };
 
 struct ItemPosition {
-    double x_pos, y_pos, z_pos;
+    double x_pos;
+    double y_pos;
+    double z_pos;
+    ItemPosition() : ItemPosition(0.0, 0.0, 0.0) {};
     ItemPosition(double x, double y, double z) : x_pos{x}, y_pos{y}, z_pos{z} {}
+};
+
+struct FoodEffect {
+    EffectName effectName_;
+    double duration;
+    FoodEffect() : effectName_{NO_EFFECT} {};
+    // struct: potion
 };
 
 struct FoodItem {
@@ -27,21 +39,11 @@ struct FoodItem {
     std::string                   foodName_;
     std::unique_ptr<ItemPosition> itemPosition_;
     std::unique_ptr<FoodEffect>   foodEffect_;
-    FoodItem() : FoodItem(0, GENERATED_ITEM, FOOD_FOOD, NO_EFFECT) {};
+    FoodItem() : FoodItem(0, GENERATED_ITEM, FOOD_FOOD) {};
 
-    FoodItem(int food_id, SpawnItem spawn_item, FoodItems food_item, EffectName ef_name) : foodItemId_{food_id}, spawnItem_{spawn_item}, foodItem_{food_item} {
-        foodName_ = FOODITEMSINV_MAP.count(food_item) ? FOODITEMSINV_MAP.at(food_item) : "";
-        regenEffect_ = FOODREGEN_MAP.count(food_item) ? FOODREGEN_MAP.at(food_item) : 0.0;
-        itemPosition_->x_pos = 0.0; itemPosition_->y_pos = 0.0; itemPosition_->z_pos = 0.0; // set to player's height when not in plyrs invetory.
-        foodEffect_->effectName_ = ef_name;
+    FoodItem(const int food_id, const SpawnItem spawn_item, const FoodItems food_item) : foodItemId_{food_id}, spawnItem_{spawn_item}, foodItem_{food_item} {
+        
     }
-};
-
-struct FoodEffect {
-    EffectName effectName_;
-    double duration;
-    FoodEffect() : effectName_{NO_EFFECT} {};
-    // struct: potion
 };
 
 #endif 

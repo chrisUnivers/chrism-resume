@@ -33,7 +33,7 @@ const std::map<FoodItems, std::string> FOODITEMSINV_MAP = {
     {FOOD_CHICKEN, "chicken"}
 };
 
-const std::map<FoodItems,double> FOODREGEN_MAP = {
+const std::map<FoodItems, double> FOODREGEN_MAP = {
     {FOOD_APPLE, 2.0},
     {FOOD_WHEAT, 0.0},
     {FOOD_POTATO, 1.0},
