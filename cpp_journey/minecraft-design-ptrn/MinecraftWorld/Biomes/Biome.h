@@ -6,7 +6,7 @@
 class Biome {
 public:
     virtual ~Biome() = default;
-    virtual PureBiome* CreateBiome(std::string biome_name) const = 0;
+    virtual void CreateBiome(std::string biome_name, std::unique_ptr<PureBiome> &biome) const = 0;
 };
 
 #endif

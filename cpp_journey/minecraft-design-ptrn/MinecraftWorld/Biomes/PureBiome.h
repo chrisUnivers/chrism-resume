@@ -13,6 +13,7 @@ protected:
     int          BiomeId_;
     BiomeNames    BiomeName_;
     std::unique_ptr<BiomeTexture> BiomeTexture_;
+    // std::unique_ptr<BiomeTexture> BiomeTexture_;
     double       BiomeWorldPercentage_; 
 public:
     virtual ~PureBiome() = default;

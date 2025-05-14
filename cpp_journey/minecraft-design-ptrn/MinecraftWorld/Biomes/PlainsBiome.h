@@ -10,9 +10,8 @@
 class PlainsBiome : public Biome {
 public:
     PlainsBiome();
-
     virtual ~PlainsBiome() = default;
-    PureBiome* CreateBiome(std::string biome_name) const override;
+    void CreateBiome(std::string biome_name, std::unique_ptr<PureBiome>& biome) const override;
 };
 
 

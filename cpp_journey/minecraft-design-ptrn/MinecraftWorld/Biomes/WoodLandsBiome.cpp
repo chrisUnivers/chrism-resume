@@ -1,31 +1,39 @@
 #include <memory>
 
 #include "WoodLandsBiome.h"
-#include "../Utils/ItemNames.h"
+#include "../Utils/defaults.h"
+#include "BiomeConstructors.h"
+#include <iostream>
 
-WoodLandsBiome::WoodLandsBiome() : WoodLandsBiome::WoodLandsBiome("birch forest", 3.0) {}
 
-WoodLandsBiome::WoodLandsBiome(std::string biome_name, double world_percentage) {
-    BiomeId_ = MineUtils::generateRandomId();
-    BiomeWorldPercentage_ = world_percentage; // to be used in for world creation
-    if (biome_name == "birch forest") {
-        BiomeName_ = BIOME_BIRCH_FOREST_WDLS;
-        BiomeTexture_ = BiomeTexture("default", "default");
+WoodLandsBiome::WoodLandsBiome(){
+}
+// BIOME_FOREST_WDLS, BIOME_FLOWER_FOREST_WDLS, BIOME_BIRCH_FOREST_WDLS
+void WoodLandsBiome::CreateBiome(std::string biome_name, std::unique_ptr<PureBiome>& mBiome) const {
+    BiomeNames bio;
+    if (WOODLANDSBIOME_MAP.count(biome_name)) {bio = WOODLANDSBIOME_MAP.at(biome_name);}
+    switch (bio)
+    {
+    case BIOME_BIRCH_FOREST_WDLS: {
+        std::unique_ptr<BiomeBirchForestWdls_Biome> ow = std::make_unique<BiomeBirchForestWdls_Biome>();
+        std::cout << "birch forest biome" << std::endl;
+        std::cout << "no change to texture: " << ow->getBiomeColour() << std::endl;
+        mBiome = std::move(ow);
+        break;
     }
-    else if (biome_name == "flower forest") {
-        BiomeName_ = BIOME_FLOWER_FOREST_WDLS;
-        BiomeTexture_ = BiomeTexture("flowers", "default");
+    case BIOME_FLOWER_FOREST_WDLS: {
+        std::unique_ptr<BiomeFlowerForestWdls_Biome> ow = std::make_unique<BiomeFlowerForestWdls_Biome>();
+        std::cout << "flower forest biome" << std::endl;
+        std::cout << "should be colourful: " << ow->getBiomeColour() << std::endl;
+        mBiome = std::move(ow);
+        break;
     }
-    else if (biome_name == "dark forest") {
-        BiomeName_ = BIOME_DARK_FOREST_WDLS;
-        BiomeTexture_ = BiomeTexture("default", "dark_default");
+    default:
+        std::unique_ptr<BiomeWoodLands_Biome> ol = std::make_unique<BiomeWoodLands_Biome>();
+        std::cout << "get forest biomes" << std::endl;
+        mBiome = std::move(ol);
+        break;
     }
 }
-
-std::unique_ptr<PureBiome> WoodLandsBiome::getBiome() const {
-    std::unique_ptr<WoodLandsBiome> rtdBiome = std::make_unique<WoodLandsBiome>();
-    return rtdBiome;
-}
-
 
 //BIOME_FOREST_WDLS, BIOME_FLOWER_FOREST_WDLS, BIOME_BIRCH_FOREST_WDLS
