@@ -10,9 +10,8 @@
 
 class PureItem {
 protected:
-    int           itemId_; // random int generated
-    bool          itemGenerated_ = false; // vs crafted item
-    ItemTextures  itemTexture_; // Stone, Block, gravel
+    int           itemId_;      // random int generated
+    SpawnItem     spawnItem_;  // generated, crafted, or drop(leaves or apples)
     ItemTypes     itemType_;
     ItemMake      itemMake_;
     std::unique_ptr<ItemPosition> itemPosition_; 
@@ -21,3 +20,4 @@ public:
 };
 
 #endif
+

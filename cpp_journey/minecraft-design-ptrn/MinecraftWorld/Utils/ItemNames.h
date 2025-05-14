@@ -1,15 +1,17 @@
 #ifndef ITEM_NAMES_H
 #define ITEM_NAMES_H
 
-enum ItemTextures {
-    DIAMOND_TEXTURE,
-    GOLD_TEXTURE,
-};
-
 enum ItemTypes {
     FOOD_TYPE,
     TOOL_TYPE,
-    ELEMENT_TYPE,
+    POSION_TYPE,
+};
+
+enum ElementType {
+    DIAMOND_ELEMENT,
+    GOLD_ELEMENT,
+    IRON_ELEMENT,
+    DEFAULT_ELEMENT
 };
 
 enum ItemMake {
@@ -19,6 +21,14 @@ enum ItemMake {
     DEFAULT_MAKE,
     WHEAT_MAKE,
 };
+
+enum SpawnItem {
+    GENERATED_ITEM,
+    CRAFTED_ITEM,
+    DROP_ITEM
+};
+
+
 
 enum BiomeNames {
     BIOME_PLAINS, // PLAINS BIOMES
