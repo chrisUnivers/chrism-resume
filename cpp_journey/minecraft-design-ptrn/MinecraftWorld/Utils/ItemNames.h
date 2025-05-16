@@ -59,6 +59,17 @@ enum EffectName {
     NO_EFFECT,
 };
 
+enum WorldNames {
+    WORLD_ONE_WORLD,
+};
+
+enum ClimateNames {
+    CLIMATE_RAINING,
+    CLIMATE_SNOWING,
+    CLIMATE_CLOUDY,
+    CLIMATE_SUNNY,
+};
+
 #endif
 
 //ItemName_; // potato cake, apple

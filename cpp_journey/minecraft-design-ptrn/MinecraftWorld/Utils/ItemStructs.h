@@ -46,4 +46,11 @@ struct FoodItem {
     }
 };
 
+struct WorldClimate {
+    double temperature;
+
+    WorldClimate() : WorldClimate(18.0) {};
+    WorldClimate(double world_temperature) : temperature{world_temperature} {}
+};
+
 #endif 

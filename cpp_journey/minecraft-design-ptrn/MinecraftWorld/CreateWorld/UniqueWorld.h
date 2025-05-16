@@ -1,0 +1,18 @@
+#ifndef UNIQUE_WORLD_H
+#define UNIQUE_WORLD_H
+
+#include <string>
+#include "../Utils/ItemNames.h"
+#include "../Utils/ItemStructs.h"
+#include "World.h"
+#include "MinecraftWorld.h"
+
+class UniqueWorld : public World {
+public:
+    UniqueWorld();
+    virtual ~UniqueWorld() = default;
+    void CreateWorld(const std::string& world_name, std::unique_ptr<PureWorld>& world) const override;
+};
+
+
+#endif
