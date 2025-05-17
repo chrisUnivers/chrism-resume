@@ -53,4 +53,13 @@ struct WorldClimate {
     WorldClimate(double world_temperature) : temperature{world_temperature} {}
 };
 
+struct WorldAttributes {
+    int numAttributes_;
+    std::pair<int, std::string> BiomesAttributes_;
+    // std::pair<int, std::string> BiomesAttributes_;
+
+    WorldAttributes() : WorldAttributes(1) {};
+    WorldAttributes(int num_attributes) : numAttributes_{num_attributes} {}
+};
+
 #endif 

@@ -53,6 +53,11 @@ enum BiomeNames {
     BIOME_SNOWY_SLOPES_MNTS
 };
 
+enum BiomeTypes {
+    BIOME_PLAINS_BIOME,
+    BIOME_WOODLANDS_BIOME,
+};
+
 enum EffectName {
     LIFE_REGEN,
     JUMP_MULTIPLE,

@@ -13,9 +13,9 @@ const std::map<std::string, BiomeNames> PLAINSBIOME_MAP = {
 };
 
 const std::map<std::string, BiomeNames> WOODLANDSBIOME_MAP = {
-    {"forest", BIOME_FOREST_WDLS},
-    {"flower forest", BIOME_FLOWER_FOREST_WDLS},
-    {"birch forest", BIOME_BIRCH_FOREST_WDLS}
+    {"woodlands forest", BIOME_FOREST_WDLS},
+    {"woodlands flower forest", BIOME_FLOWER_FOREST_WDLS},
+    {"woodlands birch forest", BIOME_BIRCH_FOREST_WDLS}
 };
 
 
@@ -25,6 +25,11 @@ const std::map<std::string, FoodItems> FOODITEMS_MAP = {
     {"wheat", FOOD_WHEAT},
     {"potato", FOOD_POTATO},
     {"chicken", FOOD_CHICKEN}
+};
+
+const std::map<std::string, BiomeTypes> BIOMETYPES_MAP = {
+    {"plains", BIOME_PLAINS_BIOME},
+    {"woodlands", BIOME_WOODLANDS_BIOME}
 };
 
 const std::map<FoodItems, std::string> FOODITEMSINV_MAP = {
