@@ -20,20 +20,22 @@ void generate_biome(int icount, std::string biome_name) {
     BiomeTypes bioType;
     std::string bio_type_name = MineUtils::biome_type_from_name(biome_name); // plains, plains ice, plains ice spikes or woodlands flower forest. Only need plains or woodlands, so type of biome name.
     
-    if (BIOMETYPES_MAP.count(bio_type_name)) {bioType = BIOMETYPES_MAP.at(bio_type_name);} // 
+    std::cout << "biome type name: " << bio_type_name << std::endl;
+    return;
+    if (BIOMETYPES_MAP.count(bio_type_name)) {bioType = BIOMETYPES_MAP.at(bio_type_name);} /**Need to change implementation below. I now only care about the type and not so much the name of the biome. This helps keep this function small since I would only be using the types and not the names of things. Need to use the MineUtils::biome_type_from_name function. */
     switch(bioType) {
-        case BIOME_PLAINS_BIOME: {
-            std::vector<PlainsBiome> vBiome;
-            generate_plains_biome(vBiome, icount, biome_name);
-            break;
-        }
-        case BIOME_WOODLANDS_BIOME: {
-            std::vector<WoodLandsBiome> vBiome;
-            generate_woods_lands_biome(vBiome, icount, biome_name);
-            break;
-        }
-        default:
-            std::cout << "New Biomes" << std::endl;
+    case BIOME_PLAINS_BIOME: {
+        std::vector<PlainsBiome> vBiome;
+        generate_plains_biome(vBiome, icount, biome_name);
+        break;
+    }
+    case BIOME_WOODLANDS_BIOME: {
+        std::vector<WoodLandsBiome> vBiome;
+        generate_woods_lands_biome(vBiome, icount, biome_name);
+        break;
+    }
+    default:
+        std::cout << "New Biomes" << std::endl;
     }
 }
 

@@ -9,8 +9,8 @@
 
 class UniqueWorld : public World {
 public:
-    
-UniqueWorld();
+
+    UniqueWorld();
     virtual ~UniqueWorld() = default;
     void CreateWorld(const std::string& world_name, std::unique_ptr<PureWorld>& world, const WorldAttributes& attributes) const override;
 };

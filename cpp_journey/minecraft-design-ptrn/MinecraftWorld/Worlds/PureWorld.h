@@ -1,7 +1,6 @@
 #ifndef PURE_WORLD_H
 #define PURE_WORLD_H
 
-
 #include <string>
 #include <iostream>
 #include <memory>
@@ -9,6 +8,7 @@
 #include "../Utils/MineUtils.h"
 #include "../Utils/ItemNames.h"
 #include "../Utils/ItemStructs.h"
+#include "../Biomes/PlainsBiome.h"
 
 class PureWorld {
 protected:

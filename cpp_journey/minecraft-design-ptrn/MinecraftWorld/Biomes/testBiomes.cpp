@@ -8,7 +8,7 @@ int main() {
     // plains, ice plains, ice spike plains
     std::unique_ptr<PlainsBiome> biome = std::make_unique<PlainsBiome>();
     std::unique_ptr<WoodLandsBiome> biome_wdls = std::make_unique<WoodLandsBiome>();
-    std::unique_ptr<PureBiome> plains_biome; 
+    std::unique_ptr<PureBiome> plains_biome;
     std::unique_ptr<PureBiome> wdls_biome; 
     biome->CreateBiome("ice plains", plains_biome);
     biome_wdls->CreateBiome("flower forest", wdls_biome);
