@@ -7,7 +7,7 @@
 
 namespace MineUtils {
     int generateRandomId();
-    std::string biome_type_from_name(const std::string& biome_name_asked);
+    std::pair<std::string, std::string> biome_type_from_name(const std::string& biome_name_asked);
 }
 
 #endif

@@ -7,6 +7,8 @@
   * I used what I'm calling the "reverse/inverse" map for food names instead of retrieving the key from a value since map does not provide a direct way to get keys from a value. There's probably a better way to do so, but I try to come up with my own solutions.
     + This can be found in the file: `./Food/FoodConstructros.h` in the `3rd constructor`
     + Since the "user" would only know things like "apple" I keep this option. However to keep strings to a minimum I uses enum. Thus, I need to go from a string to an enum. This back and forth resulted in this design decision.
+  * Changed interaction with main program to put aside the otherwise required string processing.
+    + I orginally intended for the main program to be input agnostic. However, this also requires a some what huge amount of processing the input. Thus, for now, I assume the inputs will be formatted.
   
 ### Design decisions to generate world:
   * Implementations came from thinking about the interaction with the main program. The main idea for the main program, `./Worlds/testWorld.cpp`, is to simulate the process of creating a minecraft world. This includes setting up the world with: `biomes, food items, creatures, trees and other minecraft items`. I use the `Factory Method` design pattern to generate these items. It works great since a world might need to create multiple items, so like 3 of the same biome. 
