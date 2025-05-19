@@ -11,7 +11,7 @@ namespace MineUtils {
         return rndId(rng);
     };
 
-    /** @brief Parse the string return type of biome name. */
+    /** @return std::pair<string, string> type_name: 1st = type.  */
     std::pair<std::string, std::string> biome_type_from_name(const std::string& biome_name_asked) {
         std::string s;
         std::string bio_name = "";

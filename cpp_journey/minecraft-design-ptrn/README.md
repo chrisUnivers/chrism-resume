@@ -1,15 +1,12 @@
 # Repo Info
   * Factory Method design patterns from a minecraft perspective.
+  * **Excuse** the console prints. My brain likes using text editors, vscode, but I use wsl and I have yet to set up the debug on it.
 
 ## To run
-  * The project, currently only the biomes factory, is ran through a make file. To run simply type in the command line the following commands:
+  * Included in new commit. The whole program runs as intended. One file will `testWorld.cpp` will be used to create the pretend minecraft world and initialize it with pretend minecraft items. To run use the following:
     + cd MinecraftWorld/
     + make
-    + ./biomeTest
-  * Currently the make file can only build one factory. Either biomeTest or foodTest.
-    + the make file to run food factory test file is in `./make.md`. To run it replace current `Makefile` with it's content then use:
-      1. cd MinecraftWorld/
-      2. make clean
-      3. make
-      4. ./foodTest
-  * The Biome Factory, in the Factory Method, works as intended.
+    + ./worldTest
+  * Road map/ next:
+    + Implement meaningfull output.
+    + Use multithreading to simulate some things taking longer to be initialized. This will be accomplished by sleeping part of the program for a few seconds.

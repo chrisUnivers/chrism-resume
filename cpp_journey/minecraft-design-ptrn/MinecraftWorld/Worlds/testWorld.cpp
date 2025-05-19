@@ -9,7 +9,7 @@ int main() {
     
     std::pair<int, std::string> plains_biome_info = {2, "ice spike plains"};
     uniq_world_attributes.BiomesAttributes_ = plains_biome_info;
-    world->CreateWorld("this world", uniq_world, uniq_world_attributes);
+    world->CreateWorld("this world name_name", uniq_world, uniq_world_attributes);
     std::cout << "back from create world" << std::endl;
     
     return 0;

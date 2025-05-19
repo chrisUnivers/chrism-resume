@@ -24,14 +24,19 @@ void UniqueWorld::CreateWorld(const std::string& world_name, std::unique_ptr<Pur
 void generate_biome(int icount, std::string biome_name) {
     BiomeTypes bioType;
     std::pair<std::string, std::string> bio_type_name = MineUtils::biome_type_from_name(biome_name); // plains, plains ice, plains ice spikes or woodlands flower forest. Only need plains or woodlands, so type of biome name.
-    
+    std::string mstr = "biomes";
     std::cout << "biome type: " << bio_type_name.first << std::endl;
-    if (BIOMETYPES_MAP.count(bio_type_name.second)) {bioType = BIOMETYPES_MAP.at(bio_type_name.first);} /**Need to change implementation below. I now only care about the type and not so much the name of the biome. This helps keep this function small since I would only be using the types and not the names of things. Need to use the MineUtils::biome_type_from_name function. */
+    if (BIOMETYPES_MAP.count(bio_type_name.second)) {bioType = BIOMETYPES_MAP.at(bio_type_name.first);} // if the key is found in the map, assign its value.
+    std::cout << "length of biome type is: " << mstr.size() << std::endl;
+
     switch(bioType) {
     case BIOME_PLAINS_BIOME: {
         std::vector<std::unique_ptr<PureBiome>> vBiome;
         generate_plains_biome(vBiome, icount, biome_name);
-        vBiome[0]->getBiomeColour();
+        for (const auto& bio_me : vBiome) {
+            std::cout << "Getting the colours of the each bio_me" << std::endl;
+            bio_me->getBiomeColour();
+        }
         break;
     }
     case BIOME_WOODLANDS_BIOME: {
@@ -49,7 +54,7 @@ void generate_biome(int icount, std::string biome_name) {
 /** @brief: receives name of biome, determines type of this biome from name. Then uses biome factory, following The Factory Method design, to genererate icount biomes of this type of biome.*/
 
 /**The cool version of the method: genearte_biome. For this to work, need to implement an ordering system. For now using default generate_biome. */
-void generate_biome_cool(int icount, std::string biome_name) {
+void cool_generate_biome(int icount, std::string biome_name) {
     BiomeTypes bioType;
     // std::string bio_type_name = MineUtils::biome_type_from_name(biome_name); // plains, plains ice, plains ice spikes or woodlands flower forest. Only need plains or woodlands, so type of biome name.
     
