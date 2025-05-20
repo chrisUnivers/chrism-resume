@@ -20,6 +20,7 @@ protected:
     std::vector<std::unique_ptr<PureBiome>>      WorldBiomes_;
 
 public:
+    PureWorld() {};
     virtual ~PureWorld() = default;
     double getWorldTemperature() { 
         std::cout << "The temperature is: " << std::endl; 

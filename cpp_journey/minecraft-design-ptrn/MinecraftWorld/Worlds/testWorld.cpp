@@ -16,7 +16,7 @@ int main() {
 
     uniqWorld_attributes.TreesAttributes_.emplace_back(oakTree_info);
     uniqWorld_attributes.TreesAttributes_.emplace_back(darkOakTree_info);
-    world->CreateWorld("this world's name_name", uniq_world, uniq_world_attributes);
+    world->CreateWorld("this world's name_name", uniq_world, uniqWorld_attributes);
     std::cout << "back from create world" << std::endl;
     
     return 0;

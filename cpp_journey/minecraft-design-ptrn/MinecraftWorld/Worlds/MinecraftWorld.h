@@ -9,8 +9,8 @@
 
 class MinecraftWorld : public PureWorld {
 public:
+    MinecraftWorld() {};
     virtual ~MinecraftWorld() = default;
-    virtual void generatePlainsBiomes() const = 0;
 
 };
 

@@ -9,11 +9,11 @@
 #include "../Utils/ItemStructs.h"
 #include "../Biomes/BiomeConstructors.h"
 #include "../Food/FoodConstructors.h"
-#include "../Utils/defaultValues.h"
+// #include "../Utils/defaultValues.h" 
 
 class SpawnWorld : public MinecraftWorld {
 public:
-    SpawnWorld() : SpawnWorld(1, SPAWN_WORLD_WORLD) {}
+    SpawnWorld() : SpawnWorld(1, SPAWN_WORLD_WORLD) {};
     SpawnWorld(int instance_count, WorldNames world_name){
         std::vector<PlainsBiome> moveBiome;
         WorldId_ = MineUtils::generateRandomId();

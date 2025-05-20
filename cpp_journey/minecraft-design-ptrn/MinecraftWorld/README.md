@@ -13,6 +13,6 @@
 ### Design decisions to generate world:
   * Implementations came from thinking about the interaction with the main program. The main idea for the main program, `./Worlds/testWorld.cpp`, is to simulate the process of creating a minecraft world. This includes setting up the world with: `biomes, food items, creatures, trees and other minecraft items`. I use the `Factory Method` design pattern to generate these items. It works great since a world might need to create multiple items, so like 3 of the same biome. 
     + `UniqueWorld.cpp` is the file that will handle this input and then console log when items are created. All my code is written to keep things simple so the logic should be easy to follow.
-  * More one `UniqueWorld.cpp`
+  * More on `UniqueWorld.cpp`
       + The file `./CreateWorld/UniqueWorld.cpp`
         - The function `generate_biome`: receives name of biome, determines type of this biome from name. Then uses biome factory, following The Factory Method design, to genererate `icount` biomes of this type of biome. This minimizes the work the main program, `testWorld.cpp`, does. The implementation of the factory method, `./Biomes/PlainsBiome.cpp` for example, determines which biome to create from the name. The logic fore `generate_biome` in `UniqueWorld.cpp` is easy to follow.
