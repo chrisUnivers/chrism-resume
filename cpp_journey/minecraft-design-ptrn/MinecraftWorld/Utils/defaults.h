@@ -4,7 +4,7 @@
 
 #include "ItemNames.h"
 
-const double DEFAULT_TEMPERATURE = 20.0;
+
 
 const std::map<std::string, BiomeNames> PLAINSBIOME_MAP = {
     {"plains", BIOME_PLAINS},

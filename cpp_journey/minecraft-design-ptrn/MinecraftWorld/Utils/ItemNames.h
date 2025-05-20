@@ -65,7 +65,9 @@ enum EffectName {
 };
 
 enum WorldNames {
-    WORLD_ONE_WORLD,
+    SPAWN_WORLD_WORLD,
+    NETHER_WORLD_WORLD,
+    END_WORLD_WORLD,
 };
 
 enum ClimateNames {

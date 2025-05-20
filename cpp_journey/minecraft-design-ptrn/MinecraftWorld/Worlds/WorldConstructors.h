@@ -9,22 +9,42 @@
 #include "../Utils/ItemStructs.h"
 #include "../Biomes/BiomeConstructors.h"
 #include "../Food/FoodConstructors.h"
+#include "../Utils/defaultValues.h"
 
-
-class WorldOne_One : public MinecraftWorld {
+class SpawnWorld : public MinecraftWorld {
 public:
-    WorldOne_One() : WorldOne_One(1, WORLD_ONE_WORLD) {}
-    WorldOne_One(int instance_count, WorldNames world_name){
+    SpawnWorld() : SpawnWorld(1, SPAWN_WORLD_WORLD) {}
+    SpawnWorld(int instance_count, WorldNames world_name){
         std::vector<PlainsBiome> moveBiome;
         WorldId_ = MineUtils::generateRandomId();
         WorldClimate_ = std::make_unique<WorldClimate>(DEFAULT_TEMPERATURE);
-        // {2, "ice spikes"}
-        for (int i = 0; i < instance_count; i++) {
-            std::unique_ptr<PlainsBiome> biome = std::make_unique<PlainsBiome>();
-            std::unique_ptr<PureBiome> plains_biome; 
-            biome->CreateBiome("ice plains", plains_biome);
-            WorldPlainsBiomes_ = std::move(moveBiome);
-        }
+        
+    }
+    
+};
+
+
+class NetheWorld : public MinecraftWorld {
+public:
+    NetheWorld() : NetheWorld(1, NETHER_WORLD_WORLD) {}
+    NetheWorld(int instance_count, WorldNames world_name){
+        std::vector<PlainsBiome> moveBiome;
+        WorldId_ = MineUtils::generateRandomId();
+        WorldClimate_ = std::make_unique<WorldClimate>(DEFAULT_TEMPERATURE);
+    }
+    
+};
+
+class EndWorld : public MinecraftWorld {
+protected:
+    // std::unique_ptr<PureCreature>  EndDragron_;
+
+public:
+    EndWorld() : EndWorld(1, END_WORLD_WORLD) {}
+    EndWorld(int instance_count, WorldNames world_name){
+        std::vector<PlainsBiome> moveBiome;
+        WorldId_ = MineUtils::generateRandomId();
+        WorldClimate_ = std::make_unique<WorldClimate>(DEFAULT_TEMPERATURE);
     }
     
 };

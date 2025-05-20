@@ -4,7 +4,11 @@
 
 #include <string>
 #include <memory>
+
+
+
 #include "ItemNames.h"
+#include "defaultValues.h"
 // #include "defaults.h"
 /** * @brief struct for the biome blocks textures*/
 struct BiomeTexture {
@@ -49,13 +53,14 @@ struct FoodItem {
 struct WorldClimate {
     double temperature;
 
-    WorldClimate() : WorldClimate(18.0) {};
+    WorldClimate() : WorldClimate(DEFAULT_TEMPERATURE) {};
     WorldClimate(double world_temperature) : temperature{world_temperature} {}
 };
 
 struct WorldAttributes {
     int numAttributes_;
-    std::pair<int, std::string> BiomesAttributes_;
+    std::vector<std::pair<int, std::string>> BiomesAttributes_;
+    std::vector<std::pair<int, std::string>> TreesAttributes_;
     // std::pair<int, std::string> BiomesAttributes_;
 
     WorldAttributes() : WorldAttributes(1) {};
