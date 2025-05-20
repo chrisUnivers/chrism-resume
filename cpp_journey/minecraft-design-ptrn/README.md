@@ -13,5 +13,6 @@
     + make
     + ./worldTest
   * Road map/ next:
-    + Implement meaningfull output.
+    + Implement meaningfull output and create more minecraft items.
+      - Minecraft trees, creatures and more.
     + Use multithreading to simulate some things taking longer to be initialized. This will be accomplished by sleeping part of the program for a few seconds.
