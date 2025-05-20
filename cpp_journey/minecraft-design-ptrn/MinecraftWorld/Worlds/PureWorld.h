@@ -23,11 +23,21 @@ public:
     PureWorld() {};
     virtual ~PureWorld() = default;
     double getWorldTemperature() { 
-        std::cout << "The temperature is: " << std::endl; 
+        std::cout << "Temperature Temperature" << std::endl; 
         return WorldClimate_->temperature;
     }
     void setPlainsBiome(std::unique_ptr<PureBiome>& mBiome) {
         WorldPlainsBiomes_.emplace_back(std::move(mBiome));
+    }
+    void getPlainsBiomeTexture(int nth_bio) {
+        std::cout << "world plains biomes count is: " << WorldPlainsBiomes_.size() << std::endl;
+        if (WorldPlainsBiomes_.size() > nth_bio) {
+            std::string bio_colour = WorldPlainsBiomes_[nth_bio]->getBiomeColour();
+            std::cout << "The " << nth_bio << " colour is: " << bio_colour << std::endl;
+        }
+    }
+    void setClimate() {
+        WorldClimate_->temperature = 33.7;
     }
 };
 

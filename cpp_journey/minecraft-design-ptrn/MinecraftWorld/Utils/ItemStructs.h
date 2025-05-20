@@ -60,6 +60,7 @@ struct WorldClimate {
 struct WorldAttributes {
     int numAttributes_;
     std::vector<std::pair<int, std::string>> BiomesAttributes_;
+    std::vector<std::pair<int, std::string>> FoodAttributes_;
     std::vector<std::pair<int, std::string>> TreesAttributes_;
     // std::pair<int, std::string> BiomesAttributes_;
 

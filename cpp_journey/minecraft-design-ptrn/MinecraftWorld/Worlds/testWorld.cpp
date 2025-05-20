@@ -8,7 +8,7 @@ int main() {
     WorldAttributes uniqWorld_attributes = WorldAttributes();
     
     std::pair<int, std::string> plainsBiome_info = {2, "ice spike plains"};
-    std::pair<int, std::string> woodLandsBiome_info = {3, "flower forest woodLands"};
+    std::pair<int, std::string> woodLandsBiome_info = {3, "woodlands flower forest"};
     std::pair<int, std::string> oakTree_info = {80, "oak tree"}; // for apples
     std::pair<int, std::string> darkOakTree_info = {80, "dark oak tree"}; // for apples
     uniqWorld_attributes.BiomesAttributes_.emplace_back(plainsBiome_info);
@@ -17,7 +17,11 @@ int main() {
     uniqWorld_attributes.TreesAttributes_.emplace_back(oakTree_info);
     uniqWorld_attributes.TreesAttributes_.emplace_back(darkOakTree_info);
     world->CreateWorld("this world's name_name", uniq_world, uniqWorld_attributes);
-    std::cout << "back from create world" << std::endl;
+
     
+    
+    std::cout << "back from create world" << std::endl;
+    world->ListWorldItems(uniq_world);
+    std::cout << "back from textures" << std::endl;
     return 0;
 }

@@ -64,7 +64,7 @@ enum EffectName {
     NO_EFFECT,
 };
 
-enum WorldNames {
+enum WorldTypeNames {
     SPAWN_WORLD_WORLD,
     NETHER_WORLD_WORLD,
     END_WORLD_WORLD,

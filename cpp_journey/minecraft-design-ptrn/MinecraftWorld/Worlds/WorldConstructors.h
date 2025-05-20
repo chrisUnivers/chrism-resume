@@ -13,8 +13,9 @@
 
 class SpawnWorld : public MinecraftWorld {
 public:
-    SpawnWorld() : SpawnWorld(1, SPAWN_WORLD_WORLD) {};
-    SpawnWorld(int instance_count, WorldNames world_name){
+    SpawnWorld() : SpawnWorld(1, SPAWN_WORLD_WORLD, DEFAULT_WORLD_NAME) {};
+    SpawnWorld(std::string world_name) : SpawnWorld(1, SPAWN_WORLD_WORLD, world_name) {};
+    SpawnWorld(int instance_count, WorldTypeNames world_type_name, std::string world_name){
         std::vector<PlainsBiome> moveBiome;
         WorldId_ = MineUtils::generateRandomId();
         WorldClimate_ = std::make_unique<WorldClimate>(DEFAULT_TEMPERATURE);
@@ -27,7 +28,7 @@ public:
 class NetheWorld : public MinecraftWorld {
 public:
     NetheWorld() : NetheWorld(1, NETHER_WORLD_WORLD) {}
-    NetheWorld(int instance_count, WorldNames world_name){
+    NetheWorld(int instance_count, WorldTypeNames world_type_name){
         std::vector<PlainsBiome> moveBiome;
         WorldId_ = MineUtils::generateRandomId();
         WorldClimate_ = std::make_unique<WorldClimate>(DEFAULT_TEMPERATURE);
@@ -41,7 +42,7 @@ protected:
 
 public:
     EndWorld() : EndWorld(1, END_WORLD_WORLD) {}
-    EndWorld(int instance_count, WorldNames world_name){
+    EndWorld(int instance_count, WorldTypeNames world_type_name){
         std::vector<PlainsBiome> moveBiome;
         WorldId_ = MineUtils::generateRandomId();
         WorldClimate_ = std::make_unique<WorldClimate>(DEFAULT_TEMPERATURE);
