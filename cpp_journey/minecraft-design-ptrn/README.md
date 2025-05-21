@@ -15,4 +15,4 @@
 ## Road map/ next:
   + Implement meaningfull output and create more minecraft items.
     - Minecraft trees, creatures and more.
-  + I initially intended to included multithreading to this project. However, due to limited c++ multithreading knowldege I was not able to implement the desired outcome.
+  + I initially intended to included multithreading to this project. However, due to my limited c++ multithreading knowldege(writting synchronous processes), I'm for now not able to implement the desired outcome(asynchronous/non-blocking). Looking more into c++ futures and promises!
