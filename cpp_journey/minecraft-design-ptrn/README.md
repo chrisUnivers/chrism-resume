@@ -12,7 +12,7 @@
     + cd MinecraftWorld/
     + make
     + ./worldTest
-  * Road map/ next:
-    + Implement meaningfull output and create more minecraft items.
-      - Minecraft trees, creatures and more.
-    + Use multithreading to simulate some things taking longer to be initialized. This will be accomplished by sleeping part of the program for a few seconds.
+## Road map/ next:
+  + Implement meaningfull output and create more minecraft items.
+    - Minecraft trees, creatures and more.
+  + I initially intended to included multithreading to this project. However, due to limited c++ multithreading knowldege I was not able to implement the desired outcome.
