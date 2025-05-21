@@ -8,6 +8,7 @@
 namespace MineUtils {
     int generateRandomId();
     std::pair<std::string, std::string> biome_type_from_name(const std::string& biome_name_asked);
+    double generateRandomDouble(double min_value, double max_value);
 }
 
 #endif

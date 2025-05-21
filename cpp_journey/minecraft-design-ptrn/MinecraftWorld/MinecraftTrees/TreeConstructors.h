@@ -2,15 +2,56 @@
 #define TREE_CONSTRUCTORS_H
 
 #include <memory>
+#include <iostream>
 #include "MinecraftTree.h"
 #include "../Utils/ItemStructs.h"
-#include <iostream>
+#include "../Utils/MineUtils.h"
 
 class SpruceTree_Tree : public MinecraftTree {
 public:
     SpruceTree_Tree() : SpruceTree_Tree(0, BIOME_PLAINS) {}
     SpruceTree_Tree(int biome_id, BiomeNames biome_name){
         ItemSpawnBiome_ = BIOME_WINDSWEPT_HILLS;
+    }
+    SpruceTree_Tree(int biome_id, BiomeNames biome_name, std::vector<ItemNameEn>  dropItems) {
+        ItemSpawnBiome_ = BIOME_WINDSWEPT_HILLS;
+        ItemSpawnBiomeName_ = SPRUCE_TREE_BIOME_NAME;
+        TreeDropItems_ = dropItems;
+    }
+    
+    
+    int initItemInfo() {
+        ItemInfo_.ItemId_ = MineUtils::generateRandomId();
+        ItemInfo_.ItemName_ = SPRUCE_TREE;
+        ItemInfo_.ItemNameName_ = SPRUCE_TREE_NAME;
+        ItemInfo_.ItemSpwnPos_.x_pos = MineUtils::generateRandomDouble(-800, 800);
+        ItemInfo_.ItemSpwnPos_.y_pos = MineUtils::generateRandomDouble(0.3, 100);
+        ItemInfo_.ItemSpwnPos_.z_pos = MineUtils::generateRandomDouble(-800, 800);
+        return 0;
+    }
+};
+
+class Jungle_Tree : public MinecraftTree {
+public:
+    Jungle_Tree() : Jungle_Tree(0, BIOME_JUNGLE_WDLS) {}
+    Jungle_Tree(int biome_id, BiomeNames biome_name){
+        ItemSpawnBiome_ = BIOME_JUNGLE_WDLS;
+    }
+    Jungle_Tree(int biome_id, BiomeNames biome_name, std::vector<ItemNameEn>  dropItems) {
+        ItemSpawnBiome_ = BIOME_JUNGLE_WDLS;
+        ItemSpawnBiomeName_ = JUNGLE_TREE_BIOME_NAME;
+        TreeDropItems_ = dropItems;
+    }
+    
+    
+    int initItemInfo() {
+        ItemInfo_.ItemId_ = MineUtils::generateRandomId();
+        ItemInfo_.ItemName_ = JUNGLE_TREE;
+        ItemInfo_.ItemNameName_ = JUNGLE_TREE_NAME;
+        ItemInfo_.ItemSpwnPos_.x_pos = MineUtils::generateRandomDouble(-800, 800);
+        ItemInfo_.ItemSpwnPos_.y_pos = MineUtils::generateRandomDouble(0.3, 100);
+        ItemInfo_.ItemSpwnPos_.z_pos = MineUtils::generateRandomDouble(-800, 800);
+        return 0;
     }
 };
 

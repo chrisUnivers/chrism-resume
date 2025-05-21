@@ -9,9 +9,10 @@
 
 class PureTree : public PureMinecraftItem {
 protected:
+    
     BiomeNames               ItemSpawnBiome_;
     std::vector<ItemNameEn>  TreeDropItems_;
-
+    std::string              ItemSpawnBiomeName_;
 public:
     virtual ~PureTree() = default;
     virtual int initItemInfo() const = 0;

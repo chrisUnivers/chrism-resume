@@ -2,10 +2,12 @@
 #define MINECRAFT_TREE_H
 
 #include "PureTree.h"
+#include "../Utils/defaultValues.h"
 
 class MinecraftTree : public PureTree {
 public:
     virtual ~MinecraftTree() = default;
+    int initItemInfo() const override { return 0; };
 };
 
 #endif

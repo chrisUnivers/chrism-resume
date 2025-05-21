@@ -11,6 +11,13 @@ namespace MineUtils {
         return rndId(rng);
     };
 
+    double generateRandomDouble(double min_value, double max_value) { //https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
+        std::random_device dev;
+        std::mt19937 rng(dev());
+        std::uniform_real_distribution<std::mt19937::result_type> rndDouble(min_value, max_value);
+        return rndDouble(rng);
+    }
+
     /** @return std::pair<string, string> type_name: 1st = type.  */
     std::pair<std::string, std::string> biome_type_from_name(const std::string& biome_name_asked) {
         std::string s;
