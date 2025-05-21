@@ -68,4 +68,16 @@ struct WorldAttributes {
     WorldAttributes(int num_attributes) : numAttributes_{num_attributes} {}
 };
 
+struct MinecraftItemInfo {
+    int                           ItemId_;
+    ItemNameEn                    ItemName_;
+    std::string                   ItemNameName_;
+    ItemPosition                  ItemSpwnPos_;
+
+    MinecraftItemInfo() : MinecraftItemInfo(0, DEFAULT_ITEM, "default-name") {};
+    MinecraftItemInfo(int id, ItemNameEn iNameEn, std::string iName) : ItemId_{id}, ItemName_{iNameEn}, ItemNameName_{iName} {
+        ItemSpwnPos_ = ItemPosition(0.0, 0.0, 0.0);
+    }
+};
+
 #endif 

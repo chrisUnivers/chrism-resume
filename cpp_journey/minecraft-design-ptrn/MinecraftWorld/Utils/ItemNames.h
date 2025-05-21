@@ -50,7 +50,8 @@ enum BiomeNames {
     BIOME_SPARSE_JUNGLE_WDLS,
     BIOME_TAIGA_WDLS,
     BIOME_FROZEN_PEAKS_MNTS, // MOUNTAIN BIOMES
-    BIOME_SNOWY_SLOPES_MNTS
+    BIOME_SNOWY_SLOPES_MNTS,
+    BIOME_WINDSWEPT_HILLS,
 };
 
 enum BiomeTypes {
@@ -76,6 +77,14 @@ enum ClimateNames {
     CLIMATE_CLOUDY,
     CLIMATE_SUNNY,
 };
+
+enum ItemNameEn {
+    OAK_TREE,
+    DIAMOND_BLOCK,
+    DEFAULT_ITEM,
+    SPRUCE_TREE_LEAVES
+};
+
 
 #endif
 
