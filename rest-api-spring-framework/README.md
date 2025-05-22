@@ -1,6 +1,6 @@
 ## Repo information
-  + This repository demostrates some of the projects I worked on while self learning the spirngboot framework mostly for web service. So working with CRUD operations. Will update soon.
-  + I also have another springboot project in `../backend_spbootDev`.
+  + This repository demostrates some of the projects I worked on while self learning the spirngboot framework mostly for web service. So working with CRUD operations. Will update soon. Tutorial came from: https://spring.io/guides, but hard to find exact ones.
+  + I also have another springboot project in `../backend_spbootDev`. 
 
 ### The Book Tracker Mongodb.
     - Please be ready for a colourful page. At the time of working on this project, I was also learning css and javascript. Thus, the page layout is not the best!
