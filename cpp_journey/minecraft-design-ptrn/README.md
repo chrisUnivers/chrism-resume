@@ -15,4 +15,5 @@
 ## Road map/ next:
   + Implement meaningfull output and create more minecraft items.
     - Minecraft trees, creatures and more.
-  + I initially intended to included multithreading to this project. However, due to my limited c++ multithreading knowldege(writting synchronous processes), I'm for now not able to implement the desired outcome(asynchronous/non-blocking). Looking more into c++ futures and promises!
+  + Implement asynchoronous concurrent processes
+    - For things like biomes, two main futures need. One that the main thread will wait on, and another that will handle the creation of biomes. This second future will also have other async futures which will do the actual biome setup.

@@ -4,7 +4,7 @@
 #include <string>
 #include <iostream>
 #include <memory>
-#include <vector>
+#include <mutex>
 #include "../Utils/MineUtils.h"
 #include "../Utils/ItemNames.h"
 #include "../Utils/ItemStructs.h"
@@ -19,14 +19,17 @@ protected:
     std::vector<std::pair<std::string, int>>     WorldCreationItems_;
     std::vector<std::unique_ptr<PureBiome>>      WorldBiomes_;
 
-public:
+    mutable std::mutex m;
+    public:
     PureWorld() {};
     virtual ~PureWorld() = default;
     double getWorldTemperature() { 
         std::cout << "Temperature Temperature" << std::endl; 
         return WorldClimate_->temperature;
     }
+
     void setPlainsBiome(std::unique_ptr<PureBiome>& mBiome) {
+        std::lock_guard<std::mutex> lock(m);
         WorldPlainsBiomes_.emplace_back(std::move(mBiome));
     }
     void getPlainsBiomeTexture(int nth_bio) {

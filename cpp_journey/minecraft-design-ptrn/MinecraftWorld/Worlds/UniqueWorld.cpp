@@ -7,11 +7,11 @@
 #include "../Utils/defaults.h"
 #include "WorldConstructors.h"
 
-
 BiomeTypes generate_biome(std::string biome_name);
 void generate_plains_biome(PureWorld* world, int instance_count, std::string bio_name);
 void generate_woodLands_biome(PureWorld* world, int instance_count, std::string bio_name);
-void handle_world_biomes(const WorldAttributes& attributes, std::unique_ptr<SpawnWorld>& world_new);
+template<typename T>
+void handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new);
 void handle_world_creatures(const WorldAttributes& attributes, std::unique_ptr<SpawnWorld>& world_new);
 
 UniqueWorld::UniqueWorld(){
@@ -20,10 +20,10 @@ UniqueWorld::UniqueWorld(){
 void UniqueWorld::CreateWorld(const std::string& world_name, std::unique_ptr<PureWorld>& world, const WorldAttributes& attributes) const {
     
     std::cout << "this world is called: " << world_name << std::endl;
-    
     std::unique_ptr<SpawnWorld> ol = std::make_unique<SpawnWorld>(world_name); // need to create biomes, food, creatures for this world then move ol back to the calling world, in this case <world>
     double temperature = ol->getWorldTemperature();
-    handle_world_biomes(attributes, ol);
+    std::future<void> biomes_future = std::async(std::launch::async, handle_world_biomes<WorldAttributes>, attributes, std::move(ol));
+    // handle_world_biomes(attributes, ol);
     world = std::move(ol);
 
 }
@@ -35,7 +35,8 @@ void UniqueWorld::ListWorldItems(std::unique_ptr<PureWorld>&world) const {
 }
 
 // Could pass in std::vector<std::pair<int, std::string>> which is what the function needs, attributes.BiomesAttributes_, but WorldAttributes keeps the function parameters more simple.
-void handle_world_biomes(const WorldAttributes& attributes, std::unique_ptr<SpawnWorld>& world_new) {
+template<typename T>
+void handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new) {
 
     for (const auto& biome: attributes.BiomesAttributes_) {
         BiomeTypes bioType = generate_biome(biome.second); // biome.second is the name of the biome: ice spike plains.

@@ -1,8 +1,11 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-
+#include <future>
+#include <thread>
 #include "PureWorld.h"
+
+
 
 class World {
 public:
