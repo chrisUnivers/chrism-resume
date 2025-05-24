@@ -46,3 +46,8 @@ const std::map<FoodItems, double> FOODREGEN_MAP = {
     {FOOD_POTATO, 1.0},
     {FOOD_CHICKEN, 1.0}
 };
+
+const std::map<std::string, ItemNameEn> WDLSBIOMETREE_MAP = {
+    {"Spruce tree", TREE_SPRUCE},
+    {"Jungle tree", TREE_JUNGLE}
+};

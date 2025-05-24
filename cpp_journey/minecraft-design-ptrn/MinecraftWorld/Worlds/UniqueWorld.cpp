@@ -8,10 +8,10 @@
 #include "WorldConstructors.h"
 
 BiomeTypes generate_biome(std::string biome_name);
-void generate_plains_biome(PureWorld* world, int instance_count, std::string bio_name);
+void generate_plains_biome(std::unique_ptr<SpawnWorld>& world, int instance_count, std::string bio_name);
 void generate_woodLands_biome(PureWorld* world, int instance_count, std::string bio_name);
 template<typename T>
-void handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new);
+std::unique_ptr<SpawnWorld> handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new);
 void handle_world_creatures(const WorldAttributes& attributes, std::unique_ptr<SpawnWorld>& world_new);
 
 UniqueWorld::UniqueWorld(){
@@ -20,10 +20,13 @@ UniqueWorld::UniqueWorld(){
 void UniqueWorld::CreateWorld(const std::string& world_name, std::unique_ptr<PureWorld>& world, const WorldAttributes& attributes) const {
     
     std::cout << "this world is called: " << world_name << std::endl;
-    std::unique_ptr<SpawnWorld> ol = std::make_unique<SpawnWorld>(world_name); // need to create biomes, food, creatures for this world then move ol back to the calling world, in this case <world>
-    double temperature = ol->getWorldTemperature();
-    std::future<void> biomes_future = std::async(std::launch::async, handle_world_biomes<WorldAttributes>, attributes, std::move(ol));
-    // handle_world_biomes(attributes, ol);
+    std::unique_ptr<SpawnWorld> ol = std::make_unique<SpawnWorld>(world_name);
+    std::future<std::unique_ptr<SpawnWorld>> biomes_future = std::async(handle_world_biomes<WorldAttributes>, attributes, std::move(ol));
+    ol = std::move(biomes_future.get());
+    /** NOTE: Each handle_something_function() has it's own future for concurrency. */
+    // Also need futures for: food, creatures for this world then std::move(ol) back to the calling world, in this case <world>
+    //std::future<std::unique_ptr<SpawnWorld>> creatures_future = std::async(handle_world_creatures<WorldAttributes>, attributes, std::move(ol));
+    // ol = std::move(creatures_future.get());...
     world = std::move(ol);
 
 }
@@ -35,25 +38,30 @@ void UniqueWorld::ListWorldItems(std::unique_ptr<PureWorld>&world) const {
 }
 
 // Could pass in std::vector<std::pair<int, std::string>> which is what the function needs, attributes.BiomesAttributes_, but WorldAttributes keeps the function parameters more simple.
+/** @note only one thread works in this function to create biomes.
+ *  @return return the world passed in since it has been changed and the futures do not allow to pass values by reference.
+ */
 template<typename T>
-void handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new) {
+std::unique_ptr<SpawnWorld> handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new) {
 
     for (const auto& biome: attributes.BiomesAttributes_) {
         BiomeTypes bioType = generate_biome(biome.second); // biome.second is the name of the biome: ice spike plains.
-        std::unique_ptr<SpawnWorld> world = std::make_unique<SpawnWorld>();
+        int num__biomes = biome.first;
+        std::string bio__name = biome.second;
         switch(bioType) {
         case BIOME_PLAINS_BIOME: {
-            generate_plains_biome(world_new.get(), biome.first, biome.second); // biome.first is the number of biomes to create.
+            generate_plains_biome(world_new, num__biomes, bio__name); // generate plains biomes for world_new.
             break;
         }
         case BIOME_WOODLANDS_BIOME: {
-            // generate_plains_biome(world.get(), biome.first);
+            // generate_woodLands_biome(world_new, num__biomes, bio__name) // generate woodLands biomes for this world.
             break;
         }
         default:
             std::cout << "New Biomes" << std::endl;
-        }        
+        }
     }
+    return world_new;
 }
 
 void handle_world_creatures(const WorldAttributes& attributes, std::unique_ptr<SpawnWorld>& world_new) {
@@ -76,16 +84,16 @@ BiomeTypes generate_biome(std::string biome_name) {
     
 }
 
-/** @brief: receives name of biome, determines type of this biome from name. Then uses biome factory, following The Factory Method design, to genererate icount biomes of this type of biome. 
- * @attention: biome_name and not biome_type_name
+/** @param world the reference to the world passed in.
+ *  @attention Will modify the biome values of this object.
 */
-void generate_plains_biome(PureWorld* world, int instance_count, std::string bio_name) {
+void generate_plains_biome(std::unique_ptr<SpawnWorld>& world, int instance_count, std::string bio_name) {
     for (int i = 0; i < instance_count; i++) {
         std::unique_ptr<PlainsBiome> biome = std::make_unique<PlainsBiome>();
         std::unique_ptr<PureBiome> plains_biome; 
         // biome->CreateBiome("ice plains", plains_biome);
         biome->CreateBiome(bio_name, plains_biome);
-        world->setPlainsBiome(plains_biome);
+        world->setPlainsBiome(plains_biome); // A mutex is used on this function.
         // double bio_temperature = world->getWorldTemperature();
         // std::cout << "the temperature is: " << world->getWorldTemperature() << std::endl;
     }

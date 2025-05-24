@@ -9,6 +9,7 @@
 #include "../Utils/ItemNames.h"
 #include "../Utils/ItemStructs.h"
 #include "../Biomes/PlainsBiome.h"
+#include "../Trees/WoodLandTrees.h"
 
 class PureWorld {
 protected:
@@ -17,9 +18,13 @@ protected:
     std::unique_ptr<WorldClimate>                WorldClimate_;
     std::vector<std::unique_ptr<PureBiome>>      WorldPlainsBiomes_;
     std::vector<std::pair<std::string, int>>     WorldCreationItems_;
+
+    std::vector<std::unique_ptr<PureTree>>       WorldTrees_;
     std::vector<std::unique_ptr<PureBiome>>      WorldBiomes_;
 
-    mutable std::mutex m;
+    mutable std::mutex plains_biome_mutex;
+    // mutex for trees in different biomes.
+    mutable std::mutex woodLands_trees_mutex;
     public:
     PureWorld() {};
     virtual ~PureWorld() = default;
@@ -29,8 +34,12 @@ protected:
     }
 
     void setPlainsBiome(std::unique_ptr<PureBiome>& mBiome) {
-        std::lock_guard<std::mutex> lock(m);
+        std::lock_guard<std::mutex> lock(plains_biome_mutex);
         WorldPlainsBiomes_.emplace_back(std::move(mBiome));
+    }
+    void setWorldTree(std::unique_ptr<PureTree>& mTree) {
+        std::lock_guard<std::mutex> lock(woodLands_trees_mutex);
+        WorldTrees_.emplace_back(std::move(mTree));
     }
     void getPlainsBiomeTexture(int nth_bio) {
         std::cout << "world plains biomes count is: " << WorldPlainsBiomes_.size() << std::endl;

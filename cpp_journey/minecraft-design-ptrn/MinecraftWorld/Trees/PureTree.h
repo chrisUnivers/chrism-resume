@@ -16,6 +16,11 @@ protected:
 public:
     virtual ~PureTree() = default;
     virtual int initItemInfo() const = 0;
+    std::string getTreeBiomeName() { 
+        std::cout << "Retrieved this tree's biome name: " << std::endl;
+
+        return ItemSpawnBiomeName_;
+    }
 };
 
 #endif

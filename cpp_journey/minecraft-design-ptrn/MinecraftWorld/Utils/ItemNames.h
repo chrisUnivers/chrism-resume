@@ -80,12 +80,14 @@ enum ClimateNames {
 };
 
 enum ItemNameEn {
-    OAK_TREE,
-    SPRUCE_TREE,
-    JUNGLE_TREE,
     DIAMOND_BLOCK,
     DEFAULT_ITEM,
-    SPRUCE_TREE_LEAVES
+    TREE_OAK,
+    TREE_SPRUCE,
+    TREE_JUNGLE,
+    TREE_DEFAULT,
+    SPRUCE_TREE_LEAVES,
+    JUNGLE_TREE_LEAVES
 };
 
 
