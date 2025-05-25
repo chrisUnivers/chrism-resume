@@ -14,7 +14,7 @@ namespace MineUtils {
     double generateRandomDouble(double min_value, double max_value) { //https://en.cppreference.com/w/cpp/numeric/random/uniform_real_distribution
         std::random_device dev;
         std::mt19937 rng(dev());
-        std::uniform_real_distribution<std::mt19937::result_type> rndDouble(min_value, max_value);
+        std::uniform_real_distribution<> rndDouble(min_value, max_value);
         return rndDouble(rng);
     }
 

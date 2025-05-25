@@ -18,10 +18,12 @@ void WoodLandTrees::CreateTree(std::string tree_name, std::unique_ptr<PureTree> 
     {
     case TREE_SPRUCE: {
         std::unique_ptr<SpruceTree_Tree> ol = std::make_unique<SpruceTree_Tree>();
-        // std::cout << "ice plains biome" << std::endl;
+        
+        std::cout << "Spruce tree constructed" << std::endl;
         std::string text_color = ol->getTreeBiomeName();
-        // std::cout << "the text color: " << text_color << std::endl;
-         mtree = std::move(ol);
+        std::cout << "the spawn biome of the tree: " << text_color << std::endl;
+        int initInfo = ol->initItemInfo();
+        mtree = std::move(ol);
         break;
     }
     case BIOME_ICE_SPIKE_PLAINS: {

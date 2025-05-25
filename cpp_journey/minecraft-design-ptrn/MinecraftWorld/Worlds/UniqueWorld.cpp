@@ -14,6 +14,11 @@ template<typename T>
 std::unique_ptr<SpawnWorld> handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new);
 void handle_world_creatures(const WorldAttributes& attributes, std::unique_ptr<SpawnWorld>& world_new);
 
+ItemNameEn generate_tree(std::string tree_name);
+template<typename S>
+std::unique_ptr<SpawnWorld> handle_world_trees(const S& attributes, std::unique_ptr<SpawnWorld> world_new);
+void generate_spruce_biome(std::unique_ptr<SpawnWorld>& world, int instance_count, std::string bio_name);
+
 UniqueWorld::UniqueWorld(){
 }
 
@@ -21,14 +26,17 @@ void UniqueWorld::CreateWorld(const std::string& world_name, std::unique_ptr<Pur
     
     std::cout << "this world is called: " << world_name << std::endl;
     std::unique_ptr<SpawnWorld> ol = std::make_unique<SpawnWorld>(world_name);
-    std::future<std::unique_ptr<SpawnWorld>> biomes_future = std::async(handle_world_biomes<WorldAttributes>, attributes, std::move(ol));
-    ol = std::move(biomes_future.get());
+    
     /** NOTE: Each handle_something_function() has it's own future for concurrency. */
-    // Also need futures for: food, creatures for this world then std::move(ol) back to the calling world, in this case <world>
-    //std::future<std::unique_ptr<SpawnWorld>> creatures_future = std::async(handle_world_creatures<WorldAttributes>, attributes, std::move(ol));
-    // ol = std::move(creatures_future.get());...
-    world = std::move(ol);
+    std::future<std::unique_ptr<SpawnWorld>> biomes_future = std::async(handle_world_biomes<WorldAttributes>, attributes, std::move(ol));
+    
+    ol = std::move(biomes_future.get()); // update ol with created biomes
 
+    // std::future<std::unique_ptr<SpawnWorld>> trees_future = std::async(handle_world_trees<WorldAttributes>, attributes, std::move(ol));
+    
+    // ol = std::move(trees_future.get()); // update ol with created trees
+   
+    world = std::move(ol);
 }
 
 /** @param world the world to print its minecraft items
@@ -37,7 +45,7 @@ void UniqueWorld::ListWorldItems(std::unique_ptr<PureWorld>&world) const {
     world->getPlainsBiomeTexture(0);
 }
 
-// Could pass in std::vector<std::pair<int, std::string>> which is what the function needs, attributes.BiomesAttributes_, but WorldAttributes keeps the function parameters more simple.
+
 /** @note only one thread works in this function to create biomes.
  *  @return return the world passed in since it has been changed and the futures do not allow to pass values by reference.
  */
@@ -64,6 +72,29 @@ std::unique_ptr<SpawnWorld> handle_world_biomes(const T& attributes, std::unique
     return world_new;
 }
 
+template<typename S>
+std::unique_ptr<SpawnWorld> handle_world_trees(const S& attributes, std::unique_ptr<SpawnWorld> world_new) {
+
+    for (const auto& tree: attributes.TreesAttributes_) {
+        ItemNameEn treeType = generate_tree(tree.second); // tree.second is the name of the tree: ice spike plains.
+        int num__trees = tree.first;
+        std::string tree__name = tree.second;
+        switch(treeType) {
+        case TREE_SPRUCE: {
+            generate_spruce_tree(world_new, num__spcTrees, tree__name); // generate spruce trees for world_new.
+            break;
+        }
+        case TREE_JUNGLE: {
+            // generate_jungle_trees(world_new, num__trees, tree__name) // generate jungle trees for this world.
+            break;
+        }
+        default:
+            std::cout << "New Trees" << std::endl;
+        }
+    }
+    return world_new;
+}
+
 void handle_world_creatures(const WorldAttributes& attributes, std::unique_ptr<SpawnWorld>& world_new) {
     /** Currently the Classes for Creatures have not be created yet. */
 }
@@ -81,7 +112,10 @@ BiomeTypes generate_biome(std::string biome_name) {
     // if the key is found in the map, assign its value.
     if (BIOMETYPES_MAP.count(bio_type_name.second)) {bioType = BIOMETYPES_MAP.at(bio_type_name.first);} else bioType = BIOME_PLAINS_BIOME; 
     return bioType;
+}
     
+ItemNameEn generate_tree(std::string tree_name) {
+
 }
 
 /** @param world the reference to the world passed in.
@@ -98,6 +132,8 @@ void generate_plains_biome(std::unique_ptr<SpawnWorld>& world, int instance_coun
         // std::cout << "the temperature is: " << world->getWorldTemperature() << std::endl;
     }
 }
+
+void generate_spruce_biome(std::unique_ptr<SpawnWorld>& world, int instance_count, std::string bio_name) {}
 
 void generate_woodLands_biome(PureWorld* world, int instance_count, std::string bio_name) {
     for (int i = 0; i < instance_count; i++) {

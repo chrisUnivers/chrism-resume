@@ -5,8 +5,7 @@
 #include <iostream>
 #include <memory>
 
-#include "../Utils/ItemNames.h"
-#include "../Utils/ItemStructs.h"
+
 class   PureMinecraftItem {
 protected:
     MinecraftItemInfo     ItemInfo_;

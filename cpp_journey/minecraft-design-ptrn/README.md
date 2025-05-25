@@ -16,4 +16,5 @@
   + Implement meaningfull output and create more minecraft items.
     - Minecraft trees, creatures and more.
   + Implement asynchoronous concurrent processes
-    - For things like biomes, two main futures will be used. One that the main thread will wait on, and another that will handle the creation of biomes. This second future will also have other async futures which will do the actual biome setup.
+    - Will be implementing the simple case first, where only the main thread can create new threads. Unlike originally planned, these new threads will not create new ones.
+      + For things like biomes, I originally intended for two main futures will be used. Those that the main thread will wait on, and those that handle the creation of biomes. These second futures would also have other async futures which would do the actual biome, creatures, trees... setup.

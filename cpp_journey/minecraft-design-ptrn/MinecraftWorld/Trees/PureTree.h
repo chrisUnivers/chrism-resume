@@ -21,6 +21,12 @@ public:
 
         return ItemSpawnBiomeName_;
     }
+
+    std::string getItemInfoName() {
+        // std::cout << "returning this item's name: " << std::endl;
+        // return ItemInfo_.ItemNameName_;
+        return ItemSpawnBiomeName_;
+    }
 };
 
 #endif

@@ -2,8 +2,6 @@
 #define WOODLAND_BIOME_TREES_H
 
 #include <string>
-#include "../Utils/ItemNames.h"
-#include "../Utils/ItemStructs.h"
 #include "Tree.h"
 #include "MinecraftTree.h"
 

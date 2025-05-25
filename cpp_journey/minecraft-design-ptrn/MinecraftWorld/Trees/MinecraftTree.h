@@ -1,8 +1,8 @@
 #ifndef MINECRAFT_TREE_H
 #define MINECRAFT_TREE_H
 
+
 #include "PureTree.h"
-#include "../Utils/defaultValues.h"
 
 class MinecraftTree : public PureTree {
 public:

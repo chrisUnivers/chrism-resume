@@ -4,27 +4,20 @@
 #include <memory>
 #include <iostream>
 #include "MinecraftTree.h"
-#include "../Utils/ItemStructs.h"
-#include "../Utils/MineUtils.h"
 
-class SpruceTree_Tree : public MinecraftTree {
+class SpruceTree_Tree : public MinecraftTree { //SpruceTree_Tree
 public:
-    SpruceTree_Tree() : SpruceTree_Tree(0, BIOME_PLAINS) {}
-    SpruceTree_Tree(int biome_id, BiomeNames biome_name){
-        std::vector<ItemNameEn> treedropitems = {SPRUCE_TREE_LEAVES};
-        SpruceTree_Tree(biome_id, biome_name, treedropitems);
-    }
-    SpruceTree_Tree(int biome_id, BiomeNames biome_name, std::vector<ItemNameEn>  dropItems) {
-        ItemSpawnBiome_ = BIOME_WINDSWEPT_HILLS;
-        ItemSpawnBiomeName_ = SPRUCE_TREE_BIOME_NAME;
-        TreeDropItems_ = dropItems;
-    }
+    SpruceTree_Tree() : SpruceTree_Tree(0, BIOME_WINDSWEPT_HILLS) {}
+    SpruceTree_Tree(int biome_id, BiomeNames biome_name) : SpruceTree_Tree(biome_id, biome_name, std::vector<ItemNameEn> {SPRUCE_TREE_LEAVES}) {}
     
+    SpruceTree_Tree(int biome_id, BiomeNames biome_name, std::vector<ItemNameEn>  dropItems) {}
     
     int initItemInfo() {
         ItemInfo_.ItemId_ = MineUtils::generateRandomId();
         ItemInfo_.ItemName_ = TREE_SPRUCE;
-        ItemInfo_.ItemNameName_ = SPRUCE_TREE_NAME;
+        ItemInfo_.ItemNameName_ = SPRUCE_TREE_NAME; // default string value
+        ItemSpawnBiomeName_ = SPRUCE_TREE_BIOME_NAME;
+        ItemSpawnBiome_ = BIOME_WINDSWEPT_HILLS;
         ItemInfo_.ItemSpwnPos_.x_pos = MineUtils::generateRandomDouble(-800, 800);
         ItemInfo_.ItemSpwnPos_.y_pos = MineUtils::generateRandomDouble(0.3, 100);
         ItemInfo_.ItemSpwnPos_.z_pos = MineUtils::generateRandomDouble(-800, 800);
