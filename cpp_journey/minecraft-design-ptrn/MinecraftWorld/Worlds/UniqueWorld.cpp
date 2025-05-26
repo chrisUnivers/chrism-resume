@@ -9,7 +9,7 @@
 
 BiomeTypes generate_biome(std::string biome_name);
 template<typename oI, typename oStr>
-std::unique_ptr<PureBiome> generate_plains_biome(oI instance_count, oStr bio_name);
+void generate_plains_biome(oI instance_count, oStr bio_name, std::vector<std::unique_ptr<PureBiome>> bio_vect);
 void generate_woodLands_biome(PureWorld* world, int instance_count, std::string bio_name);
 template<typename T>
 std::unique_ptr<SpawnWorld> handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new);
@@ -62,6 +62,7 @@ std::unique_ptr<SpawnWorld> handle_world_biomes(const T& attributes, std::unique
             BiomeTypes bioType = generate_biome(name_biome);
             switch(bioType) {
             case BIOME_PLAINS_BIOME: {
+                std::vector<std::unique_ptr<PureBiome>> bio_vect;
                 gen_future.push_back(std::async(generate_plains_biome<int, std::string>, num_biomes, name_biome));// generate plains biomes for world_new.
                 break;
             }
@@ -74,10 +75,13 @@ std::unique_ptr<SpawnWorld> handle_world_biomes(const T& attributes, std::unique
             }
             std::advance(this_itor, ITOR_ADVANCE);
         }
-        if (gen_future.size >= LIMIT_THREAD_USE) {
-            for (auto vec_itor = gen_future.begin(); vec_itor != gen_future.end(); vec_itor++) {
+        for (auto vec_itor = gen_future.begin(); vec_itor != gen_future.end(); ) {
+            if (vec_itor->wait_for(std::chrono::seconds(0)) == std::future_status::ready) {
                 world_new->setPlainsBiome(vec_itor->get()); // get biome create by this thread and add it to the world.
-                vec_itor = gen_future.erase(vec_itor);
+                vec_itor = gen_future.erase(vec_itor);   
+            }
+            else {
+                ++vec_itor;
             }
         }
     }
@@ -134,15 +138,13 @@ ItemNameEn generate_tree(std::string tree_name) {
  *  @attention Will modify the biome values of this object.
 */
 template<typename oI, typename oStr>
-std::unique_ptr<PureBiome> generate_plains_biome(oI instance_count, oStr bio_name) {
+void generate_plains_biome(oI instance_count, oStr bio_name, std::vector<std::unique_ptr<PureBiome>> bio_vect) {
     for (int i = 0; i < instance_count; i++) {
         std::unique_ptr<PlainsBiome> biome = std::make_unique<PlainsBiome>();
         std::unique_ptr<PureBiome> plains_biome; 
         // biome->CreateBiome("ice plains", plains_biome);
         biome->CreateBiome(bio_name, plains_biome);
-
-        // double bio_temperature = world->getWorldTemperature();
-        // std::cout << "the temperature is: " << world->getWorldTemperature() << std::endl;
+        bio_vect.push_back(plains_biome);
     }
 }
 
