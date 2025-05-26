@@ -8,7 +8,8 @@
 #include "WorldConstructors.h"
 
 BiomeTypes generate_biome(std::string biome_name);
-void generate_plains_biome(std::unique_ptr<SpawnWorld>& world, int instance_count, std::string bio_name);
+template<typename oI, typename oStr>
+void generate_plains_biome(std::unique_ptr<SpawnWorld>& world, oI instance_count, oStr bio_name);
 void generate_woodLands_biome(PureWorld* world, int instance_count, std::string bio_name);
 template<typename T>
 std::unique_ptr<SpawnWorld> handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new);
@@ -52,22 +53,36 @@ void UniqueWorld::ListWorldItems(std::unique_ptr<PureWorld>&world) const {
 template<typename T>
 std::unique_ptr<SpawnWorld> handle_world_biomes(const T& attributes, std::unique_ptr<SpawnWorld> world_new) {
 
-    for (const auto& biome: attributes.BiomesAttributes_) {
-        BiomeTypes bioType = generate_biome(biome.second); // biome.second is the name of the biome: ice spike plains.
-        int num__biomes = biome.first;
-        std::string bio__name = biome.second;
-        switch(bioType) {
-        case BIOME_PLAINS_BIOME: {
-            generate_plains_biome(world_new, num__biomes, bio__name); // generate plains biomes for world_new.
-            break;
+    std::vector<std::future<void>> gen_future; // vector of futures to generate biomes.
+    const std::vector<std::pair<int, std::string>>::iterator this_itor = attributes.BiomesAttributes_.begin();
+    const std::vector<std::pair<int, std::string>>::iterator end_itor = attributes.BiomesAttributes_.end();
+    while ((this_itor != end_itor)) {
+        if (gen_future.size <= LIMIT_THREAD_USE) {
+            int num_biomes = (*this_itor).first;
+            std::string name_biome = (*this_itor).second;
+            BiomeTypes bioType = generate_biome(name_biome);
+            switch(bioType) {
+            case BIOME_PLAINS_BIOME: {
+                gen_future.push_back(std::async(generate_plains_biome<int, std::string>, std::move(world_new), num_biomes, name_biome));// generate plains biomes for world_new.
+                break;
+            }
+            case BIOME_WOODLANDS_BIOME: {
+                // generate_woodLands_biome(world_new, num__biomes, bio__name) // generate woodLands biomes for this world.
+                break;
+            }
+            default:
+                std::cout << "New Biomes" << std::endl;
+            }
+
+            std::advance(this_itor, ITOR_ADVANCE);
         }
-        case BIOME_WOODLANDS_BIOME: {
-            // generate_woodLands_biome(world_new, num__biomes, bio__name) // generate woodLands biomes for this world.
-            break;
+        else {
+            for (auto vec_itor = gen_future.begin(); vec_itor != gen_future.end(); vec_itor++) {
+                world_new->setPlainsBiome(vec_itor->get()); // get biome create by this thread and add it to the world.
+                vec_itor = gen_future.erase(vec_itor);
+            }
         }
-        default:
-            std::cout << "New Biomes" << std::endl;
-        }
+        
     }
     return world_new;
 }
@@ -121,7 +136,8 @@ ItemNameEn generate_tree(std::string tree_name) {
 /** @param world the reference to the world passed in.
  *  @attention Will modify the biome values of this object.
 */
-void generate_plains_biome(std::unique_ptr<SpawnWorld>& world, int instance_count, std::string bio_name) {
+template<typename oI, typename oStr>
+void generate_plains_biome(std::unique_ptr<SpawnWorld>& world, oI instance_count, oStr bio_name) {
     for (int i = 0; i < instance_count; i++) {
         std::unique_ptr<PlainsBiome> biome = std::make_unique<PlainsBiome>();
         std::unique_ptr<PureBiome> plains_biome; 
