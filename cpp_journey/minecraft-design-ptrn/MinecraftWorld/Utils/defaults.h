@@ -32,6 +32,11 @@ const std::map<std::string, BiomeTypes> BIOMETYPES_MAP = {
     {"woodlands", BIOME_WOODLANDS_BIOME}
 };
 
+const std::map<std::string, ItemNameEn> TREETYPES_MAP = {
+    {"spruce", TREE_SPRUCE},
+    {"jungle",TREE_JUNGLE}
+};
+
 const std::map<FoodItems, std::string> FOODITEMSINV_MAP = {
     {FOOD_APPLE, "apple"},
     {FOOD_DIAMOND_APPLE, "diamond-apple"},

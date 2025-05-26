@@ -90,6 +90,11 @@ enum ItemNameEn {
     JUNGLE_TREE_LEAVES
 };
 
+enum MinecraftItemTypes {
+    TREE,
+    BIOME
+};
+
 
 #endif
 
