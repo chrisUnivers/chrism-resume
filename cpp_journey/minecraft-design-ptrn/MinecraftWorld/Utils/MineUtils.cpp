@@ -53,19 +53,17 @@ namespace MineUtils {
             case BIOME: {
                 if (BIOMETYPES_MAP.count(s)) {
                     type_and_name.first = s; // woodlands for example
-                } else {
-                    common_name += s;
-                    common_name += " ";
                 }
+                common_name += s;
+                common_name += " ";
                 break;
             }
             case TREE: {
                 if (TREETYPES_MAP.count(s)) {
-                    type_and_name.first = s; // woodlands for example
-                } else {
-                    common_name += s;
-                    common_name += " ";
+                    type_and_name.first = s;
                 }
+                common_name += s;
+                common_name += " ";
                 // woodlands for example
                 break;
             }
