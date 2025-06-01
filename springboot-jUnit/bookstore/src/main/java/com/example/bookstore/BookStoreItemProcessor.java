@@ -4,8 +4,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
 
 import org.springframework.batch.item.ItemProcessor;
 
@@ -13,11 +13,21 @@ public class BookStoreItemProcessor implements ItemProcessor<BookStore, BookStor
     
     @Override
     public BookStore process(final BookStore bookStore) {
-        List<TheBook> approvedBooks;
-        
-        
-        final BookStore updatedBookStore = new BookStore(bookStore.bookStoreName(), bookStore.address(), bookStore.bookStoreId(), bookStore.bookCollection()); // Need to update the book store collection first by reading the submitted-books-csv file.
-        
+        List<TheBook> approvedBooks = findSubmittedBooks("process-in-txt", bookStore.bksId());
+        String nwCollection = "";
+
+        for (TheBook book : approvedBooks) {
+            String strScore = String.valueOf(book.score());
+            
+            nwCollection += "(" + book.title() + ", " + book.authFirstName() + ", " + book.authLasName() + ", " + book.releaseDate() + ", " + strScore +"), ";
+        }
+        final String updatedCollection = nwCollection + bookStore.bksCollection();
+
+        String sameName    = bookStore.bksName();
+        String sameAddress = bookStore.bksAddress();
+        String sameId      = bookStore.bksId();
+        final BookStore updatedBookStore = new BookStore(sameName, sameAddress, sameId, updatedCollection);
+
         return updatedBookStore;
     }
 
@@ -44,18 +54,20 @@ public class BookStoreItemProcessor implements ItemProcessor<BookStore, BookStor
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file_to_use));
             String line = reader.readLine();
+            
             while (line != null) {
                 BookInfoUtils rawBookInfo = new BookInfoUtils(line);
-                
                 String[] bookStoreIds = rawBookInfo.returnBookIds();
                 
                 for (String bookStoreId: bookStoreIds) {
-                    if ((bookStoreId.equals(uniqueId))) {
+                    if ((bookStoreId.equals(uniqueId))) { // each book migh have submitted to multiple book stores. This pre-processing can be fixed with improved input, however, plan on using it for unit tests.
                         TheBook nBook = new TheBook(rawBookInfo.getTitle(), rawBookInfo.getFirstName(), rawBookInfo.getLastName(), rawBookInfo.getReleaseDate(), "", rawBookInfo.getBookReviewScore(), "");
                         rnBookList.add(nBook);
                     }
                 }
+                line = reader.readLine();
             }
+            reader.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

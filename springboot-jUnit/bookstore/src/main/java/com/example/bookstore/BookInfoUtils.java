@@ -7,14 +7,14 @@ public class BookInfoUtils {
 
     BookInfoUtils() {
         this("no-info");
+        this.bookInfo_ = removeCommas();
+        this.infoInit_ = 1;
     }
     BookInfoUtils(String bInfo) {
         this.bookInfo_ = bInfo;
     }
 
     public String[] returnBookIds() {
-        
-        initInfo();
         String[] rtIds = this.bookInfo_.split(" ");
         // rtIds[5] = SubmittedTo:BookstoreFourId-BookstoreFiveId
         rtIds = rtIds[5].split(":")[1].split("-");
@@ -30,33 +30,27 @@ public class BookInfoUtils {
     }
 
     public String getTitle() {
-        initInfo();
         return this.bookInfo_.split(" ")[0];
     }
 
     public String getFirstName() {
-        initInfo();
         return this.bookInfo_.split(" ")[1];
     }
 
     public String getLastName() {
-        initInfo();
         return this.bookInfo_.split(" ")[2];
     }
 
     public double getBookReviewScore() {
-        initInfo();
         float score = Float.parseFloat(this.bookInfo_.split(" ")[6].split(":")[1]);
         return (double)score;
     }
 
     public String getReleaseDate() {
-        initInfo();
         return this.bookInfo_.split(" ")[3];
     }
 
     private String removeCommas() {
-        initInfo();
         String[] pLine = this.bookInfo_.split(" ");
         String rnLine = "";
         int pIndex = 0;
