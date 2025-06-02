@@ -23,7 +23,7 @@ public class BookStoreItemProcessor implements ItemProcessor<BookStore, BookStor
             nwCollection += "(" + book.title() + ", " + book.authFirstName() + ", " + book.authLasName() + ", " + book.releaseDate() + ", " + strScore +"), ";
         }
 
-        String writeStr = bookStore.bksCollection() + nwCollection;
+        String writeStr = bookStore.bksCollection() + nwCollection + "\n";
         final String updatedCollection = bookStore.bksCollection() + nwCollection;
 
 

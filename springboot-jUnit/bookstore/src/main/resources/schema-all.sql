@@ -1,9 +1,0 @@
-DROP TABLE bookstores IF EXISTS
-
-CREATE TABLE bookstores (
-    bks_unique_id BIGINT IDENTITY NOT NULL PRIMARY KEY,
-    bks_name VARCHAR(30),
-    bks_id VARCHAR(140),
-    bks_address VARCHAR(80),
-    bks_collection VARCHAR(300)
-);
