@@ -27,17 +27,18 @@ public class BookStoreItemProcessor implements ItemProcessor<BookStore, BookStor
         final String updatedCollection = bookStore.bksCollection() + nwCollection;
 
 
-        // try {
-        //     BufferedWriter writer = new BufferedWriter(new FileWriter("newCollection.txt", true));
-        //     writer.write(writeStr);
-        //     writer.close();
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+         try {
+             BufferedWriter writer = new BufferedWriter(new FileWriter("newCollection.txt", true));
+             writer.write(writeStr);
+             writer.close();
+         } catch (IOException e) {
+             e.printStackTrace();
+         }
 
-        String sameName    = bookStore.bksName();
-        String sameAddress = bookStore.bksAddress();
-        String sameId      = bookStore.bksId();
+        final String sameName    = bookStore.bksName().toUpperCase();
+        final String sameAddress = bookStore.bksAddress().toUpperCase();
+        final String sameId      = bookStore.bksId().toUpperCase();
+
         final BookStore updatedBookStore = new BookStore(sameName, sameAddress, sameId, updatedCollection);
 
         return updatedBookStore;
@@ -62,7 +63,7 @@ public class BookStoreItemProcessor implements ItemProcessor<BookStore, BookStor
      */
     List<TheBook> findSubmittedBooks(String file_to_use, String uniqueId) {
 
-        List<TheBook> rnBookList = new ArrayList<TheBook>();
+        List<TheBook> rnBookList = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file_to_use));
             String line = reader.readLine();

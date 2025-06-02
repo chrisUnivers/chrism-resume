@@ -5,6 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class BookStoreItemProcessor implements ItemProcessor<BookStore, BookStor
     
     @Override
     public BookStore process(final BookStore bookStore) {
+        
         List<TheBook> approvedBooks = findSubmittedBooks("submitted-books.csv", bookStore.bksId());
         String nwCollection = "";
 
@@ -27,18 +29,19 @@ public class BookStoreItemProcessor implements ItemProcessor<BookStore, BookStor
         final String updatedCollection = bookStore.bksCollection() + nwCollection;
         
 
-        // try {
-        //     BufferedWriter writer = new BufferedWriter(new FileWriter("newCollection.txt", true));
-        //     writer.write(writeStr);
-        //     writer.close();
-        // } catch (IOException e) {
-        //     e.printStackTrace();
-        // }
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("newCollection.txt", true));
+            writer.write(writeStr);
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        String sameName    = bookStore.bksName();
-        String sameAddress = bookStore.bksAddress();
-        String sameId      = bookStore.bksId();
-        final BookStore updatedBookStore = new BookStore(sameName, sameAddress, sameId, updatedCollection);
+        final String sameName    = bookStore.bksName().toUpperCase();
+        final String sameAddress = bookStore.bksAddress().toUpperCase();
+        final String sameId      = bookStore.bksId().toUpperCase();
+        // final String updatedCollection = bookStore.bksCollection().toUpperCase();
+        final BookStore updatedBookStore = new BookStore(sameName, sameId, sameAddress, updatedCollection);
 
         return updatedBookStore;
     }

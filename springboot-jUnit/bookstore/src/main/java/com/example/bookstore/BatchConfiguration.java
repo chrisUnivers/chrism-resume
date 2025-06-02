@@ -21,30 +21,19 @@ public class BatchConfiguration {
     
     @Bean
     public FlatFileItemReader<BookStore> reader() {
-        // FlatFileItemReader<BookStore> rtnFile = 
-        // return rtnFile;
-        return new FlatFileItemReaderBuilder<BookStore>()
-            .name("bookstoreItemReader")
-            .resource(new ClassPathResource("bookstore-data.csv"))
-            .delimited()
-            .names("bksName", "bksAddress", "bksId", "bksCollection")
-            .targetType(BookStore.class)
-            .build();
+        return new FlatFileItemReaderBuilder<BookStore>().name("bookstoreItemReader").resource(new ClassPathResource("bookstore-data.csv")).delimited().names("bksName", "bksId", "bksAddress", "bksCollection").targetType(BookStore.class).build();
     }
 
     @Bean
     public BookStoreItemProcessor processor() {
-        // BookStoreItemProcessor proc = new BookStoreItemProcessor();
         return new BookStoreItemProcessor();
     }
 
     @Bean
     public JdbcBatchItemWriter<BookStore> writer(DataSource dataSource) {
-
-        // JdbcBatchItemWriter<BookStore> dbSource = 
-        
+        // bksName bksAddress
         return new JdbcBatchItemWriterBuilder<BookStore>()
-            .sql("INSERT INTO bookstores (bks_name, bks_address, bks_id, bks_collection) VALUES (:bksName, :bksAddress, :bksId, :bksCollection)")
+            .sql("INSERT INTO bookstores (bks_name, bks_id, bks_address, bks_collection) VALUES (:bksName, :bksId, :bksAddress, :bksCollection)")
             .dataSource(dataSource)
             .beanMapped()
             .build();

@@ -26,7 +26,7 @@ public class JobCompletionNotificationListener implements JobExecutionListener{
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
             jdbcTemplate
                     .query("SELECT bks_name, bks_address, bks_id, bks_collection FROM bookstores", new DataClassRowMapper<>(BookStore.class))
-                    .forEach(bookstore -> log.info("database book: .", bookstore));
+                    .forEach(bookstore -> log.info("database book: {}.", bookstore));
         } // bks_name bks_address bks_id bks_collection
     }
 }

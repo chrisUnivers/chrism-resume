@@ -12,6 +12,8 @@ public class BookInfoUtils {
     }
     BookInfoUtils(String bInfo) {
         this.bookInfo_ = bInfo;
+        this.bookInfo_ = removeCommas();
+        this.infoInit_ = 1;
     }
 
     public String[] returnBookStoreIds() {
@@ -42,7 +44,7 @@ public class BookInfoUtils {
     }
 
     public double getBookReviewScore() {
-        float score = Float.parseFloat(this.bookInfo_.split(" ")[6].split(":")[1]);
+        double score = Double.parseDouble(this.bookInfo_.split(" ")[6].split(":")[1]);
         return (double)score;
     }
 
