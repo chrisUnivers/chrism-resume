@@ -1,4 +1,4 @@
-package com.example.bookstore;
+package com.example.bookstore_intellij;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JobCompletionNotificationListener implements JobExecutionListener{
-    
+
     private static final Logger log = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
 
-    
+
     private final JdbcTemplate jdbcTemplate;
 
     public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
@@ -25,8 +25,8 @@ public class JobCompletionNotificationListener implements JobExecutionListener{
     public void afterJob(JobExecution jobExecution) {
         if (jobExecution.getStatus() == BatchStatus.COMPLETED) {
             jdbcTemplate
-					.query("SELECT bks_name, bks_address, bks_id, bks_collection FROM bookstores", new DataClassRowMapper<>(BookStore.class))
-					.forEach(bookstore -> log.info("database book: .", bookstore));
+                    .query("SELECT bks_name, bks_address, bks_id, bks_collection FROM bookstores", new DataClassRowMapper<>(BookStore.class))
+                    .forEach(bookstore -> log.info("database book: .", bookstore));
         } // bks_name bks_address bks_id bks_collection
     }
 }

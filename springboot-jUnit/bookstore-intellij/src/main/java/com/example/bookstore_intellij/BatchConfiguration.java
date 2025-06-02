@@ -1,4 +1,4 @@
-package com.example.bookstore;
+package com.example.bookstore_intellij;
 
 import javax.sql.DataSource;
 
@@ -18,51 +18,45 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 @Configuration
 public class BatchConfiguration {
-    
+
     @Bean
     public FlatFileItemReader<BookStore> reader() {
-        // FlatFileItemReader<BookStore> rtnFile = 
-        // return rtnFile;
         return new FlatFileItemReaderBuilder<BookStore>()
-            .name("bookstoreItemReader")
-            .resource(new ClassPathResource("bookstore-data.csv"))
-            .delimited()
-            .names("bksName", "bksAddress", "bksId", "bksCollection")
-            .targetType(BookStore.class)
-            .build();
+                .name("bookstoreItemReader")
+                .resource(new ClassPathResource("bookstore-data.csv"))
+                .delimited()
+                .names("bksName", "bksAddress", "bksId", "bksCollection")
+                .targetType(BookStore.class)
+                .build();
     }
 
     @Bean
     public BookStoreItemProcessor processor() {
-        // BookStoreItemProcessor proc = new BookStoreItemProcessor();
         return new BookStoreItemProcessor();
     }
 
     @Bean
     public JdbcBatchItemWriter<BookStore> writer(DataSource dataSource) {
-
-        // JdbcBatchItemWriter<BookStore> dbSource = 
-        
         return new JdbcBatchItemWriterBuilder<BookStore>()
-            .sql("INSERT INTO bookstores (bks_name, bks_address, bks_id, bks_collection) VALUES (:bksName, :bksAddress, :bksId, :bksCollection)")
-            .dataSource(dataSource)
-            .beanMapped()
-            .build();
+                .sql("INSERT INTO bookstores (bks_name, bks_address, bks_id, bks_collection) VALUES (:bksName, :bksAddress, :bksId, :bksCollection)")
+                .dataSource(dataSource)
+                .beanMapped()
+                .build();
     }
-    
+
     @Bean
     public Job importBookStoreJob(JobRepository jobRepository, Step step1, JobCompletionNotificationListener listener) {
         return new JobBuilder("importBookStoreJob", jobRepository).listener(listener).start(step1)
-        .build();
+                .build();
     }
 
     @Bean
     public Step step1(JobRepository jobRepository, DataSourceTransactionManager transactionManager, FlatFileItemReader<BookStore> reader, BookStoreItemProcessor processor, JdbcBatchItemWriter<BookStore> writer) {
         return new StepBuilder("step1", jobRepository)
-            .<BookStore, BookStore>chunk(3, transactionManager)
-            .reader(reader)
-            .processor(processor)
-            .writer(writer)
-            .build();
+                .<BookStore, BookStore>chunk(3, transactionManager)
+                .reader(reader)
+                .processor(processor)
+                .writer(writer)
+                .build();
     }
 }

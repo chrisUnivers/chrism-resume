@@ -1,7 +1,7 @@
-package com.example.bookstore;
+package com.example.bookstore_intellij;
 
 public class BookInfoUtils {
-    
+
     protected String bookInfo_;
     protected int infoInit_ = 0;
 
@@ -18,7 +18,7 @@ public class BookInfoUtils {
         String[] rtIds = this.bookInfo_.split(" ");
         // rtIds[5] = SubmittedTo:BookstoreFourId-BookstoreFiveId
         rtIds = rtIds[5].split(":")[1].split("-");
-        
+
         return rtIds;
     }
 
@@ -26,7 +26,7 @@ public class BookInfoUtils {
         if (infoInit_ != 1) {
             this.bookInfo_ = removeCommas();
             this.infoInit_ = 1;
-        }        
+        }
     }
 
     public String getTitle() {
