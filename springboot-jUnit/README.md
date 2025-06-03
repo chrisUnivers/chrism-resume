@@ -4,7 +4,7 @@
 ## Projects
   * **Intellij-BookStore**
     + The bookstore project is a spingboot project that processes input data of a book and writes them to an sql database.
-    + It was setup using the spring init tool since intellij does not have an extension for this.
+    + It was set up using the spring init tool since intellij does not have an extension for this.
 
 ## BookStore Project design decisions:
   * The output goes to the file `/bookstore-intellij/newCollection.txt`. This is nice since I can easily inspect it instead of using the console.

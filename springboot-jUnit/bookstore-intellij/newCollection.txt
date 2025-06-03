@@ -1,3 +1,18 @@
-bookOne-bookTwo-bookThree(My_Book_Title, Emily, Findstone, June-08-2016, 8.1), 
-bookFive-bookThree-bookFour(My_Book_Title, Emily, Findstone, June-08-2016, 8.1), 
-bookSix-bookSeven-bookOne(Service, Emily, Stance, Aug-08-2013, 8.3), 
+bookOne-bookTwo-bookThree(My_Book_Title, Emily, Findstone, June-08-2016, 8.1),(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookFive-bookThree-bookFour(My_Book_Title, Emily, Findstone, June-08-2016, 8.1)
+bookSix-bookSeven-bookOne(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookOne-bookTwo-bookThree(My_Book_Title, Emily, Findstone, June-08-2016, 8.1),(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookFive-bookThree-bookFour(My_Book_Title, Emily, Findstone, June-08-2016, 8.1)
+bookSix-bookSeven-bookOne(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookOne-bookTwo-bookThree(My_Book_Title, Emily, Findstone, June-08-2016, 8.1),(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookFive-bookThree-bookFour(My_Book_Title, Emily, Findstone, June-08-2016, 8.1)
+bookSix-bookSeven-bookOne(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookOne-bookTwo-bookThree(My_Book_Title, Emily, Findstone, June-08-2016, 8.1),(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookFive-bookThree-bookFour(My_Book_Title, Emily, Findstone, June-08-2016, 8.1)
+bookSix-bookSeven-bookOne(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookOne-bookTwo-bookThree(My_Book_Title, Emily, Findstone, June-08-2016, 8.1),(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookFive-bookThree-bookFour(My_Book_Title, Emily, Findstone, June-08-2016, 8.1)
+bookSix-bookSeven-bookOne(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookOne-bookTwo-bookThree(My_Book_Title, Emily, Findstone, June-08-2016, 8.1),(Service, Emily, Stance, Aug-08-2013, 8.3)
+bookFive-bookThree-bookFour(My_Book_Title, Emily, Findstone, June-08-2016, 8.1)
+bookSix-bookSeven-bookOne(Service, Emily, Stance, Aug-08-2013, 8.3)

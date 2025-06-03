@@ -1,12 +1,16 @@
 package com.example.bookstore_intellij;
 
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.List;
+
+
 
 import org.springframework.batch.item.ItemProcessor;
 
@@ -15,16 +19,22 @@ public class BookStoreItemProcessor implements ItemProcessor<BookStore, BookStor
     @Override
     public BookStore process(final BookStore bookStore) {
         List<TheBook> approvedBooks = findSubmittedBooks("submitted-books.csv", bookStore.bksId());
-        String nwCollection = "";
+        StringBuilder nwCollectionSb = new StringBuilder();
+        Formatter sbFormat = new Formatter(nwCollectionSb);
 
+        UtilsConstants constUtils = new UtilsConstants();
         for (TheBook book : approvedBooks) {
             String strScore = String.valueOf(book.score());
 
-            nwCollection += "(" + book.title() + ", " + book.authFirstName() + ", " + book.authLasName() + ", " + book.releaseDate() + ", " + strScore +"), ";
+            if (!book.equals(approvedBooks.get(approvedBooks.size() - 1))) {
+                sbFormat.format(constUtils.NW_BOOK_COLLECTION, book.title(), book.authFirstName(), book.authLastName(), book.releaseDate(), strScore);
+            } else {
+                sbFormat.format(constUtils.NW_BOOK_COLLECTION_END, book.title(), book.authFirstName(), book.authLastName(), book.releaseDate(), strScore);
+            }
         }
 
-        String writeStr = bookStore.bksCollection() + nwCollection + "\n";
-        final String updatedCollection = bookStore.bksCollection() + nwCollection;
+        String writeStr = bookStore.bksCollection() + nwCollectionSb.toString();
+        final String updatedCollection = bookStore.bksCollection() + nwCollectionSb.toString();
 
 
          try {
