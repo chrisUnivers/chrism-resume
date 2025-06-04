@@ -17,7 +17,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
 
-
+import static com.example.bookstore_intellij.TestUtils.*;
 
 @SpringBootTest
 @SpringBatchTest
@@ -40,16 +40,20 @@ class BookstoreIntellijApplicationTests {
 
 	@Test
 	public void testUpdateDatabaseFromSubmittedFile(@Autowired Job job) throws Exception {
+
 		this.jobLauncherTestUtils.setJob(job);
-//		this.jdbcTemplate.query("SELECT bks_name, bks_address, bks_id, bks_collection FROM bookstores", new DataClassRowMapper<>(BookStore.class)).forEach(bookstore -> log.info("Test bookstores: <{}>", bookstore));
 
-		String sqlStr = "SELECT bks_name, bks_address, bks_id, bks_collection FROM bookstores WHERE bks_id = 'IDONE'";
+		// is idOne and idTwo in the database?
+		int count_rtn_two = this.jdbcTemplate.query(SQL_TWO_BKS_IDS, new DataClassRowMapper<>(BookStore.class), ID_ONE, ID_TWO).size();
 
-		int count_sz = this.jdbcTemplate.query(sqlStr, new DataClassRowMapper<>(BookStore.class)).size();
+		int fls_rst = this.jdbcTemplate.query(SQL_ONE_BKS_ID, new DataClassRowMapper<>(BookStore.class), NOT_ID).size();
 
+		int findstoneStance_rst = this.jdbcTemplate.query(SQL_FINDSTONE_STANCE, new DataClassRowMapper<>(BookStore.class), INPUT_FINDSTONE_STANCE).size();
 
+		Assertions.assertEquals(2, count_rtn_two);
+		Assertions.assertEquals(1, findstoneStance_rst);
+		Assertions.assertEquals(1, fls_rst);
 		JobExecution jobExecution = this.jobLauncherTestUtils.launchJob();
 
-		Assertions.assertEquals(1, count_sz);
 	}
 }
