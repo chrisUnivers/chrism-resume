@@ -1,10 +1,11 @@
 ## Info for this repository
   * This will repository will contain my projects springboot projects and projects that use jUnit for unit testing.
-
 ## Projects
   * **Intellij-BookStore**
     + The bookstore project is a spingboot project that processes input data of a book and writes them to an sql database.
     + It was set up using the spring init tool since intellij does not have an extension for this.
+  * **Webflux-batch-bookstore**
+    + This project is a springboot webflux project. I intend on using it to handle POST requests which submit a new book to a bookstore. This request updates the `submitted-books.csv` file in the `bookstore-intellij` project. Then launch the batch job created in the `Bookstore-Intellij` project which updates the database.
 
 ## BookStore Project design decisions:
   * The output goes to the file `/bookstore-intellij/newCollection.txt`. This is nice since I can easily inspect it instead of using the console.
