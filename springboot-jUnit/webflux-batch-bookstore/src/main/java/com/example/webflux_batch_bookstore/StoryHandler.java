@@ -34,7 +34,6 @@ public class StoryHandler {
     public Mono<ServerResponse> bkBatchJob(ServerRequest request) {
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder().addString("JobID", String.valueOf(System.currentTimeMillis()));
         JobParameters params = jobParametersBuilder.toJobParameters();
-        // My_Book_Title, Emily, Findstone, June-08-2016, FoundIN:BookstoreOneId-BookStoreTwoId-BookstoreThreeId, SubmittedTo:idOne-idTwo, revScore:8.1
 
         Mono<TheBook> reqString = request.bodyToMono(TheBook.class);
         try {
