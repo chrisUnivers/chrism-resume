@@ -35,12 +35,12 @@ public class StoryHandler {
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder().addString("JobID", String.valueOf(System.currentTimeMillis()));
         JobParameters params = jobParametersBuilder.toJobParameters();
         // My_Book_Title, Emily, Findstone, June-08-2016, FoundIN:BookstoreOneId-BookStoreTwoId-BookstoreThreeId, SubmittedTo:idOne-idTwo, revScore:8.1
-        String bookWebSubmit = request.pathVariable("newBook");
+        String bookWebSubmit = "\n" + request.pathVariable("newBook");
 
         try {
-//            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_FOR_SUBMITTED_BOOKS, true));
-//            writer.write(bookWebSubmit);
-//            writer.close();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_FOR_SUBMITTED_BOOKS, true));
+            writer.write(bookWebSubmit);
+            writer.close();
 
             JobExecution jobExecution = jobLauncher.run(this.importBookStoreJob, params);
             return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(new Story("New book is: " + bookWebSubmit)));

@@ -6,7 +6,7 @@
     + It was set up using the spring init tool since intellij does not have an extension for this.
   * **Webflux-batch-bookstore**
     + This project is a springboot webflux project. I intend on using it to handle POST requests which submit a new book to a bookstore. This request updates the `submitted-books.csv` file in the `bookstore-intellij` project. Then launch the batch job created in the `Bookstore-Intellij` project which updates the database.
-
+    + Application basically works. However, currently what should be a POST request is handled as a GET request due to difficulty handling POST request with `RouterFunctions` from `spring reactive web`. Thus, I'm changing the project to a `spring web` project since I already know how to use it. I only wanted to use spring reactive/webflux for learning purposes.
 ## BookStore Project design decisions:
   * The output goes to the file `/bookstore-intellij/newCollection.txt`. This is nice since I can easily inspect it instead of using the console.
   * Decided to go with the simple case, where I assume that the file `./bookstore/submitted-books.csv` is formatted and thus can use predefined indices. This is bad design because there's no reason to assume that. However, it's simple to implement and thus focus on implementing a batch processor.
