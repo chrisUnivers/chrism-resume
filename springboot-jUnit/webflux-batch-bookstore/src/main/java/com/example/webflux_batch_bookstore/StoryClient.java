@@ -15,6 +15,9 @@ public class StoryClient {
     }
 
     public Mono<String> getStory() {
+
         return this.client.get().uri("/story").accept(MediaType.APPLICATION_JSON).retrieve().bodyToMono(Story.class).map(Story::getBkStory);
     }
+
+
 }

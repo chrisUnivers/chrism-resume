@@ -15,7 +15,7 @@ public class StoryRouter {
 
     @Bean
     public RouterFunction<ServerResponse> route(StoryHandler storyHandler) {
-        RouterFunction<ServerResponse> route = RouterFunctions.route().GET("/story", accept(MediaType.APPLICATION_JSON), storyHandler::bkChapt).GET("/story/batch", accept(MediaType.APPLICATION_JSON), storyHandler::bkBatchJob).build();
+        RouterFunction<ServerResponse> route = RouterFunctions.route().GET("/story", accept(MediaType.APPLICATION_JSON), storyHandler::bkChapt).build();
         return route;
     }
 }

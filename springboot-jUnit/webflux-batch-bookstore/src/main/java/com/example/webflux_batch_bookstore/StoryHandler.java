@@ -14,6 +14,11 @@ import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import static com.example.webflux_batch_bookstore.UtilsConstants.*;
+
 @Component
 public class StoryHandler {
     @Autowired
@@ -29,12 +34,20 @@ public class StoryHandler {
     public Mono<ServerResponse> bkBatchJob(ServerRequest request) {
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder().addString("JobID", String.valueOf(System.currentTimeMillis()));
         JobParameters params = jobParametersBuilder.toJobParameters();
+        // My_Book_Title, Emily, Findstone, June-08-2016, FoundIN:BookstoreOneId-BookStoreTwoId-BookstoreThreeId, SubmittedTo:idOne-idTwo, revScore:8.1
+        String bookWebSubmit = request.pathVariable("newBook");
+
         try {
+//            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_FOR_SUBMITTED_BOOKS, true));
+//            writer.write(bookWebSubmit);
+//            writer.close();
+
             JobExecution jobExecution = jobLauncher.run(this.importBookStoreJob, params);
-            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(new Story("Job, JobExecution ID: " + jobExecution.getId() + " is possibly running!")));
+            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(new Story("New book is: " + bookWebSubmit)));
 
         } catch (Exception e) {
             return ServerResponse.badRequest().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(new Story("bad request" + e.getMessage())));
         }
     }
 }
+
