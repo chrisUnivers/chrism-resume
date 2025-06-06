@@ -35,13 +35,29 @@ public class StoryHandler {
         JobParametersBuilder jobParametersBuilder = new JobParametersBuilder().addString("JobID", String.valueOf(System.currentTimeMillis()));
         JobParameters params = jobParametersBuilder.toJobParameters();
 
-        Mono<TheBook> reqString = request.bodyToMono(TheBook.class);
+        Mono<TheBook> reqEntry = request.bodyToMono(TheBook.class);
         try {
-//            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_FOR_SUBMITTED_BOOKS, true));
-//            writer.write(bookWebSubmit);
-//            writer.close();
-            JobExecution jobExecution = jobLauncher.run(this.importBookStoreJob, params);
-            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(new Story("New book is being created")));
+            reqEntry.flatMap(book -> {
+                try {
+                    BufferedWriter nwWriter = new BufferedWriter(new FileWriter(FILE_FOR_SUBMITTED_BOOKS));
+                    String approveEntry = book.title() + book.authFirstName() + book.authLastName();
+                    nwWriter.write(approveEntry);
+                    nwWriter.close();
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+                return Mono.empty();
+            });
+//            JobExecution jobExecution = jobLauncher.run(this.importBookStoreJob, params);
+            try {
+                BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_NOW_SUBMITTED_BOOKS));
+                String approveEntry = "Good Morning\nbook.title() + book.authFirstName() + book.authLastName()\nGood Morning";
+                writer.write(approveEntry);
+                writer.close();
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            return ServerResponse.ok().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(new Story("New book to be read!")));
 
         } catch (Exception e) {
             return ServerResponse.badRequest().contentType(MediaType.APPLICATION_JSON).body(BodyInserters.fromValue(new Story("bad request" + e.getMessage())));
