@@ -6,7 +6,7 @@
     + It was set up using the spring init tool since intellij does not have an extension for this.
   * **Webflux-batch-bookstore**
     + This project is a springboot webflux project. I intend on using it to handle POST requests which submit a new book to a bookstore. This request updates the `submitted-books.csv` file in the `bookstore-intellij` project. Then launch the batch job created in the `Bookstore-Intellij` project which updates the database.
-
+    + This project is effectively done. The only issue left is processing http POST requests as MONO objects in the method `bkBatchJob` in the file `StoryHandlr.java`. The project was intended to be an extention to the `bookstore-intellij` project which creates a spring batch job and implements a few end-to-end test using Junit. Currently workin on a new frontend project using aws and nextjs.
 ## BookStore Project design decisions:
   * The output goes to the file `/bookstore-intellij/newCollection.txt`. This is nice since I can easily inspect it instead of using the console.
   * Decided to go with the simple case, where I assume that the file `./bookstore/submitted-books.csv` is formatted and thus can use predefined indices. This is bad design because there's no reason to assume that. However, it's simple to implement and thus focus on implementing a batch processor.
