@@ -26,7 +26,6 @@ const customBaseQuery = async (
     }
 };
 
-
 export const api = createApi({
     baseQuery: customBaseQuery,
     reducerPath: "api",
@@ -36,7 +35,7 @@ export const api = createApi({
             query: ({ vibe }) => ({
                 url: "showcases",
                 params: { vibe }
-            }),
+            }), // vibe: sculpture showcase, paintings showcase, techno showcase
             providesTags: ["Showcases"],
         }),
         getShowcase: build.query<Showcase, string>({
