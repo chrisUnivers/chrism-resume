@@ -1,8 +1,9 @@
-import express, { Request, Response } from "express";
+import express from "express";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
 import * as dynamoose from "dynamoose";
 import cors from "cors"
+import showcaseRoutes from "./routes/showcaseRoutes";
 
 
 dotenv.config()
@@ -14,17 +15,17 @@ app.use(cors());
 
 const isProduction = process.env.NODE_ENV === "production";
 
-
 if (!isProduction) {
-  dynamoose.aws.ddb.local()
+  dynamoose.aws.ddb.local();
 }
-
 
 app.get("/", (req, res) => {
   res.send("This is home route");
 });
 
-const port =  process.env.PORT || 3000;
+app.use("/showcases", showcaseRoutes)
+
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

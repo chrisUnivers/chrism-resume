@@ -1,4 +1,4 @@
- import { model, Schema } from "dynamoose";
+import { model, Schema } from "dynamoose";
 
 
 const showcaseSchema = new Schema ({
@@ -10,7 +10,7 @@ const showcaseSchema = new Schema ({
         type: String,
         required: true,
     },
-    artDescription: {
+    description: {
         type: String,
         required: true,
     },
@@ -23,7 +23,7 @@ const showcaseSchema = new Schema ({
         type: String,
         required: true,
     },
-    artImage: {
+    image: {
         type: String,
         required: true,
     },
@@ -35,7 +35,11 @@ const showcaseSchema = new Schema ({
         type: String,
         required: true,
         enum: ["Upcoming", "Open", "Closed"],
-    }
+    },
+    vibe: {
+        type: String,
+        required: true,
+    },
 });
 
 const gallerySchema = new Schema({
@@ -60,5 +64,5 @@ const gallerySchema = new Schema({
   }
 );
 
-const GalleryEvent = model("GalleryEvent", gallerySchema);
-export default GalleryEvent;
+const GalleryModel = model("GalleryEvent", gallerySchema);
+export default GalleryModel;
