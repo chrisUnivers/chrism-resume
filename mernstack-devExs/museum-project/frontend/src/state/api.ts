@@ -1,5 +1,16 @@
+
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { BaseQueryApi, FetchArgs } from "@reduxjs/toolkit/query";
+import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
+
+export interface User {
+  userId: string;
+  username: string;
+  email: string;
+  profilePictureUrl?: string;
+  cognitoId?: string;
+}
+
 
 const customBaseQuery = async (
     args: string | FetchArgs,
@@ -31,6 +42,25 @@ export const api = createApi({
     reducerPath: "api",
     tagTypes: ["Showcases"],
     endpoints: (build) => ({
+        getAuthUser: build.query({
+            queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
+                try {
+                    const user = await getCurrentUser();
+                    const session = await fetchAuthSession();
+                    if (!session) throw new Error("No session found");
+                    const { userSub } = session;
+                    const { accessToken } = session.tokens ?? {};
+                    
+                    const userDetailsResponse = await fetchWithBQ(`users/${userSub}`);
+                    const userDetails = userDetailsResponse.data as User;
+
+                    return { data: { user, userSub, userDetails } };
+                } catch (error: any) {
+                    return { error: error.message || "Could not retrieve user data" };
+                }
+            },
+        }),
+        
         getShowcases: build.query<Showcase[], { vibe?: string }>({
             query: ({ vibe }) => ({
                 url: "showcases",
@@ -38,11 +68,26 @@ export const api = createApi({
             }), // vibe: sculpture showcase, paintings showcase, techno showcase
             providesTags: ["Showcases"],
         }),
+
         getShowcase: build.query<Showcase, string>({
             query: (id) => `showcases/${id}`,
             providesTags: (result, error, id) => [{ type: "Showcases", id}],
+        }),
+
+        createShowcase: build.mutation<Showcase, {artistId: string, artistName: string}>({
+            query: (body) => ({
+                url: `showcases`,
+                method: "POST",
+                body,
+            }),
+            invalidatesTags: ["Showcases"],
         })
     }),
 });
 
-export const { useGetShowcasesQuery, useGetShowcaseQuery } = api;
+export const { 
+    useGetShowcasesQuery, 
+    useGetShowcaseQuery,
+    useCreateShowcaseMutation,
+    useGetAuthUserQuery
+} = api;

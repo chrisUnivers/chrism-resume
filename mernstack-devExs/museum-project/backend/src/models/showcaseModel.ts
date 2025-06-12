@@ -40,7 +40,10 @@ const showcaseSchema = new Schema ({
         type: String,
         required: true,
     },
-});
+},{
+    timestamps: true,
+  }
+);
 
 const gallerySchema = new Schema({
     galaId: {
@@ -64,5 +67,5 @@ const gallerySchema = new Schema({
   }
 );
 
-const GalleryModel = model("GalleryEvent", gallerySchema);
-export default GalleryModel;
+const ShowcaseModel = model("Showcase", showcaseSchema);
+export default ShowcaseModel;
