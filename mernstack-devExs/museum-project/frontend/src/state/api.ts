@@ -61,11 +61,8 @@ export const api = createApi({
             },
         }),
         
-        getShowcases: build.query<Showcase[], { vibe?: string }>({
-            query: ({ vibe }) => ({
-                url: "showcases",
-                params: { vibe }
-            }), // vibe: sculpture showcase, paintings showcase, techno showcase
+        getShowcases: build.query<Showcase[], void>({
+            query: () => "showcases", 
             providesTags: ["Showcases"],
         }),
 

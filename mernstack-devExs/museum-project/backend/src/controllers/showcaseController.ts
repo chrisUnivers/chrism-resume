@@ -46,8 +46,8 @@ export const createShowcase = async( req: Request, res: Response): Promise<void>
         await newShowcase.save();
 
         res.json({message: "Showcase retrived successfully", data: newShowcase })
-    } catch (error) {
-        res.status(500).json({ message: "Problem creating showcase", error});
+    } catch (error: any) {
+        res.status(500).json({ message: `Problem creating showcase: ${error.message}`});
     }
 };
 
@@ -60,11 +60,9 @@ export const updateShowcase = async( req: Request, res: Response): Promise<void>
             res.status(404).json({ message: "Showcase not found. Check provided infromation"});
             return;
         }
-
         
         res.json({message: "Showcase updated successfully" })
-    } catch (error) {
-        res.status(500).json({ message: "Problem creating showcase", error});
+    } catch (error: any) {
+        res.status(500).json({ message: `Problem updating showcase: ${error.message}`});
     }
-    
 };

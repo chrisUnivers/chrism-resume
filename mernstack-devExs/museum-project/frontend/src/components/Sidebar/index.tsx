@@ -3,20 +3,23 @@
 
 import React, { useState } from 'react'
 import Image from 'next/image';
-import { FaArchway, FaCity, FaGear, FaLock, FaX } from 'react-icons/fa6';
+import { FaArchway, FaCity, FaGear, FaLock, FaShieldHeart, FaX } from 'react-icons/fa6';
 import { IconType } from 'react-icons';
 import { usePathname } from 'next/navigation';
 import { useAppDispatch, useAppSelector } from '@/app/redux';
 import Link from 'next/link';
 import { setIsSidebarCollapsed } from '@/state';
 import { FaChevronDown, FaChevronUp, FaConciergeBell, FaHome } from 'react-icons/fa';
+import { useGetShowcasesQuery } from '@/state/api';
 
 const Sidebar = () => {
+    const [showArtShowcases, setShowArtShowcases] = useState(true);
+    const [showActions, setShowActions] = useState(true); // local state
+    
+    const { data: showcases} = useGetShowcasesQuery();
     const dispatch = useAppDispatch();
     const isSidebarCollapsed = useAppSelector( (state) => state.global.isSidebarCollapsed,);
     
-    const [showArtShowcases, setShowArtShowcases] = useState(true);
-    const [showActions, setShowActions] = useState(true); // local state
     
     const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white ${isSidebarCollapsed ? "w-0 hidden" : "w-72"}`;
     
@@ -63,6 +66,11 @@ const Sidebar = () => {
               <FaChevronUp className="h-5 w-5" />
             ) : ( <FaChevronDown className="h-5 w-5" /> )}
           </button>
+          {/* MY ART SHOWCASES LISTS*/}
+          {showArtShowcases && showcases?.map((showcase) => (
+            <SidebarLink key={showcase.showcaseId} icon={FaShieldHeart} label={showcase.description} href={`/showcases/${showcase.showcaseId}`} />
+          ))}
+
 
           {/* ACTIONS LINKS*/}
           <button onClick={() => setShowActions((prev) => !prev)}className="flex w-full items-center justify-between px-8 py-3 text-gray-500">
@@ -83,14 +91,12 @@ interface SidebarLinkProps {
   href: string;
   icon: IconType;
   label: string;
-  // isCollapsed: boolean;
 }
 
 const SidebarLink = ({
   href,
   icon: Icon,
   label,
-  // isCollapsed,
 }: SidebarLinkProps) => {
   const pathname = usePathname();
   const isActive =
