@@ -1,17 +1,30 @@
+"use client";
 
 import { useAppDispatch, useAppSelector } from '@/app/redux';
 import { setIsSidebarCollapsed } from '@/state';
+import { signOut } from 'aws-amplify/auth';
 import Link from 'next/link';
 import React from 'react'
+
+
 import { FaBars, FaSearch } from 'react-icons/fa';
 import { FaGear } from 'react-icons/fa6';
-
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed,
   );
+  
+  const handleSignOut = async () => {
+    try {
+
+      await signOut();
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
+
   return (
     <div className={`flex items-center justify-between bg-white ${isSidebarCollapsed ? "px-4" : "px-12"} py-3 dark:bg-black`}>
         {/* Search Bar */}
@@ -27,13 +40,12 @@ const Navbar = () => {
               <input className="w-full rounded border-none bg-gray-100 p-2 pl-8 placeholder-gray-500 focus:border-transparent focus:outline-none dark:bg-gray-700 dark:text-white dark:placeholder-white" type="search" placeholder="Search..."/>
           </div>
         </div>
-
         {/* Icons */}
         <div className="flex items-center">
           <Link href="/settings" className="h-min w-min rounded p-2 hover:bg-gray-100">
-
             <FaGear className="h-6 w-6 cursor-pointer dark:text-white"/>
           </Link>
+          <button className="self-start rounded bg-blue-400 px-4 py-2 text-xs font-bold text-white hover:bg-blue-500 md:block" onClick={handleSignOut}>Sign out</button>
           <div className="ml-2 mr-5 hidden min-h-[2em] w-[0.1rem] bg-gray-200 md:inline-block"></div>
         </div>
     </div>

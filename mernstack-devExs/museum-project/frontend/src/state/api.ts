@@ -51,10 +51,11 @@ export const api = createApi({
                     const { userSub } = session;
                     const { accessToken } = session.tokens ?? {};
                     
-                    const userDetailsResponse = await fetchWithBQ(`users/${userSub}`);
-                    const userDetails = userDetailsResponse.data as User;
+                    // const userDetailsResponse = await fetchWithBQ(`users/${userSub}`);
+                    // const userDetails = userDetailsResponse.data as User;
 
-                    return { data: { user, userSub, userDetails } };
+                    // return { data: { user, userSub, userDetails } };
+                    return { data: { user, userSub} };
                 } catch (error: any) {
                     return { error: error.message || "Could not retrieve user data" };
                 }
@@ -78,7 +79,15 @@ export const api = createApi({
                 body,
             }),
             invalidatesTags: ["Showcases"],
-        })
+        }),
+
+        deleteCourse: build.mutation<{ message: string }, string>({
+            query: (id) => ({
+                url: `showcases/${id}`,
+                method: "DELETE",
+            }),
+            invalidatesTags: ["Showcases"],
+        }),
     }),
 });
 
@@ -86,5 +95,6 @@ export const {
     useGetShowcasesQuery, 
     useGetShowcaseQuery,
     useCreateShowcaseMutation,
-    useGetAuthUserQuery
+    useGetAuthUserQuery,
+    useDeleteCourseMutation,
 } = api;

@@ -6,6 +6,10 @@ const showcaseSchema = new Schema ({
         type: String,
         required: true,
     },
+    showcaseTitle: {
+        type: String,
+        required: true,
+    },
     artId: {
         type: String,
         required: true,

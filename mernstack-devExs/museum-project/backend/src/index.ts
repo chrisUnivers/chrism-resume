@@ -19,6 +19,7 @@ if (!isProduction) {
   dynamoose.aws.ddb.local();
 }
 
+
 app.get("/", (req, res) => {
   res.send("This is home route");
 });

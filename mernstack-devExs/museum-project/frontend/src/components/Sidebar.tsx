@@ -1,6 +1,5 @@
 "use client";
 
-
 import React, { useState } from 'react'
 import Image from 'next/image';
 import { FaArchway, FaCity, FaGear, FaLock, FaShieldHeart, FaX } from 'react-icons/fa6';
@@ -14,7 +13,7 @@ import { useGetShowcasesQuery } from '@/state/api';
 
 const Sidebar = () => {
     const [showArtShowcases, setShowArtShowcases] = useState(true);
-    const [showActions, setShowActions] = useState(true); // local state
+    const [showActions, setShowActions] = useState(true);
     
     const { data: showcases} = useGetShowcasesQuery();
     const dispatch = useAppDispatch();
@@ -54,7 +53,7 @@ const Sidebar = () => {
             </div>
           </div>
           <nav className="z-10 w-full">
-            <SidebarLink icon={FaHome} label="Home" href="/" />
+            <SidebarLink icon={FaHome} label="Home" href="/artist" />
             <SidebarLink icon={FaArchway} label="Art Museums" href="/artmuseum" /> 
             <SidebarLink icon={FaCity} label="Art Galas" href="/artgalas" />
             <SidebarLink icon={FaGear} label="Settings" href="/settings" />
@@ -70,7 +69,6 @@ const Sidebar = () => {
           {showArtShowcases && showcases?.map((showcase) => (
             <SidebarLink key={showcase.showcaseId} icon={FaShieldHeart} label={showcase.description} href={`/showcases/${showcase.showcaseId}`} />
           ))}
-
 
           {/* ACTIONS LINKS*/}
           <button onClick={() => setShowActions((prev) => !prev)}className="flex w-full items-center justify-between px-8 py-3 text-gray-500">
@@ -91,12 +89,14 @@ interface SidebarLinkProps {
   href: string;
   icon: IconType;
   label: string;
+  // isCollapsed: boolean;
 }
 
 const SidebarLink = ({
   href,
   icon: Icon,
   label,
+  // isCollapsed,
 }: SidebarLinkProps) => {
   const pathname = usePathname();
   const isActive =

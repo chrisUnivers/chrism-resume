@@ -54,15 +54,25 @@ export const createShowcase = async( req: Request, res: Response): Promise<void>
 export const updateShowcase = async( req: Request, res: Response): Promise<void> => {
     const { showcaseId } = req.params;
     const newData = { ...req.body };
+    // const { artistId } = gethAuth(req); // getAuth is from clrk
     try { // showcaseId artId description artistId artistName image showcaseDateAndTime status vibe
         const showcase = await ShowcaseModel.get(showcaseId);
         if (!showcase) {
             res.status(404).json({ message: "Showcase not found. Check provided infromation"});
             return;
         }
+
+        // if (showcase.artistId !== artistId) {
+        //     res.status(403).json({ message: "Not authorized to update showcase"}); // artistId from clrk. see above
+        // }
         
         res.json({message: "Showcase updated successfully" })
     } catch (error: any) {
         res.status(500).json({ message: `Problem updating showcase: ${error.message}`});
     }
 };
+// quary string(optional params): https://example.com/path?key1=value1&key2=value2
+/**
+ * path params are required, so when you get a course you need path params since you need those params to identify the specific course. 
+ * path params: https://example.com/paht/{param}
+ */
