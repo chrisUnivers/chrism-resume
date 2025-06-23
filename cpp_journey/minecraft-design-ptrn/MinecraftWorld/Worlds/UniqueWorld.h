@@ -16,8 +16,8 @@ class UniqueWorld : public World {
 public:
     UniqueWorld();
     virtual ~UniqueWorld() = default;
-    void CreateWorld(const std::string& world_name, std::unique_ptr<PureWorld>& world, WorldAttributes attributes) const override;
-    void ListWorldItems(std::unique_ptr<PureWorld>&world) const override;
+    void CreateWorld(const std::string& world_name, std::unique_ptr<MinecraftWorld>& world, WorldAttributes attributes) const override;
+    void ListWorldItems(std::unique_ptr<MinecraftWorld>&world) const override;
 };
 
 #endif

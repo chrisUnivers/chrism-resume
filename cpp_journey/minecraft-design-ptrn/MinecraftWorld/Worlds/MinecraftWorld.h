@@ -11,7 +11,7 @@ class MinecraftWorld : public PureWorld {
 public:
     MinecraftWorld() {};
     virtual ~MinecraftWorld() = default;
-
+    virtual void getPlainsBiomeTexture(int nth_bio) const = 0;
 };
 
 #endif

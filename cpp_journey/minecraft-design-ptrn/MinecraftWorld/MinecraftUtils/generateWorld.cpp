@@ -2,14 +2,7 @@
 #include <iostream>
 
 #include "generateWorld.h"
-#include "./Blocks/DiamondBlock.h"
 
-void MineCraftWorld::generateDiamonds() {
-    for (int i = 0; i < TOTAL_NUMBER_OF_DIAMONDS; i++) {
-        worldBlockIds_->emplace_back(randId());
-        DiamondBlock(worldBlockIds_[worldBlockIds_->size() -1 ]);
-    }
-}
 
 int MineCraftWorld::randId()
 {
