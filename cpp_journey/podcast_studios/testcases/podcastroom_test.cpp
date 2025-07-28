@@ -1,8 +1,8 @@
 #include "../podcastroom/StudioRoom.h"
 
-#include <gtest/gtest.h>
+#include "PodRoomFxTest.h"
 
-TEST(builder_test, PodcastPodBuilder) {
+TEST_F(PodRoomTest, PodcastPodBuilder) {
     PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true);
     bool expectedStatus = true;
     
@@ -12,8 +12,8 @@ TEST(builder_test, PodcastPodBuilder) {
     );
 }
 
-TEST(builder_test, RoomAddOnsBuilder) {
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyAddOns().SetControlSetup("Modarn-Setup").MyPodcast().SetPodcastName("Morning-Podcast");
+TEST_F(PodRoomTest, RoomAddOnsBuilder) {
+    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyAddOns().SetControlSetup(podcastInputs_[podCount_].podCntrlSetupFx_[podCount_]).MyPodcast().SetPodcastName("Morning-Podcast");
     
     std::string expectedControls = "Modarn-Setup";
     std::string expectedPCastName = "Morning-Podcast";
@@ -27,9 +27,9 @@ TEST(builder_test, RoomAddOnsBuilder) {
     );
 }
 
-TEST(builder_test, PodPodcastBuilder) {
-    PodcastHost host = PodcastHost().SetFirstName("Host1").SetLastName("Tech").SetPhoneNum("250-638-386").SetEmail("host1email@gmail.com");
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyAddOns().SetControlSetup("Modarn-Setup").MyPodcast().SetPodcastHosts({&host}).SetPodcastName("Morning-Podcast").SetPodcastDescription("A podcast about mindful thinking!");
+TEST_F(PodRoomTest, PodPodcastBuilder) {
+    PodcastHost host = PodcastHost().SetFirstName(podcastInputs_[podCount_].hostInputsFx_[0].fNameT_).SetLastName(podcastInputs_[podCount_].hostInputsFx_[0].lNameT_).SetEmail(podcastInputs_[podCount_].hostInputsFx_[0].emailT_).SetPhoneNum(podcastInputs_[podCount_].hostInputsFx_[0].phoneNumT_);
+    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyAddOns().SetControlSetup(podcastInputs_[podCount_].podCntrlSetupFx_[0]).MyPodcast().SetPodcastName("Morning-Podcast").SetPodcastDescription("A podcast about mindful thinking!").SetPodcastHosts({&host});
     int expecteNumPCastHosts = 1;
 
     EXPECT_EQ(
@@ -38,7 +38,7 @@ TEST(builder_test, PodPodcastBuilder) {
     );
 }
 
-TEST(builder_test, SetPodcastGuest_PodPodcastBuilder) {
+TEST_F(PodRoomTest, SetPodcastGuest_PodPodcastBuilder) {
     PodcastHost host = PodcastHost().SetFirstName("Host1").SetLastName("Tech").SetPhoneNum("250-638-386").SetEmail("host1email@gmail.com");
     PodGuest guestOne = {"gfName", "glName", "gcEmail", "gsHandle"};
     PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyPodcast().SetPodcastHosts({&host}).SetPodcastGuest({&guestOne});

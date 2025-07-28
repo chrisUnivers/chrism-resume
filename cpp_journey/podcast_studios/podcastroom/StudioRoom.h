@@ -48,7 +48,6 @@ private:
     int validate_guests(std::vector<PodGuest const *> &guests) {
         int valid = 0;
         if(guests.empty()) {
-            // use try catch block
         } else {
             for (const PodGuest* guest : guests) {
                 prm_.running_pod_.SetPCastGuest(*guest);
@@ -60,7 +59,6 @@ private:
     int validate_hosts(std::vector<PodcastHost const *> &hosts) {
         int valid = 0;
         if (hosts.empty()) {
-            // maybe try catch block
         } else {
             for (const PodcastHost* host : hosts) {
                 prm_.running_pod_.SetPCastHost(*host);
@@ -69,7 +67,7 @@ private:
         }
         return valid;
     }
-public:
+    public:
     explicit PodPodcastBuilder(PodcastRoom& prm) : IBaseBuilder(prm) {}
     
     PodPodcastBuilder& SetPodcastName(std::string_view podcast_name) { prm_.running_pod_.SetPCastName(podcast_name) ; return *this; }
