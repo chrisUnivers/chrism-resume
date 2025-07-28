@@ -28,8 +28,8 @@ TEST(builder_test, RoomAddOnsBuilder) {
 }
 
 TEST(builder_test, PodPodcastBuilder) {
-    PodcastHost host = PodcastHost().SetFirstName("Maya").SetLastName("Tech").SetPhoneNum("250-638-386").SetEmail("mayawithtech@gmail.com");
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyAddOns().SetControlSetup("Modarn-Setup").MyPodcast().SetPodcastName("Morning-Podcast").SetPodcastDescription("A podcast about mindful thinking!");
+    PodcastHost host = PodcastHost().SetFirstName("Host1").SetLastName("Tech").SetPhoneNum("250-638-386").SetEmail("host1email@gmail.com");
+    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyAddOns().SetControlSetup("Modarn-Setup").MyPodcast().SetPodcastHosts({&host}).SetPodcastName("Morning-Podcast").SetPodcastDescription("A podcast about mindful thinking!");
     int expecteNumPCastHosts = 1;
 
     EXPECT_EQ(
@@ -39,7 +39,12 @@ TEST(builder_test, PodPodcastBuilder) {
 }
 
 TEST(builder_test, SetPodcastGuest_PodPodcastBuilder) {
-    PodcastHost host = PodcastHost().SetFirstName("Maya").SetLastName("Tech").SetPhoneNum("250-638-386").SetEmail("mayawithtech@gmail.com");
+    PodcastHost host = PodcastHost().SetFirstName("Host1").SetLastName("Tech").SetPhoneNum("250-638-386").SetEmail("host1email@gmail.com");
     PodGuest guestOne = {"gfName", "glName", "gcEmail", "gsHandle"};
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true);
+    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyPodcast().SetPodcastHosts({&host}).SetPodcastGuest({&guestOne});
+
+    EXPECT_EQ(
+        1,
+        room1.GetRunningPCastGuests()
+    );
 }

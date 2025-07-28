@@ -45,6 +45,7 @@ public:
     }
     PodPodcast& SetPCastGuest(const PodGuest guest) {
         pcast_guests_.push_back(guest);
+        return *this;
     }
     PodPodcast& SetPCastSchedule(std::string_view schedule) {
         pcast_schedule_ = schedule;

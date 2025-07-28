@@ -42,7 +42,33 @@ public:
 };
 RoomAddOnsBuilder IBaseBuilder::MyAddOns() { return RoomAddOnsBuilder(prm_); }
 
+
 class PodPodcastBuilder : public IBaseBuilder {
+private:
+    int validate_guests(std::vector<PodGuest const *> &guests) {
+        int valid = 0;
+        if(guests.empty()) {
+            // use try catch block
+        } else {
+            for (const PodGuest* guest : guests) {
+                prm_.running_pod_.SetPCastGuest(*guest);
+            }
+            valid = 1;
+        }
+        return valid;
+    }
+    int validate_hosts(std::vector<PodcastHost const *> &hosts) {
+        int valid = 0;
+        if (hosts.empty()) {
+            // maybe try catch block
+        } else {
+            for (const PodcastHost* host : hosts) {
+                prm_.running_pod_.SetPCastHost(*host);
+            }
+            valid = 1;
+        }
+        return valid;
+    }
 public:
     explicit PodPodcastBuilder(PodcastRoom& prm) : IBaseBuilder(prm) {}
     
@@ -50,9 +76,9 @@ public:
     
     PodPodcastBuilder& SetPodcastDescription(std::string_view pod_descrp) { prm_.running_pod_.SetPCastDescirpt(pod_descrp); return *this; }
     
-    // PodPodcastBuilder& SetPodcastHosts() {}
+    PodPodcastBuilder& SetPodcastHosts(std::vector<PodcastHost const *> hosts = {}) { int v = validate_hosts(hosts); return *this; }
     
-    // PodPodcastBuilder& SetPodcastGuest() {}
+    PodPodcastBuilder& SetPodcastGuest(std::vector<PodGuest const *> guests = {}) { int v = validate_guests(guests); return *this; }
 
     PodPodcastBuilder& SetPodcastType(std::string_view pcast_type) { prm_.running_pod_.SetPCastType(pcast_type); return *this; }
 

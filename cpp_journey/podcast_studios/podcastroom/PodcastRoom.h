@@ -53,6 +53,8 @@ public:
 
     int GetRunningPCastHosts() const { return running_pod_.pcast_hosts_.size(); }
     
+    int GetRunningPCastGuests() const { return running_pod_.getGuestList().size(); }
+    
     bool GetPodRoomStatus() { return prm_use_status_; }
     
     std::string GetRoomAddOnControlSetUp() { return rao_control_setup_; }
