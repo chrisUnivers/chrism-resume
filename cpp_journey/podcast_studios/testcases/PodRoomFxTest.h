@@ -4,27 +4,22 @@
 #include "../podcastroom/PodPodcast.h"
 #include <vector>
 #include <gtest/gtest.h>
+
 class PodRoomTest : public testing::Test {
 protected:
     using mStr = std::string;
     PodRoomTest() {
-        HostInputTest host1 = HostInputTest("Host1", "Tech", "250-638-386", "hostnew@gmail.com", "", "");
+        HostInputTest h1 = HostInputTest("Host1", "Tech", "250-638-386", "hostnew@gmail.com", "", "");
         GuestTest g1 = GuestTest("gfName", "glName", "gcEmail", "gsHandle");
         GuestTest g2 = GuestTest("gTwo_fName", "gTwo_lName", "gTwo_email", "gTwo_sHandle");
-        mStr setPcast1 = "Modarn-Setup";
-        podcastInputs_[podCount_].hostInputsFx_.emplace_back(host1);    // First Podcast
-        podcastInputs_[podCount_].guestInputsFx_.emplace_back(g1);       // First Podcast
-        podcastInputs_[podCount_].guestInputsFx_.emplace_back(g2);       // First Podcast
-        podcastInputs_[podCount_].podCntrlSetupFx_.emplace_back(setPcast1); // First Podcast
-    }
+        host1Fx_ = PodcastHost().SetFirstName(h1.fNameT_).SetLastName(h1.lNameT_).SetEmail(h1.emailT_).SetPhoneNum(h1.phoneNumT_);
+        guest1Fx_ = {g1.fNameT_, g1.lNameT_, g1.emailT_, g1.socialsT_};
+        guest2Fx_ = {g2.fNameT_, g2.lNameT_, g2.emailT_, g2.socialsT_};
+        cntrsetup1Fx_ = "Modarn-Setup";
+        podDescr1Fx_ = "A podcast about mindful thinking!";
+        podName1Fx_ = "Morning-Podcast";
 
-    struct HostInputTest;
-    struct GuestTest;
-    struct PodCastInputTest {
-        std::vector<HostInputTest> hostInputsFx_;
-        std::vector<GuestTest>     guestInputsFx_;
-        std::vector<mStr>          podCntrlSetupFx_;
-    };
+    }
     struct HostInputTest{
         mStr fNameT_ {};
         mStr lNameT_ {};
@@ -41,7 +36,12 @@ protected:
         mStr socialsT_ {};
         GuestTest(mStr fN, mStr lN, mStr em, mStr soc) : fNameT_(fN), lNameT_(lN), emailT_(em), socialsT_(soc) { }
     };
-    int podCount_ = 0;
-    std::map<int, PodCastInputTest> podcastInputs_   {};
+    PodcastHost host1Fx_;
+    PodGuest guest1Fx_;
+    PodGuest guest2Fx_;
+
+    mStr cntrsetup1Fx_;
+    mStr podDescr1Fx_ ;
+    mStr podName1Fx_  ;
 };
 #endif //POD_ROOM_FX_TEST_H
