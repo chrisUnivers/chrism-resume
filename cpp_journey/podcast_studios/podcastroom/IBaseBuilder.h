@@ -2,21 +2,22 @@
 #define I_BaseBuilder_H
 
 
-#include "PodcastRoom.h"
+#include "PodPodcast.h"
 
 class IBaseBuilder {
 protected:
-    PodcastRoom& prm_;
+    PodPodcast& basePCast_;
 public:
-    explicit IBaseBuilder(PodcastRoom& prm) : prm_(prm) {}
-    operator PodcastRoom() {
-        if (!prm_.prm_use_status_) {
-            std::cout << "room must be free to use" << std::endl;
+    explicit IBaseBuilder(PodPodcast& pcast) : basePCast_(pcast) {}
+    operator PodPodcast&() {
+        if (basePCast_.pcast_hosts_.empty()) {
+            std::cout << "Podcast must have a host" << std::endl;
         }
-        return std::move(prm_);
+        return std::move(basePCast_);
     }
     RoomAddOnsBuilder MyAddOns();
-    PodPodcastBuilder MyPodcast();
+    PodcastRoomBuilder MyPodcastRoom();
+    
 };
 
 #endif /* I_BaseBuilder_H */

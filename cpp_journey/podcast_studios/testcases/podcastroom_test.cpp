@@ -2,62 +2,57 @@
 
 #include "PodRoomFxTest.h"
 
-TEST_F(PodRoomTest, CreatePodcastRoom) {
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true);
+TEST_F(PodRoomTest, AddOneHostToPodcast_PodPodcastBuilder) {
+    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_});
     bool expectedStatus = true;
     
     EXPECT_EQ(
         expectedStatus,
-        room1.GetPodRoomStatus()
+        pcast1.getHostCount()
     );
 }
 
-TEST_F(PodRoomTest, GivePodcastName) {
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyPodcast().SetPodcastName(podName1Fx_);
+TEST_F(PodRoomTest, GivePodcastName_PodPodcastBuilder) {
+    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_);
     
     std::string expectedPCastName = "Morning-Podcast";
     EXPECT_EQ(
         expectedPCastName,
-        
-        room1.GetRunningPCastName()
+        pcast1.getPCastName()
     );
 }
 
-TEST_F(PodRoomTest, AddControlSetupAddon) {
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyAddOns().SetControlSetup(cntrsetup1Fx_);
-    
+TEST_F(PodRoomTest, AddControlSetupAddon_RoomAddOnsBuilder) {
+    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).MyAddOns().SetControlSetup(cntrsetup1Fx_);
     std::string expectedControls = "Modarn-Setup";
     EXPECT_EQ(
         expectedControls,
-        room1.GetRoomAddOnControlSetUp()
+        pcast1.getControlRoomSetup()
     );
 }
 
-TEST_F(PodRoomTest, AddOneHostToPodcast) {
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyPodcast().SetPodcastName(podName1Fx_).SetPodcastDescription(podDescr1Fx_).SetPodcastHosts({&host1Fx_});
-    int expecteNumPCastHosts = 1;
+TEST_F(PodRoomTest, CreatePodcastRoom_PodcastRoomBuilder) {
+    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).MyPodcastRoom().SetUseStatus(true);
+    bool expecteUseStatus = true;
 
     EXPECT_EQ(
-        expecteNumPCastHosts,
-        room1.GetRunningPCastHosts()
+        expecteUseStatus,
+        pcast1.getPodcastLiveStatus()
     );
 }
 
-TEST_F(PodRoomTest, AddOneHostOneGuest) {
-    
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyPodcast().SetPodcastHosts({&host1Fx_}).SetPodcastGuest({&guest1Fx_});
-
+TEST_F(PodRoomTest, AddOneHostOneGuest_PodPodcastBuilder) {
+    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).SetPodcastGuest({&guest1Fx_});
     EXPECT_EQ(
         1,
-        room1.GetRunningPCastGuests()
+        pcast1.getGuestsCount()
     );
 }
 
-TEST_F(PodRoomTest, SetMultipleGuests) {
-    PodcastRoom room1 = PodcastRoomBuilder().SetUseStatus(true).MyPodcast().SetPodcastHosts({&host1Fx_}).SetPodcastGuest({&guest1Fx_, &guest2Fx_});
-
+TEST_F(PodRoomTest, SetMultipleGuests_PodPodcastBuilder) {
+    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).SetPodcastGuest({&guest1Fx_, &guest2Fx_});
     EXPECT_EQ(
         2,
-        room1.GetRunningPCastGuests()
+        pcast1.getGuestsCount()
     );
 }
