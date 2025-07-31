@@ -60,36 +60,32 @@ public:
         }
         return out;
     }
-    
-    void SetPCastName(std::string_view pcast_name) {
+
+    void SetPCastName(const std::string_view pcast_name) {
         pcast_name_ = pcast_name; 
     }
-    void SetPCastDescirpt(std::string_view pcast_descr) {
+    void SetPCastDescirpt(const std::string_view pcast_descr) {
         pcast_description_ = pcast_descr; 
     }
-    void SetPCastType(std::string_view floor_name) {
+    void SetPCastType(const std::string_view floor_name) {
         pcast_type_ = floor_name;
-    
     }
-
+    
     void SetPCastHost(const PodcastHost host) {
         pcast_hosts_.push_back(host);
     }
     void SetPCastGuest(const PodGuest guest) {
         pcast_guests_.push_back(guest); 
     }
-    void SetPCastSchedule(std::string_view schedule) {
+    void SetPCastSchedule(const std::string_view schedule) {
         pcast_schedule_ = schedule;
-    }
-    void SetPCastId(std::string_view id) {
+    }//
+    void SetPCastId(const std::string_view id) {
         pcast_id_ = id;
     }
 
-    std::string getPCastName() const {
-        return pcast_name_;
-    }
-    std::string getPCastDescr() const {
-        return pcast_description_;
+    bool getPodcastLiveStatus() {
+        return pcast_room_.GetPodRoomStatus();
     }
     bool hasHosts() const {
         return pcast_hosts_.empty();
@@ -101,18 +97,25 @@ public:
     std::vector<PodGuest> getGuestList() const {
         return pcast_guests_;
     }
+    std::string getPodcastId() const {
+        return pcast_id_;
+    }
+    std::string getControlRoomSetup() {
+        return pcast_room_.GetRoomAddOnControlSetUp();
+    }
+    
     int getHostCount() const {
         return pcast_hosts_.size();
     }
     int getGuestsCount() const {
         return pcast_guests_.size();
     }
-
-    std::string getControlRoomSetup() {
-        return pcast_room_.GetRoomAddOnControlSetUp();
+    
+    std::string getPCastName() const {
+        return pcast_name_;
     }
-    bool getPodcastLiveStatus() {
-        return pcast_room_.GetPodRoomStatus();
+    std::string getPCastDescr() const {
+        return pcast_description_;
     }
 };
 
