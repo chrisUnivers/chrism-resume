@@ -2,6 +2,7 @@ package org.example;
 
 public class PinkArGlassesBuilder implements IArGlassesBuilder{
 
+    protected  ArGlasses arGlasses_;
     @Override
     public void BuildIOProcessor() {
 
@@ -17,8 +18,8 @@ public class PinkArGlassesBuilder implements IArGlassesBuilder{
     }
     @Override
     public String toString() {
-        String pinkArGlassesBldr = "I'm a pink ar glasses build";
+        String pinkArGlassesStr = "A pink AR glasses build";
 
-        return pinkArGlassesBldr;
+        return pinkArGlassesStr;
     }
 }
