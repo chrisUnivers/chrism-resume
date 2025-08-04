@@ -1,7 +1,6 @@
 package org.example;
 
 public interface IIOProcessor {
-
+    public void setIOProcessorModel(UtilEnums.IOProcessorModels ioName);
+    public UtilEnums.IOProcessorModels getIOProcessorModel();
 }
-//public void setIOProcessorModel(IOProcessorModels ioName);
-//public IOProcessorModels getIOProcessorModel();

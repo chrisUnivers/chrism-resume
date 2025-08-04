@@ -1,8 +1,10 @@
 package org.example;
 
 public interface IArGlassesBuilder {
-    public void BuildIOProcessor();
-    public void Reset();
 
     public IArGlasses MakeARGlasses();
+    public void Reset();
+    public void BuildIOProcessor();
+    public void BuildGlassesFrames();
+
 }

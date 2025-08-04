@@ -1,17 +1,45 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
+import org.example.arglasses.utils.ProcessInput;
+import org.example.arglasses.utils.ReadInputT;
+import org.example.arglasses.utils.RealSanta;
+import org.example.cool.santa.InspectGift;
+import org.example.cool.santa.SantasCoo;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.BlockingDeque;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingDeque;
+
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        Thread readInputs = new Thread(new ReadInputT("builderAndCondtion.txt"));
+        readInputs.start();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+
+        List<SantasCoo> santasCOOsList = new ArrayList<>();
+        ExecutorService processInputsGetSantaReady = Executors.newFixedThreadPool(4);
+        RealSanta pinkSanta = new RealSanta("Pink Santa");
+
+        for (int i = 0; i < 2; i++) {
+            processInputsGetSantaReady.submit(new ProcessInput());
         }
+        for (int i = 0; i < 2; i++) {  // create and add COO's to santa's coo's list
+            SantasCoo coo = new SantasCoo("(COO " + i + ")");
+            coo.subscribe(pinkSanta::addToSantasBag, pinkSanta::santaHasAnewGift);
+            santasCOOsList.add(coo);
+        }
+        for (int i = 0; i < 2; i++) {
+            try {
+                int addingValue = 1;
+                processInputsGetSantaReady.submit(new InspectGift(santasCOOsList.get(i)));
+            } catch (InterruptedException e) {
+               System.err.println("Not able to call InspectGift runnable in main");
+            }
+        }
+        processInputsGetSantaReady.shutdown();
     }
 }

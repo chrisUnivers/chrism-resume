@@ -1,7 +1,7 @@
 package org.example;
 
 public class ArGlasses implements IArGlasses{
-
+    String arGlassesCondition_;
     protected IIOProcessor arGlassesIOProcessor_;
 
     @Override
@@ -11,6 +11,14 @@ public class ArGlasses implements IArGlasses{
     @Override
     public IIOProcessor getIOProcessor() {
         return this.arGlassesIOProcessor_;
+    }
+    public String getGlassesCondition() {
+        return this.arGlassesCondition_;
+    }
+    @Override
+    public void setGlassesCondition(String glassesCondition) {
+
+        this.arGlassesCondition_ = glassesCondition;
     }
     @Override
     public String toString() {
