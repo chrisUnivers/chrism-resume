@@ -1,0 +1,3 @@
+# Intro
+
+  * This project demostrates more of my java skills. I uses the java Flow library to simulate publisher and subscriber events. The project implements the builder pattern to create objects of a class I call AR glasses. I then use reactive programming, concurrency to add these gifts to Santa's bags. The adding is done by object of a class I call SantasCOOs, Chief Executive Officer, who make sure all AR gifts are both in good condition and added to Santa's bag. Santa then takes off when all gifts have been add. I also have some unit tests but not all methods are tested. Multithreading is setup in the `Main.java` file. The reactive programming part and the parrell programming logic is all implemented in the `cool.santa` package.

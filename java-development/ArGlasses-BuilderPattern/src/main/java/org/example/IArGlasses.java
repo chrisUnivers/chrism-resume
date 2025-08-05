@@ -5,4 +5,6 @@ public interface IArGlasses {
     public IIOProcessor getIOProcessor();
     public void setGlassesCondition(String glassesCondition);
     public String getGlassesCondition();
+    public String getGlassesCreatedBy();
+    public void setGlassesCreatedBy(String nameOfCoo);
 }

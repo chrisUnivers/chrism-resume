@@ -7,8 +7,9 @@ public class ConstUtils {
     public static final String MAIN_BLDR_TOSTRING_STR = "Main Builder has: %s";
     public static final String[] FAST_IO_PROCESSOR_INPUTS = new String[]{"Fast Io Processor", "cool pink AR glasses"};
     public static final UtilEnums.IOProcessorModels FAST_IO_PROCESSOR_MODEL = UtilEnums.IOProcessorModels.PINK;
-    public static final String AR_GLASSES_CONDITION_NEW = "new";
-    public static final String SANTA_HAS_A_NEW_GIFT_STR = "%s has: %d gift(s)%n";
-    public static final String AR_GLASSES_PINK_BUILD_STR = "pink builder";
-    public static final String ADDING_TO_SANTAS_BAG_STR = "%s added: %s ar glasses to santa's bag";
+    public static final String AR_GLASSES_CONDITION_NEW = "in new";
+    public static final String SANTA_HAS_A_NEW_GIFT_STR = "%s has: %d gift(s)";
+    public static final String PINK_BUILD_AR_GLASSES_STR = "pink builder";
+    public static final String ADDED_TO_SANTAS_BAG_STR = "%s added: %s ar glasses to santa's bag";
+    public static final String SANTA_IS_READY_TO_GO_STR = "%s is ready to go!";
 }

@@ -16,11 +16,10 @@ public class ReadInputT implements Runnable{
     public void run() {
         try (BufferedReader reader = new BufferedReader(new FileReader(filename_))) {
             String line;
-            int notreading = 0;
+
             while ( (line = reader.readLine() ) != null) {
 
                 FileProcessing.fileQueue_.put(line);
-                int reading = 1;
             }
             FileProcessing.fileQueue_.put("EOF");
         }catch (IOException | InterruptedException e) {

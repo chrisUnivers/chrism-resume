@@ -33,12 +33,7 @@ public class Main {
             santasCOOsList.add(coo);
         }
         for (int i = 0; i < 2; i++) {
-            try {
-                int addingValue = 1;
-                processInputsGetSantaReady.submit(new InspectGift(santasCOOsList.get(i)));
-            } catch (InterruptedException e) {
-               System.err.println("Not able to call InspectGift runnable in main");
-            }
+            processInputsGetSantaReady.submit(new InspectGift(santasCOOsList.get(i)));
         }
         processInputsGetSantaReady.shutdown();
     }
