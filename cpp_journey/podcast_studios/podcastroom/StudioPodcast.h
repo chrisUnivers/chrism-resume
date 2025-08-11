@@ -65,7 +65,7 @@ public:
     }
 
     void SetPCastName(const std::string_view pcast_name) {
-        pcast_name_ = pcast_name; 
+        pcast_name_ = pcast_name;
     }
     void SetPCastDescirpt(const std::string_view pcast_descr) {
         pcast_description_ = pcast_descr; 
@@ -122,4 +122,4 @@ public:
     }
 };
 
-#endif // STUDIO_PODCAST_H
+#endif // STUDIO_PODCAST_H new
