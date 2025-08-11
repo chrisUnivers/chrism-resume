@@ -66,7 +66,7 @@ public class NotifySanta implements Flow.Publisher<IArGlasses>, Flow.Subscriber<
             giftFromSanta_ = newglasses;
             updateSantasBag();
         } else {
-            System.out.println(this.notifyName_ + ": " + newglasses.getGlassesCondition() + " was not added to santa's bag. Santa can only give new gifts!");
+            System.out.println(this.notifyName_ + ": Ar glasses in " + newglasses.getGlassesCondition() + " cannot be added to santa's bag. Santa can only give new gifts!");
         }
     }
     @Override

@@ -16,7 +16,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        Thread readInputs = new Thread(new ReadInputT("builderAndCondtion.txt"));
+        Thread readInputs = new Thread(new ReadInputT("builderAndCondition.txt"));
         readInputs.start();
 
 
