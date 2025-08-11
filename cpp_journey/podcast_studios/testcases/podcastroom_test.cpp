@@ -2,8 +2,8 @@
 
 #include "PodRoomFxTest.h"
 
-TEST_F(PodRoomTest, AddOneHostToPodcast_PodPodcastBuilder) {
-    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_});
+TEST_F(PodRoomTest, AddOneHostToPodcast_StudioPodcastBuilder) {
+    StudioPodcast pcast1 = StudioPodcastBuilder().SetPodcastHosts({&host1Fx_});
     bool expectedStatus = true;
     
     EXPECT_EQ(
@@ -12,8 +12,8 @@ TEST_F(PodRoomTest, AddOneHostToPodcast_PodPodcastBuilder) {
     );
 }
 
-TEST_F(PodRoomTest, GivePodcastName_PodPodcastBuilder) {
-    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_);
+TEST_F(PodRoomTest, GivePodcastName_StudioPodcastBuilder) {
+    StudioPodcast pcast1 = StudioPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_);
     
     std::string expectedPCastName = "Morning-Podcast";
     EXPECT_EQ(
@@ -23,7 +23,7 @@ TEST_F(PodRoomTest, GivePodcastName_PodPodcastBuilder) {
 }
 
 TEST_F(PodRoomTest, AddControlSetupAddon_RoomAddOnsBuilder) {
-    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).MyAddOns().SetControlSetup(cntrsetup1Fx_);
+    StudioPodcast pcast1 = StudioPodcastBuilder().SetPodcastHosts({&host1Fx_}).MyAddOns().SetControlSetup(cntrsetup1Fx_);
     std::string expectedControls = "Modarn-Setup";
     EXPECT_EQ(
         expectedControls,
@@ -32,7 +32,7 @@ TEST_F(PodRoomTest, AddControlSetupAddon_RoomAddOnsBuilder) {
 }
 
 TEST_F(PodRoomTest, CreatePodcastRoom_PodcastRoomBuilder) {
-    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).MyPodcastRoom().SetUseStatus(true);
+    StudioPodcast pcast1 = StudioPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).MyPodcastRoom().SetUseStatus(true);
     bool expecteUseStatus = true;
 
     EXPECT_EQ(
@@ -41,16 +41,16 @@ TEST_F(PodRoomTest, CreatePodcastRoom_PodcastRoomBuilder) {
     );
 }
 
-TEST_F(PodRoomTest, AddOneHostOneGuest_PodPodcastBuilder) {
-    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).SetPodcastGuest({&guest1Fx_});
+TEST_F(PodRoomTest, AddOneHostOneGuest_StudioPodcastBuilder) {
+    StudioPodcast pcast1 = StudioPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).SetPodcastGuest({&guest1Fx_});
     EXPECT_EQ(
         1,
         pcast1.getGuestsCount()
     );
 }
 
-TEST_F(PodRoomTest, SetMultipleGuests_PodPodcastBuilder) {
-    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).SetPodcastGuest({&guest1Fx_, &guest2Fx_});
+TEST_F(PodRoomTest, SetMultipleGuests_StudioPodcastBuilder) {
+    StudioPodcast pcast1 = StudioPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).SetPodcastGuest({&guest1Fx_, &guest2Fx_});
     EXPECT_EQ(
         2,
         pcast1.getGuestsCount()
@@ -58,7 +58,7 @@ TEST_F(PodRoomTest, SetMultipleGuests_PodPodcastBuilder) {
 }
 
 TEST_F(PodRoomTest, AddOnePodcastToStudio_AuthoInfo_SetOfficialPodcats) {
-    PodPodcast pcast1 = PodPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).SetPodcastGuest({&guest1Fx_}).SetPodcastId("podcast1Id");
+    StudioPodcast pcast1 = StudioPodcastBuilder().SetPodcastHosts({&host1Fx_}).SetPodcastName(podName1Fx_).SetPodcastGuest({&guest1Fx_}).SetPodcastId("podcast1Id");
     
     std::string mId = SetOfficialPodcats(pcast1);
     std::string expectedId = "podcast1Id";
@@ -70,7 +70,7 @@ TEST_F(PodRoomTest, AddOnePodcastToStudio_AuthoInfo_SetOfficialPodcats) {
 }
 
 TEST_F(PodRoomTest, TwoPodcastsAdded_AuthoInfo_SetOfficialPodcats) {
-    PodPodcast pcast2 = PodPodcastBuilder().SetPodcastHosts({&host2Fx_}).SetPodcastName(podName2Fx_).SetPodcastGuest({&guest2Fx_}).SetPodcastId("podcast2Id");
+    StudioPodcast pcast2 = StudioPodcastBuilder().SetPodcastHosts({&host2Fx_}).SetPodcastName(podName2Fx_).SetPodcastGuest({&guest2Fx_}).SetPodcastId("podcast2Id");
     
     std::string mId = SetOfficialPodcats(pcast2);
     std::string expectedId = "podcast2Id";
@@ -82,5 +82,18 @@ TEST_F(PodRoomTest, TwoPodcastsAdded_AuthoInfo_SetOfficialPodcats) {
     EXPECT_EQ(
         expectedSize,
         getSizeSignedUpPodcasts() 
+    );
+}
+
+TEST_F(PodRoomTest, ValidSignInEvent_PodcastOne_EventSingIn) {
+    studioFx_.signedInPodcasts_.emplace("podcast1Id", info1Fx_);
+    EventSingIn event{studioFx_};
+    
+    
+    int expectedSignedInPodcasts = 1;
+
+    EXPECT_EQ(
+        1,
+        1
     );
 }

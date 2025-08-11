@@ -1,9 +1,11 @@
-#ifndef POD_PODCAST_H
-#define POD_PODCAST_H
+#ifndef STUDIO_PODCAST_H
+#define STUDIO_PODCAST_H
 
 #include <vector>
 #include "PodcastHost.h"
 #include "PodcastRoom.h"
+
+struct Host { std::string fName_; std::string lName_; };
 
 struct PodGuest {
     std::string first_name_;
@@ -12,19 +14,20 @@ struct PodGuest {
     std::string social_handle_;
 };
 
-struct PodcastSummary {
-    std::string podName;
-    std::string csvHostsName;
-    std::string usedRoom;
-    std::string startTime;
-    std::string endTime;
+struct PodcastInfo {
+    std::string podCastId_; 
+    std::string podcastName_;
+    std::vector<Host> podcastHosts_;
+
+    int signIn = 0;
+    friend std::ostream& operator<<(std::ostream& out, const PodcastInfo& p) { out << "The podcast: \"" << p.podcastName_ << ", " << p.podCastId_ << "\""; return out; }
 };
 
-class PodPodcast {
+class StudioPodcast {
 private:
     friend class IBaseBuilder;
     friend class RoomAddOnsBuilder;
-    friend class PodPodcastBuilder; 
+    friend class StudioPodcastBuilder; 
     friend class PodcastRoomBuilder;
     friend class PodcastRoom;
     
@@ -37,9 +40,9 @@ private:
     std::vector<PodGuest> pcast_guests_;
     std::string pcast_id_;
     PodcastRoom pcast_room_;
-    PodPodcast() = default;
+    StudioPodcast() = default;
 public:
-    friend std::ostream& operator<<(std::ostream& out, const PodPodcast& p) {
+    friend std::ostream& operator<<(std::ostream& out, const StudioPodcast& p) {
         auto print_value = [&](const auto& vl) { out << vl << " "; };
 
         out << "Room Info: ";
@@ -119,4 +122,4 @@ public:
     }
 };
 
-#endif // POD_PODCAST_H
+#endif // STUDIO_PODCAST_H

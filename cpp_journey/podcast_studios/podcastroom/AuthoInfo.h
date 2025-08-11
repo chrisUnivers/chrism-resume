@@ -5,14 +5,14 @@
 #include <string>
 #include <vector>
 #include <memory>
-#include "PodPodcast.h"
+#include "StudioPodcast.h"
 
-inline std::map<std::string, PodPodcast> & getSignedUpPodcasts() {
-    static std::map<std::string, PodPodcast> signedUpPodcasts_;
+inline std::map<std::string, StudioPodcast> & getSignedUpPodcasts() {
+    static std::map<std::string, StudioPodcast> signedUpPodcasts_;
     return signedUpPodcasts_;
 }
 
-inline std::string SetOfficialPodcats(const PodPodcast& podcastO) {
+inline std::string SetOfficialPodcats(const StudioPodcast& podcastO) {
     auto & sdpPodcasts = getSignedUpPodcasts();
     sdpPodcasts.emplace(podcastO.getPodcastId(), podcastO);
     return podcastO.getPodcastId();

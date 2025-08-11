@@ -1,8 +1,9 @@
 #ifndef POD_ROOM_FX_TEST_H
 #define POD_ROOM_FX_TEST_H
 
-#include "../podcastroom/PodPodcast.h"
+#include "../podcastroom/StudioPodcast.h"
 #include "../podcastroom/AuthoInfo.h"
+#include "../podcastroom/EventSingIn.h"
 #include <vector>
 #include <gtest/gtest.h>
 
@@ -26,6 +27,10 @@ protected:
         podDescr1Fx_ = "A podcast about mindful thinking!";
         podName1Fx_ = "Morning-Podcast";
         podName2Fx_ = "Go Great-Podcast";
+        
+        info1Fx_.podCastId_ = "podcast1Id";
+        info1Fx_.podcastName_ = podName1Fx_;
+        info1Fx_.podcastHosts_.emplace_back(Host{h1.fNameT_, h1.lNameT_});
 
     }
     struct HostInputTest{
@@ -53,5 +58,7 @@ protected:
     mStr podDescr1Fx_ ;
     mStr podName1Fx_  ;
     mStr podName2Fx_;
+    PodcastInfo info1Fx_;
+    StudioService studioFx_{};
 };
 #endif //POD_ROOM_FX_TEST_H

@@ -2,14 +2,14 @@
 #define I_BaseBuilder_H
 
 
-#include "PodPodcast.h"
+#include "StudioPodcast.h"
 
 class IBaseBuilder {
 protected:
-    PodPodcast& basePCast_;
+    StudioPodcast& basePCast_;
 public:
-    explicit IBaseBuilder(PodPodcast& pcast) : basePCast_(pcast) {}
-    operator PodPodcast&() {
+    explicit IBaseBuilder(StudioPodcast& pcast) : basePCast_(pcast) {}
+    operator StudioPodcast&() {
         if (basePCast_.pcast_hosts_.empty()) {
             std::cout << "Podcast must have a host" << std::endl;
         }

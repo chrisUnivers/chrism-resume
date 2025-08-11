@@ -17,9 +17,9 @@ private:
     int rao_num_of_laptops_;
     
     friend class PodcastHost;
-    friend class PodPodcast;
+    friend class StudioPodcast;
 
-    friend class PodPodcastBuilder;
+    friend class StudioPodcastBuilder;
     friend class RoomAddOnsBuilder;
     friend class PodcastRoomBuilder;
     
