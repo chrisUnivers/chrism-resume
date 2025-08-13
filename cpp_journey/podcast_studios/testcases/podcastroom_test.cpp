@@ -86,14 +86,14 @@ TEST_F(PodRoomTest, TwoPodcastsAdded_AuthoInfo_SetOfficialPodcats) {
 }
 
 TEST_F(PodRoomTest, ValidSignInEvent_PodcastOne_EventSingIn) {
-    studioFx_.signedInPodcasts_.emplace("podcast1Id", info1Fx_);
     EventSingIn event{studioFx_};
     
+    studioFx_.podcastGoesLiveCall_(GoLiveEvent{podInfoFx_[0], std::cout, "This is the second message message"});
     
     int expectedSignedInPodcasts = 1;
 
     EXPECT_EQ(
         1,
-        1
+        event.getNumSignedInPodcast()
     );
 }

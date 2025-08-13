@@ -4,10 +4,12 @@ set(This PodcastRoomLib)
 
 set(Headers
     StudioRoom.h
+    EventSingIn.h
 )
 
 set(Sources
     StudioRoom.cpp
+    EventSingIn.cpp
 )
 
 add_library(${This} STATIC ${Sources} ${Headers})

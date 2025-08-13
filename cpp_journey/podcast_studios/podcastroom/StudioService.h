@@ -2,14 +2,17 @@
 #define PODCAST_EVENTS_H
 
 
+#include <map>
 #include "PodcastRoom.h"
 #include "IStudioService.h"
-#include "StudioPodcast.h"
 
 class StudioService : public IStudioService {
 public:
     std::map<std::string, PodcastInfo> signedInPodcasts_;
-    
+    PodastGoLiveCallback podcastGoesLiveCall_{};
+    void initOutput(PodastGoLiveCallback goLiveCall) override {
+        podcastGoesLiveCall_ = goLiveCall;
+    }
     int validSignedUpPodcast(std::string id) override { return signedInPodcasts_.count(id); }
 };
 
