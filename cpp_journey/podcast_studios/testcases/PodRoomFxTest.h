@@ -32,9 +32,16 @@ protected:
         info1Fx_.podcastName_ = podName1Fx_;
         info1Fx_.podcastHosts_.emplace_back(Host{h1.fNameT_, h1.lNameT_});
 
+        info2Fx_.podCastId_ = "podcast2Id";
+        info2Fx_.podcastName_ = podName2Fx_;
+        info2Fx_.podcastHosts_.emplace_back(Host{h2.fNameT_, h2.lNameT_});
+
         studioFx_.signedInPodcasts_.emplace("podcast1Id", info1Fx_);
+        studioFx_.signedInPodcasts_.emplace("podcast2Id", info2Fx_);
 
         podInfoFx_.emplace_back(info1Fx_);
+        podInfoFx_.emplace_back(info2Fx_);
+        
     }
     struct HostInputTest{
         mStr fNameT_ {};
@@ -62,6 +69,7 @@ protected:
     mStr podName1Fx_  ;
     mStr podName2Fx_;
     PodcastInfo info1Fx_;
+    PodcastInfo info2Fx_;
     StudioService studioFx_{};
     std::vector<PodcastInfo> podInfoFx_;
 };
