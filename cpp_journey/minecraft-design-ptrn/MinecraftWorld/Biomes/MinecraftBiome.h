@@ -1,11 +1,12 @@
 #ifndef MINECRAFT_BIOME_H
 #define MINECRAFT_BIOME_H
 
-#include "PureBiome.h"
 
-class MinecraftBiome : public PureBiome {
+#include "../Utils/ItemStructs.h"
+
+class MinecraftBiome {    
 public:
-    virtual ~MinecraftBiome() = default;
+    virtual void createBiome(BiomeTypes type) const = 0; 
+    virtual ~MinecraftBiome() {};
 };
-
-#endif
+#endif // MINECRAFT_BIOME_H

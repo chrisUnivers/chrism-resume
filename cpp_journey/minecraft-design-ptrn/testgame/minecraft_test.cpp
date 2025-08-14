@@ -31,10 +31,10 @@ TEST_F(MainGameTest, MainGameTest_createPlainsBiomePlains_Test) {
     auto biomeInfo1 = factory->createBiomeInfo(BIOMEPL_PLAINS);
     auto biomeInfo3 = factory->createBiomeInfo(BIOMEPL_PLAINS);
     
-    // std::unique_ptr<PlainsBiome> firstBiome = std::make_unique<UniqueBiome>(std::move(biomeInfo1));
+    std::unique_ptr<PlainsBiome> firstBiome = std::make_unique<PlainsBiomePlains>(std::move(biomeInfo1));
 
     EXPECT_EQ(
-        3,
-        6
+        gmFxExpectedPLSB_.expected_biome_name,
+        firstBiome->getBiomeName()
     );
 }

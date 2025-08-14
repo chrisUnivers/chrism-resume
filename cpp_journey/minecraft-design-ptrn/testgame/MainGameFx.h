@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 #include "../MinecraftWorld/Biomes/PlainsBiomeFactory.h"
-#include "../MinecraftWorld/Biomes/BiomesFactory.h"
+#include "../MinecraftWorld/Biomes/AllPlainsBiomes.h"
 
 struct ExpectedPlainsBiomePlains {
     std::string expected_biome_name = "Plains";
