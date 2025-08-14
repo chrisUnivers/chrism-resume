@@ -1,5 +1,5 @@
 ## To run the project
-  * change into the `minecraft-design-ptrn` directory which has instruction on how to compile and run project.
+  * change into the `minecraft-design-ptrn` directory which also has instruction on how to compile and run project.
 
 ## Repo info
   * This repository contains c++ code that's not apart of any school projects. It's meant to demostrate non trivial, std::vector<int> x = {1}; c++ concepts I know.
