@@ -38,7 +38,7 @@ enum FoodItems {
     FOOD_FOOD,
 };
 
-enum BiomeNames {
+enum BiomeVariationTypes {
     BIOME_PLAINS, // PLAINS BIOMES
     BIOME_ICE_PLAINS,
     BIOME_ICE_SPIKE_PLAINS,

@@ -11,14 +11,16 @@ class PureBiome {
 protected:
     // something like uuid can be used instead of a normal int.
     int                           BiomeId_;
-    BiomeNames                    BiomeName_;
+    // BiomeNames                    BiomeName_;
     std::unique_ptr<BiomeTexture> BiomeTexture_;
     double                        BiomeWorldPercentage_; 
 public:
     virtual ~PureBiome() = default;
     std::string getBiomeColour() { 
-        std::cout << "pure Biome ggt: " << std::endl; 
-        return BiomeTexture_->biomeBlocksColour_;
+        std::cout << "pure Biome ggt: " << std::endl;
+
+        std::string str{"green"};
+        return str;
     }
 };
 

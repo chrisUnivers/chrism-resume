@@ -1,6 +1,5 @@
 # Repo Info
   * Factory Method design patterns from a minecraft perspective.
-  * ***Using vscode*** + ***the console prints***. My brain likes using text editors, vscode, but I use wsl and I have yet to set up the debugging process/json files on it.
 
 ## Repo Status for the MineCraftWorld Project
   * project name: `./MinecraftWorld`.
