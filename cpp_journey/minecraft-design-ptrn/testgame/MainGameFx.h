@@ -3,11 +3,13 @@
 
 
 #include <gtest/gtest.h>
-#include "../MinecraftWorld/Biomes/PlainsBiomeFactory.h"
-#include "../MinecraftWorld/Biomes/AllPlainsBiomes.h"
+
+#include "../MinecraftWorld/Biomes/MainBiome.h"
 
 struct ExpectedPlainsBiomePlains {
     std::string expected_biome_name = "Plains";
+    std::string expected_biome_name_pl_ice = "Plains ice"; 
+    int expected_biome_id_three = 3;
 };
 
 class MainGameTest : public testing::Test{

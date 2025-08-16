@@ -11,10 +11,12 @@ public:
         switch (biometype) {
         case BiomeVariationTypes::BIOMEPL_PLAINS: {
             int id = StaticUtils::addIdToPlainsBiome();
-            return std::make_unique<MinecraftBiomeInfo>(id, CV_BIOMENAME_BIOMEPL_PLAINS, BIOMEPL_PLAINS, BiomeTexture{BlocksSurface::sd, BlockColour::gr}, 0.0);
+            return std::make_unique<MinecraftBiomeInfo>(id, CV_BIOMENAME_BIOMEPL_PLAINS, BIOMEPL_PLAINS, BiomeTexture{BlocksSurface::sd, BlockColour::gr}, WorldTakeUp::plp);
         }
         case BiomeVariationTypes::BIOMEPL_ICE: {
-            return nullptr;
+            int id = StaticUtils::addIdToPlainsBiome();
+
+            return std::make_unique<MinecraftBiomeInfo>(id, CV_BIOMENAME_BIOMEPL_ICE, BIOMEPL_ICE, BiomeTexture{BlocksSurface::sis, BlockColour::sw}, WorldTakeUp::pl_ice);
         }
         default:
             std::cout << "Provided type does not match a valid typo" << std::endl;

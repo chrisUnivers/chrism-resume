@@ -1,17 +1,33 @@
 #ifndef PLAINS_BIOME_H
 #define PLAINS_BIOME_H
 
-
 #include "MinecraftBiome.h"
+#include "PlainsBiomeFactory.h"
 
 class PlainsBiome : public MinecraftBiome {
+private:
+    std::unique_ptr<MinecraftBiomeInfo> uniqueBiomeInfo_;
 public:
-    virtual int getBiomeId() const = 0;
-    virtual std::string getBiomeName() const = 0;
-    virtual BiomeTexture applyBiomeTexture() const = 0;
-    virtual BiomeVariationTypes getBiomeUniqueType() const = 0;
-    virtual double getbiomeWorldPercentage() const = 0;
-    void createBiome(BiomeTypes type) const override {
+    PlainsBiome(std::unique_ptr<MinecraftBiomeInfo> info) : uniqueBiomeInfo_(std::move(info)) {};
+
+    int getBiomeId() const override {
+        return uniqueBiomeInfo_->biomeId_;
+    }
+    
+    BiomeTexture applyBiomeTexture() const override {
+        return uniqueBiomeInfo_->biomeTexture_;
+    }
+    
+    std::string getBiomeName() const override {
+        return uniqueBiomeInfo_->biomeName_;
+    }
+
+    BiomeVariationTypes getBiomeUniqueType() const override {
+        return uniqueBiomeInfo_->biomeUniqueType_;
+    }
+
+    double getbiomeWorldPercentage () const override {
+        return uniqueBiomeInfo_->biomeWorldPercentage_;
     }
 };
 

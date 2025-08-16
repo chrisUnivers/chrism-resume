@@ -9,3 +9,4 @@ const std::string CV_JUNGLE_TREE_NAME = "Jungle Tree";
 const std::string CV_SPRUCE_TREE_BIOME_NAME = "Windswept Hills Biome";
 const std::string CV_JUNGLE_TREE_BIOME_NAME = "Jungle Biome";
 const std::string CV_BIOMENAME_BIOMEPL_PLAINS = "Plains";
+const std::string CV_BIOMENAME_BIOMEPL_ICE = "Plains ice";

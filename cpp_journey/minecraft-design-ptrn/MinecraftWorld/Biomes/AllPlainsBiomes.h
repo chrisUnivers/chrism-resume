@@ -8,30 +8,17 @@ class PlainsBiomePlains : public PlainsBiome {
 private:
     std::unique_ptr<MinecraftBiomeInfo> uniqueBiomeInfo_;
 public:
-    PlainsBiomePlains(std::unique_ptr<MinecraftBiomeInfo> info) : uniqueBiomeInfo_(std::move(info)) {}; 
+    PlainsBiomePlains(std::unique_ptr<MinecraftBiomeInfo> info) : PlainsBiome(std::move(info)) {}; 
     
-
-    int getBiomeId() const override {
-        return uniqueBiomeInfo_->biomeId_;
-    }
-    
-    std::string getBiomeName() const override {
-        return uniqueBiomeInfo_->biomeName_;
-    }
-    
-    BiomeTexture applyBiomeTexture() const override {
-        return uniqueBiomeInfo_->biomeTexture_;
-    }
-    
-    BiomeVariationTypes getBiomeUniqueType() const override{
-        return uniqueBiomeInfo_->biomeUniqueType_;
-    }
-
-    double getbiomeWorldPercentage () const override {
-        return uniqueBiomeInfo_->biomeWorldPercentage_;
-    }
-
     ~PlainsBiomePlains() {}
-};
 
+};
+class PlainsBiomeIce : public PlainsBiome {
+private:
+    std::unique_ptr<MinecraftBiomeInfo> uniqueBiomeInfo_;
+public:
+    PlainsBiomeIce(std::unique_ptr<MinecraftBiomeInfo> info) : PlainsBiome(std::move(info)) {};
+
+    ~PlainsBiomeIce() {};
+};
 #endif //ALL_PLAINS_BIOMES_H

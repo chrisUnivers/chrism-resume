@@ -7,34 +7,52 @@ TEST_F(MainGameTest, maingametest_biome_factory_test_Test) {
     factory = std::make_unique<PlainsBiomeFactory>();
 
     
-    auto biomeInfo1 = factory->createBiomeInfo(BIOMEPL_PLAINS);
-    auto biomeInfo3 = factory->createBiomeInfo(BIOMEPL_PLAINS);
+    auto biomeInfo_a = factory->createBiomeInfo(BIOMEPL_PLAINS);
+    auto biomeInfo_b = factory->createBiomeInfo(BIOMEPL_PLAINS);
     EXPECT_EQ(
         1,
-        biomeInfo3->biomeId_
+        biomeInfo_b->biomeId_
     );
     
     EXPECT_EQ(
         0,
-        biomeInfo1->biomeId_
+        biomeInfo_a->biomeId_
     );
 
     EXPECT_EQ(
         gmFxExpectedPLSB_.expected_biome_name,
-        biomeInfo1->biomeName_
+        biomeInfo_a->biomeName_
     );
 }
 
 TEST_F(MainGameTest, MainGameTest_createPlainsBiomePlains_Test) {
     std::unique_ptr<BiomesFactory> factory;
     factory = std::make_unique<PlainsBiomeFactory>();
-    auto biomeInfo1 = factory->createBiomeInfo(BIOMEPL_PLAINS);
-    auto biomeInfo3 = factory->createBiomeInfo(BIOMEPL_PLAINS);
+    MainBiome mainBiome;
     
-    std::unique_ptr<PlainsBiome> firstBiome = std::make_unique<PlainsBiomePlains>(std::move(biomeInfo1));
-
+    std::unique_ptr<MinecraftBiome> plains = mainBiome.createBiome(*factory, BIOMEPL_PLAINS);
+    
     EXPECT_EQ(
         gmFxExpectedPLSB_.expected_biome_name,
-        firstBiome->getBiomeName()
+        plains->getBiomeName()
     );
 }
+
+TEST_F(MainGameTest, plainsbiomeice_createbiomeConfirmId_test) {
+    std::unique_ptr<BiomesFactory> factory;
+    factory = std::make_unique<PlainsBiomeFactory>();
+    MainBiome mainBiome;
+
+    std::unique_ptr<MinecraftBiome> plainsIce = mainBiome.createBiome(*factory, BIOMEPL_ICE);
+
+    EXPECT_EQ(
+        gmFxExpectedPLSB_.expected_biome_name_pl_ice,
+        plainsIce->getBiomeName()
+    );
+
+    EXPECT_EQ(
+        gmFxExpectedPLSB_.expected_biome_id_three,
+        plainsIce->getBiomeId()
+    );
+}
+    

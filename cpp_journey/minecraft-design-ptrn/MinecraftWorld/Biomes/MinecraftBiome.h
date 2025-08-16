@@ -6,7 +6,11 @@
 
 class MinecraftBiome {    
 public:
-    virtual void createBiome(BiomeTypes type) const = 0; 
-    virtual ~MinecraftBiome() {};
+    virtual int getBiomeId() const = 0;
+    virtual BiomeTexture applyBiomeTexture() const = 0;
+    virtual std::string getBiomeName() const = 0;
+    virtual BiomeVariationTypes getBiomeUniqueType() const = 0;
+    virtual double getbiomeWorldPercentage() const = 0;
+    virtual ~MinecraftBiome() = default;
 };
 #endif // MINECRAFT_BIOME_H
