@@ -11,8 +11,8 @@ struct ExpectedPlainsBiomePlains {
     std::string expected_biome_name_pl_ice = "Plains ice"; 
     std::string expected_biome_name_wdls_frs = "WoodLands forest";
     int expected_biome_id_three = 3;
+    int expected_biome_id_four = 4;
 };
-
 class MainGameTest : public testing::Test{
 
 public:

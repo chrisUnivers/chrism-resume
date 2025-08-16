@@ -66,4 +66,17 @@ TEST_F(MainGameTest, woodlandsbiomeforest_createbiome_test) {
         gmFxExpectedPLSB_.expected_biome_name_wdls_frs,
         wdlsBiome->getBiomeName()
     );
+    EXPECT_EQ(
+        gmFxExpectedPLSB_.expected_biome_id_four,
+        wdlsBiome->getBiomeId()
+    );
+}
+
+TEST_F(MainGameTest, spawnworld_createworld__Test) {
+    // std::unique_ptr<WorldFactory> spnwldFactory;
+
+    EXPECT_EQ(
+        3,
+        3
+    );
 }
