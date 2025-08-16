@@ -57,11 +57,13 @@ TEST_F(MainGameTest, plainsbiomeice_createbiomeConfirmId_test) {
 }
 TEST_F(MainGameTest, woodlandsbiomeforest_createbiome_test) {
     std::unique_ptr<BiomesFactory> wdlsFactory;
-    // wdlsFactory = std::make_unique<WoodLandsBiomeFactory>();
+    wdlsFactory = std::make_unique<WoodLandsBiomeFactory>();
     MainBiome mainBiomewdls;
+    
+    std::unique_ptr<MinecraftBiome> wdlsBiome = mainBiomewdls.createBiome(*wdlsFactory, BIOMEWDLS_FOREST);
 
     EXPECT_EQ(
-        3,
-        3
+        gmFxExpectedPLSB_.expected_biome_name_wdls_frs,
+        wdlsBiome->getBiomeName()
     );
 }

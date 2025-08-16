@@ -5,7 +5,7 @@
 #include <iostream>
 #include "BiomesFactory.h"
 #include "AllPlainsBiomes.h"
-
+#include "AllWoodLandsBiomes.h"
 class MainBiome {
 public: 
     std::unique_ptr<MinecraftBiome> createBiome(const BiomesFactory& factory, const BiomeVariationTypes& varType) {
@@ -21,8 +21,13 @@ public:
 
             return std::make_unique<PlainsBiomeIce>(std::move(biomeInfo));
         }
+        case BiomeVariationTypes::BIOMEWDLS_FOREST: {
+            std::unique_ptr<MinecraftBiomeInfo> wdlsBioInfo = factory.createBiomeInfo(varType);
+
+            return std::make_unique<WoodLandsBiomeForest>(std::move(wdlsBioInfo));
+        }
         default:
-            std::cout << "The provided variation type is not valid" << std::endl;
+            std::cout << "The provided variation type in MainBiome is not valid" << std::endl;
 
         }
     }

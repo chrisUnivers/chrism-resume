@@ -4,7 +4,6 @@
 #include "../Utils/StaticUtils.h"
 #include "BiomesFactory.h"
 
-#include "../Utils/defaultStructs.h"
 class PlainsBiomeFactory : public BiomesFactory {
 public:
     std::unique_ptr<MinecraftBiomeInfo> createBiomeInfo(BiomeVariationTypes biometype) const override {
@@ -15,7 +14,6 @@ public:
         }
         case BiomeVariationTypes::BIOMEPL_ICE: {
             int id = StaticUtils::addIdToPlainsBiome();
-
             return std::make_unique<MinecraftBiomeInfo>(id, CV_BIOMENAME_BIOMEPL_ICE, BIOMEPL_ICE, BiomeTexture{BlocksSurface::sis, BlockColour::sw}, WorldTakeUp::pl_ice);
         }
         default:

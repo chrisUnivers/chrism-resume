@@ -1,9 +1,9 @@
 #ifndef MINECRAFT_BIOME_H
 #define MINECRAFT_BIOME_H
 
-
+#include "../Utils/defaultStructs.h"
 #include "../Utils/ItemStructs.h"
-
+#include "../Utils/StaticUtils.h"
 class MinecraftBiome {    
 public:
     virtual int getBiomeId() const = 0;

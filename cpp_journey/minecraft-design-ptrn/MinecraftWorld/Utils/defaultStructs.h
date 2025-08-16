@@ -22,9 +22,9 @@ namespace BlockColour {
 namespace WorldTakeUp {
     double plp = 67.0;
     double pl_ice = 9.0;
-    double wdl_flf = 6.0;
-    double wdl_bf = 8.0;
-    double wdl_spl = 6.0;
-    double wdl_jle = 4.0;
+    double wdls_flf = 6.0;
+    double wdls_bf = 8.0;
+    double wdls_spl = 6.0;
+    double wdls_jle = 4.0;
 };
 #endif //
