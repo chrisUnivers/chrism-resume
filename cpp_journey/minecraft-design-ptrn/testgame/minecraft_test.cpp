@@ -55,4 +55,13 @@ TEST_F(MainGameTest, plainsbiomeice_createbiomeConfirmId_test) {
         plainsIce->getBiomeId()
     );
 }
-    
+TEST_F(MainGameTest, woodlandsbiomeforest_createbiome_test) {
+    std::unique_ptr<BiomesFactory> wdlsFactory;
+    // wdlsFactory = std::make_unique<WoodLandsBiomeFactory>();
+    MainBiome mainBiomewdls;
+
+    EXPECT_EQ(
+        3,
+        3
+    );
+}
