@@ -1,14 +1,18 @@
 #ifndef MINE_UTILS_H
 #define MINE_UTILS_H
 
-
+// #include "ItemNames.h"
 #include <iostream>
-#include "ItemNames.h"
+#include <random>
+#include <sstream>
 
 namespace MineUtils {
-    int generateRandomId();
-    std::pair<std::string, std::string> biome_type_from_name(const std::string& biome_name_asked);
-    std::pair<std::string, std::string> fn_type_from_name(const std::string& input_item_name, const MinecraftItemTypes known_item_type);
+    int generateRandomId() {
+        std::random_device dev;
+        std::mt19937 rng(dev());
+        std::uniform_int_distribution<std::mt19937::result_type> rndId;
+        return 3;
+    };
     double generateRandomDouble(double min_value, double max_value);
 }
 

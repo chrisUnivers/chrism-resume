@@ -28,7 +28,7 @@ public:
         }
         default:
             std::cout << "The provided variation type in MainBiome is not valid" << std::endl;
-
+            return nullptr;
         }
     }
     virtual ~MainBiome() = default;

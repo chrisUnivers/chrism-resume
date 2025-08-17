@@ -4,12 +4,11 @@ set(This GameUtils)
 
 set(Headers
     ItemNames.h
-    ItemNames.h
     defaultValues.h
     ItemStructs.h
     MineUtils.h
 )
-
 set(Sources
     utils.cpp
+    MineUtils.cpp
 )

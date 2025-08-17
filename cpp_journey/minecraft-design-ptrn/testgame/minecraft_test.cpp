@@ -73,8 +73,10 @@ TEST_F(MainGameTest, woodlandsbiomeforest_createbiome_test) {
 }
 
 TEST_F(MainGameTest, spawnworld_createworld__Test) {
-    // std::unique_ptr<WorldFactory> spnwldFactory;
-
+    std::unique_ptr<WorldFactory> spnwldFactory;
+    spnwldFactory = std::make_unique<SpawnWorldFactory>();
+    std::vector<int> numbiomes{1};
+    // spnwldFactory->createWorldInfo(numbiomes, "cool world", SPAWN_WORLD);
     EXPECT_EQ(
         3,
         3

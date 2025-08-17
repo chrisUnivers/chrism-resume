@@ -10,7 +10,7 @@
 #include "ItemNames.h"
 #include "defaultValues.h"
 
-// #include "defaults.h"
+
 /** * @brief struct for the biome blocks textures*/
 struct BiomeTexture {
     std::string blockSurface_ = "default";
