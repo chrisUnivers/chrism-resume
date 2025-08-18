@@ -11,7 +11,7 @@ namespace MineUtils {
         std::random_device dev;
         std::mt19937 rng(dev());
         std::uniform_int_distribution<std::mt19937::result_type> rndId;
-        return 3;
+        return (rndId(rng) < 0 ? -1 * rndId(rng) : rndId(rng));
     };
     double generateRandomDouble(double min_value, double max_value);
 }

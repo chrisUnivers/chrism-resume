@@ -13,7 +13,7 @@ public:
         {
         case BiomeVariationTypes::BIOMEPL_PLAINS: {
             std::unique_ptr<MinecraftBiomeInfo> biomeInfo = factory.createBiomeInfo(varType);
-        
+            // std::unique_ptr<PlainsBiomePlains> biome = std::make_unique<PlainsBiomePlains>(std::move(biomeInfo));
             return std::make_unique<PlainsBiomePlains>(std::move(biomeInfo));
         }
         case BiomeVariationTypes::BIOMEPL_ICE: {

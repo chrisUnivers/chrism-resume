@@ -74,9 +74,12 @@ TEST_F(MainGameTest, woodlandsbiomeforest_createbiome_test) {
 
 TEST_F(MainGameTest, spawnworld_createworld__Test) {
     std::unique_ptr<WorldFactory> spnwldFactory;
-    spnwldFactory = std::make_unique<SpawnWorldFactory>();
+    WorldFactoryUtils wldUtils;
+    spnwldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
     std::vector<int> numbiomes{1};
-    // spnwldFactory->createWorldInfo(numbiomes, "cool world", SPAWN_WORLD);
+    std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(numbiomes, "cool world", SPAWN_WORLD);
+    // std::string name = wldInfo->worldBiomes_[0]->getBiomeName();
+    std::cout << "The worlds id is: " << numbiomes[0] << std::endl;
     EXPECT_EQ(
         3,
         3
