@@ -76,7 +76,10 @@ TEST_F(MainGameTest, spawnworld_createworld__Test) {
     std::unique_ptr<WorldFactory> spnwldFactory;
     WorldFactoryUtils wldUtils;
     spnwldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
-    std::vector<int> numbiomes{1};
+    std::vector<std::tuple<int, BiomeVariationTypes>> numbiomes;
+    numbiomes[0] = std::tuple<int, BiomeVariationTypes>(1, BiomeVariationTypes::BIOMEPL_PLAINS);
+    numbiomes[1] = std::tuple<int, BiomeVariationTypes>(3, BiomeVariationTypes::BIOMEWDLS_FOREST);
+    std::vector<int> numbiomes{3};
     std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(numbiomes, "cool world", SPAWN_WORLD);
     
     EXPECT_EQ(

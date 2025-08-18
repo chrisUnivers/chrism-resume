@@ -95,7 +95,12 @@ enum MinecraftItemTypes {
     BIOME
 };
 
-
+enum WorldTreeType {
+    SPRUCE_TREE,
+    OAK_TREE,
+    JUNGLE_TREE,
+    BIRCH_TREE
+};
 #endif
 
 //ItemName_; // potato cake, apple

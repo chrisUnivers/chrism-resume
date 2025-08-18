@@ -14,23 +14,30 @@ public:
         }
     }
 
-    void createWorldBiomes(std::vector<std::unique_ptr<MinecraftBiome>>& vBiomes, BiomeTypes bioType, BiomeVariationTypes bVarType, int nbiomes) override {
-        switch(bioType) {
-        case BiomeTypes::BIOME_PLAINS_BIOME: {
-            switch(bVarType) {
-                
-            case BiomeVariationTypes::BIOMEPL_PLAINS: {
-                std::unique_ptr<BiomesFactory> bFactory;
-                int countPlainsBiomes = nbiomes;
-                bFactory = std::make_unique<PlainsBiomeFactory>();
-                addBiome(*bFactory, nbiomes, bVarType, vBiomes);
-            }
-            default:
-                break;
-            }
+    void createWorldBiomes(std::vector<std::unique_ptr<MinecraftBiome>>& vBiomes, std::vector<BiomeTypes> allBiomes, vecTplBiomes nbiomes) override {
+        for (BiomeTypes bioType: allBiomes) {
+            switch(bioType) {
+            case BiomeTypes::BIOME_PLAINS_BIOME: {
 
+                for (auto bio_count : nbiomes) {
+                    auto[numOfB, bvartype] = bio_count;
+                    switch(bvartype) {
+                    case BiomeVariationTypes::BIOMEPL_PLAINS: {
+                        std::unique_ptr<BiomesFactory> bFactory;
+                        int countPlainsBiomes = numOfB;
+                        bFactory = std::make_unique<PlainsBiomeFactory>();
+                        addBiome(*bFactory, numOfB, bvartype, vBiomes);
+                    }
+                    default:
+                        break;
+                    }
+                }
+                
+
+            }
+            }
         }
-        }
+        
     }
 };
 #endif // WORLD_FACTORY_UTILS_H
