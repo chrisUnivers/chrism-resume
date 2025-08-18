@@ -80,7 +80,7 @@ TEST_F(MainGameTest, spawnworld_createworld__Test) {
     std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(numbiomes, "cool world", SPAWN_WORLD);
     
     EXPECT_EQ(
-        "Plains",
+        gmFxExpectedPLSB_.expected_biome_name,
         wldInfo->worldBiomes_[0]->getBiomeName()
     );
 }
