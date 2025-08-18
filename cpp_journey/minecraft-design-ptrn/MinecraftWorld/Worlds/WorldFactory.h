@@ -12,10 +12,10 @@ struct MinecraftWorldInfo {
     std::vector<std::unique_ptr<MinecraftBiome>> worldBiomes_;
     std::string                                  worldName_;
     WorldTypeNames                               worldType_;
-    MinecraftWorldInfo(int id, int seed, const std::vector<std::unique_ptr<MinecraftBiome>>& biomes, std::string name, WorldTypeNames type) {
+    MinecraftWorldInfo(int id, int seed, std::vector<std::unique_ptr<MinecraftBiome>>& biomes, std::string name, WorldTypeNames type) {
         worldId_ = id;
         worldSeed_ = seed;
-        // worldBiomes_ = biomes;
+        worldBiomes_.push_back(std::move(biomes[0]));
         worldName_ = name;
         worldType_ = type;
         
