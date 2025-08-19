@@ -19,5 +19,4 @@ public:
     ExpectedPlainsBiomePlains gmFxExpectedPLSB_;
 };
 
-
 #endif // MAIN_GAME_FX_H

@@ -94,5 +94,10 @@ struct MinecraftBiomeInfo {
         biomeWorldPercentage_ = bioPrg;
     }
 };
-
+struct WorldTree {
+    int              treeId_;
+    std::string      treeName_;
+    WorldTreeType    treeType_;
+    double           plantRate_;
+};
 #endif 

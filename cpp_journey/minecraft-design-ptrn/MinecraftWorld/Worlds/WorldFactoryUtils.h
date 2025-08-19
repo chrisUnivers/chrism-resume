@@ -14,30 +14,41 @@ public:
         }
     }
 
-    void createWorldBiomes(std::vector<std::unique_ptr<MinecraftBiome>>& vBiomes, std::vector<BiomeTypes> allBiomes, vecTplBiomes nbiomes) override {
-        for (BiomeTypes bioType: allBiomes) {
-            switch(bioType) {
+    void createWorldBiomes(std::vector<std::unique_ptr<MinecraftBiome>>& vBiomes, std::vector<baseBiomeTplBiome> allBiomes) override {
+        int s = allBiomes.size();
+        for (int i = 0; i < s; i++) {
+            auto[baseType, varBioCountTpl] = allBiomes[i];
+
+            switch(baseType) {
             case BiomeTypes::BIOME_PLAINS_BIOME: {
-
-                for (auto bio_count : nbiomes) {
-                    auto[numOfB, bvartype] = bio_count;
-                    switch(bvartype) {
-                    case BiomeVariationTypes::BIOMEPL_PLAINS: {
-                        std::unique_ptr<BiomesFactory> bFactory;
-                        int countPlainsBiomes = numOfB;
-                        bFactory = std::make_unique<PlainsBiomeFactory>();
-                        addBiome(*bFactory, numOfB, bvartype, vBiomes);
-                    }
-                    default:
-                        break;
-                    }
-                }
-                
-
+                std::unique_ptr<BiomesFactory> factory = std::make_unique<PlainsBiomeFactory>();
+                processBiomes(varBioCountTpl, vBiomes, *factory);
+                break;
             }
+            case BiomeTypes::BIOME_WOODLANDS_BIOME: {
+                std::unique_ptr<BiomesFactory> factory = std::make_unique<WoodLandsBiomeFactory>();
+                processBiomes(varBioCountTpl, vBiomes, *factory);
+                break;
+            }
+            default:
+                std::cout << "WorldFactoryUtils: Provided type does not match a valid biome type. " << std::endl;
+                break;
             }
         }
-        
     }
+
+    void processBiomes(vecTplBiomes varBioCountTpl, std::vector<std::unique_ptr<MinecraftBiome>>& vBiomes, BiomesFactory& bFactory) {
+        auto[numOfB, bvartype] = varBioCountTpl;
+        switch(bvartype) {
+        case BiomeVariationTypes::BIOMEPL_PLAINS: {
+            addBiome(bFactory, numOfB, bvartype, vBiomes);
+            break;
+        }
+        default:
+            std::cout << "WorldFactoryUtils: processBiomes" << std::endl;
+            break;
+        }
+    }
+        
 };
 #endif // WORLD_FACTORY_UTILS_H

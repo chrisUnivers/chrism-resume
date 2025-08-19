@@ -11,33 +11,24 @@ struct MinecraftWorldInfo {
     int                                          worldSeed_;
     WorldTypeNames                               worldType_;
     std::vector<std::unique_ptr<MinecraftBiome>> worldBiomes_;
-    std::vector<WorldTree>                       worldTrees_;
     std::string                                  worldName_;
-    MinecraftWorldInfo(int id, int seed, std::vector<std::unique_ptr<MinecraftBiome>>& biomes, std::string name, std::vector<WorldTree> trees, WorldTypeNames type) {
+    MinecraftWorldInfo(int id, int seed, std::vector<std::unique_ptr<MinecraftBiome>>& biomes, std::string name, WorldTypeNames type) {
         worldId_ = id;
         worldSeed_ = seed;
         worldType_ = type;
         worldName_ = name;
-
-        worldTrees_ = trees;
         worldBiomes_.push_back(std::move(biomes[0]));
-        
+
     };
 };
 
-struct WorldTree {
-    int              treeId_;
-    std::string      treeName_;
-    WorldTreeType    treeType_;
-    double           plantRate_;
-};
-
-using vecTplBiomes = std::vector<std::tuple<int, BiomeVariationTypes>>;
+using vecTplBiomes = std::tuple<int, BiomeVariationTypes>;
+using baseBiomeTplBiome = std::tuple<BiomeTypes, vecTplBiomes>;
 class WorldFactory {
 public:
     virtual ~WorldFactory() = default;
 
-    virtual std::unique_ptr<MinecraftWorldInfo> createWorldInfo(std::vector<BiomeTypes> allBiomes, vecTplBiomes& numbiomes, std::vector<int>& numtrees, std::string worldname, WorldTypeNames worldName) = 0;
+    virtual std::unique_ptr<MinecraftWorldInfo> createWorldInfo(std::vector<baseBiomeTplBiome> allBiomes, std::string worldname, WorldTypeNames worldName) = 0;
 };
 
 #endif // WORLD_FACTORY_H
