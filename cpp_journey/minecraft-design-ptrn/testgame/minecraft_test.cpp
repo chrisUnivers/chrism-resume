@@ -81,7 +81,7 @@ TEST_F(MainGameTest, spawnworld_createworld__Test) {
     trackBiomes.push_back(std::tuple<int, BiomeVariationTypes>(1, BiomeVariationTypes::BIOMEPL_PLAINS));
     trackBiomes.push_back(std::tuple<int, BiomeVariationTypes>(3, BiomeVariationTypes::BIOMEWDLS_FOREST));
 
-    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, trackBiomes[0]}};
+    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, trackBiomes[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, trackBiomes[1]}};
     
     std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(allBiomes, "cool world", WorldTypeNames::SPAWN_WORLD);
     

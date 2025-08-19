@@ -31,7 +31,7 @@ public:
                 break;
             }
             default:
-                std::cout << "WorldFactoryUtils: Provided type does not match a valid biome type. " << std::endl;
+                std::cout << "WorldFactoryUtils: createWorldBiomes. " << std::endl;
                 break;
             }
         }
@@ -41,6 +41,10 @@ public:
         auto[numOfB, bvartype] = varBioCountTpl;
         switch(bvartype) {
         case BiomeVariationTypes::BIOMEPL_PLAINS: {
+            addBiome(bFactory, numOfB, bvartype, vBiomes);
+            break;
+        }
+        case BiomeVariationTypes::BIOMEWDLS_FOREST: {
             addBiome(bFactory, numOfB, bvartype, vBiomes);
             break;
         }
