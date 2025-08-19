@@ -13,10 +13,17 @@ struct ExpectedPlainsBiomePlains {
     int expected_biome_id_three = 3;
     int expected_biome_id_four = 4;
 };
+
+struct WorldInput {
+    std::vector<std::tuple<int, BiomeVariationTypes>> trackBiomes_{std::tuple<int, BiomeVariationTypes>(1, BiomeVariationTypes::BIOMEPL_PLAINS), std::tuple<int, BiomeVariationTypes>(3, BiomeVariationTypes::BIOMEWDLS_FOREST)};
+    std::vector<std::string> worldNames_{"cool world"};
+};
+
 class MainGameTest : public testing::Test{
 
 public:
     ExpectedPlainsBiomePlains gmFxExpectedPLSB_;
+    WorldInput gmWorldBiomesInputs_;  
 };
 
 #endif // MAIN_GAME_FX_H
