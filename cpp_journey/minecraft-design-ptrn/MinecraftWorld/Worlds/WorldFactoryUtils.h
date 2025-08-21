@@ -36,7 +36,6 @@ public:
             }
         }
     }
-
     void processBiomes(vecTplBiomes varBioCountTpl, std::vector<std::unique_ptr<MinecraftBiome>>& vBiomes, BiomesFactory& bFactory) {
         auto[numOfB, bvartype] = varBioCountTpl;
         switch(bvartype) {
@@ -53,6 +52,39 @@ public:
             break;
         }
     }
+    void createWorldTree(std::vector<treeTypeTpl>& vecTreeTpl, std::vector<WorldTree>& vTrees) {
+        double plantrate = 8.0;
+        std::string treename = "";
         
+        auto tree_init = [&vTrees](std::string name, double rate, WorldTreeType type, int numTrees){
+            for (int v = 0; v < numTrees; v++) {  vTrees.push_back({WorldTree{MineUtils::generateRandomId(), name, type, rate}}); };
+        };
+        
+        for (auto treeTpl : vecTreeTpl) {
+            auto[numTrees, treeType] = treeTpl;
+            switch(treeType) {
+            case WorldTreeType::OAK_TREE: {
+                treename = "Oak tree";
+                plantrate = 63.3;
+                tree_init(treename, plantrate, treeType, numTrees);
+                break;
+            }
+            case WorldTreeType::SPRUCE_TREE: {
+                treename = "Spruce tree";
+                plantrate = 57.6;
+                tree_init(treename, plantrate, treeType, numTrees);
+                break;
+            }
+            case WorldTreeType::BIRCH_TREE: {
+                treename = "Birch tree";
+                plantrate = 64.8;
+                tree_init(treename, plantrate, treeType, numTrees);
+                break;
+            }
+            default: 
+                throw std::invalid_argument("SpawnWorld Factory had problems creating world trees with the given arguments");
+            }
+        }
+    }        
 };
 #endif // WORLD_FACTORY_UTILS_H

@@ -14,16 +14,20 @@ public:
     
     SpawnWorldFactory(WorldFactoryUtils utils) : factoryUtils_(utils) {};
     
-    std::unique_ptr<MinecraftWorldInfo> createWorldInfo(std::vector<baseBiomeTplBiome> allBiomes, std::string worldname, WorldTypeNames worldtype) override { 
+    std::unique_ptr<MinecraftWorldInfo> createWorldInfo(std::vector<baseBiomeTplBiome> allBiomes, std::vector<treeTypeTpl>& treeTpls, int numOfAllTrees, std::string worldname, WorldTypeNames worldtype) override { 
         switch (worldtype) {
         case WorldTypeNames::SPAWN_WORLD: {
             int id = MineUtils::generateRandomId();
             
             int seed = MineUtils::generateRandomId();
             vecPtrBiomes uniqueBiomes;
+            
             factoryUtils_.createWorldBiomes(uniqueBiomes, allBiomes);
-                       
-            return std::make_unique<MinecraftWorldInfo>(id, seed, uniqueBiomes, worldname, worldtype);
+            std::vector<WorldTree> uniqueTrees;
+            uniqueTrees.reserve(numOfAllTrees);
+            if (uniqueTrees.size() > 0) 
+                factoryUtils_.createWorldTree(treeTpls, uniqueTrees); 
+            return std::make_unique<MinecraftWorldInfo>(id, seed, uniqueBiomes, worldname, uniqueTrees, worldtype);
         }
         default:
             std::cout << "Provided type does not match a valid type" << std::endl;

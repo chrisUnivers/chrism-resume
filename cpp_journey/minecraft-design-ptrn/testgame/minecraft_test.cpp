@@ -71,15 +71,32 @@ TEST_F(MainGameTest, woodlandsbiomeforest_createbiome_test) {
         wdlsBiome->getBiomeId()
     );
 }
-
-TEST_F(MainGameTest, spawnworld_createworld__Test) {
+TEST_F(MainGameTest, spawnworld_useworldfactorynotrees__Test) {
     std::unique_ptr<WorldFactory> spnwldFactory;
     WorldFactoryUtils wldUtils;
     spnwldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
 
     std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldBiomesInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldBiomesInputs_.trackBiomes_[1]}};
     
-    std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(allBiomes, gmWorldBiomesInputs_.worldNames_[0], WorldTypeNames::SPAWN_WORLD);
+    std::vector<treeTypeTpl> wldTrees{};
+
+    std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(allBiomes, wldTrees, 0,gmWorldBiomesInputs_.worldNames_[0], WorldTypeNames::SPAWN_WORLD);
+    
+    EXPECT_EQ(
+        gmFxExpectedPLSB_.expected_biome_name,
+        wldInfo->worldBiomes_[0]->getBiomeName()
+    );
+}
+TEST_F(MainGameTest, spawnworld_useworldfactoryaddtrees__Test) {
+    std::unique_ptr<WorldFactory> spnwldFactory;
+    WorldFactoryUtils wldUtils;
+    spnwldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
+
+    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldBiomesInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldBiomesInputs_.trackBiomes_[1]}};
+    
+    std::vector<treeTypeTpl> wldTrees{std::tuple<int, WorldTreeType>(1, WorldTreeType::OAK_TREE), std::tuple<int, WorldTreeType>(3, WorldTreeType::SPRUCE_TREE)};
+
+    std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(allBiomes, wldTrees, 4,gmWorldBiomesInputs_.worldNames_[0], WorldTypeNames::SPAWN_WORLD);
     
     EXPECT_EQ(
         gmFxExpectedPLSB_.expected_biome_name,
