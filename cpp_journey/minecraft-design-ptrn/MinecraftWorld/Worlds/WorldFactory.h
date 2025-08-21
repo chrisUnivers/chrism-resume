@@ -21,7 +21,6 @@ struct MinecraftWorldInfo {
 
         worldTrees_ = wldTrees;
         for ( auto& biome : biomes) { worldBiomes_.push_back(std::move(biomes[0])); }
-
     };
 };
 
