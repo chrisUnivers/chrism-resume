@@ -109,10 +109,18 @@ TEST_F(MainGameTest, spawnworld_createworld__test) {
     std::unique_ptr<WorldFactory> spwnWldFactory;
     WorldFactoryUtils wldUtils;
     spwnWldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
+    
     MainWorld mainWorld(std::move(spwnWldFactory));
 
+    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldBiomesInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldBiomesInputs_.trackBiomes_[1]}};
+    
+    std::vector<treeTypeTpl> wldTrees{std::tuple<int, WorldTreeType>(1, WorldTreeType::OAK_TREE), std::tuple<int, WorldTreeType>(3, WorldTreeType::SPRUCE_TREE)};
+
+    std::unique_ptr<MinecraftWorld> spwnWld = mainWorld.createWorld(allBiomes, wldTrees, 4, gmWorldBiomesInputs_.worldNames_[0], SPAWN_WORLD);
+
+    
     EXPECT_EQ(
-        3,
-        3
+        gmFxExpectedPLSB_.expected_wld_name,
+        spwnWld->getWorldName()
     );
 }
