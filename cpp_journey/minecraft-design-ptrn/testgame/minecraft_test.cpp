@@ -87,6 +87,7 @@ TEST_F(MainGameTest, spawnworld_useworldfactorynotrees__Test) {
         wldInfo->worldBiomes_[0]->getBiomeName()
     );
 }
+
 TEST_F(MainGameTest, spawnworld_useworldfactoryaddtrees__Test) {
     std::unique_ptr<WorldFactory> spnwldFactory;
     WorldFactoryUtils wldUtils;
@@ -102,4 +103,11 @@ TEST_F(MainGameTest, spawnworld_useworldfactoryaddtrees__Test) {
         gmFxExpectedPLSB_.expected_biome_name,
         wldInfo->worldBiomes_[0]->getBiomeName()
     );
+}
+
+TEST_F(MainGameTest, spawnworld_createworld__test) {
+    std::unique_ptr<WorldFactory> spwnWldFactory;
+    WorldFactoryUtils wldUtils;
+    spwnWldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
+    MainWorld mainWorld(std::move(spwnWldFactory));
 }
