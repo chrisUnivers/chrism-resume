@@ -110,4 +110,9 @@ TEST_F(MainGameTest, spawnworld_createworld__test) {
     WorldFactoryUtils wldUtils;
     spwnWldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
     MainWorld mainWorld(std::move(spwnWldFactory));
+
+    EXPECT_EQ(
+        3,
+        3
+    );
 }

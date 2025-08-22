@@ -1,17 +1,17 @@
-// #ifndef MINECRAFT_WORLD_H
-// #define MINECRAFT_WORLD_H
+#ifndef MINECRAFT_WORLD_H
+#define MINECRAFT_WORLD_H
 
-// #include "PureWorld.h"
-// #include "../Biomes/PlainsBiome.h"
-// #include "../Biomes/WoodLandsBiome.h"
+#include <vector>
+#include <string>
+#include "../Biomes/MainBiome.h"
 
 
 
-// class MinecraftWorld : public PureWorld {
-// public:
-//     MinecraftWorld() {};
-//     virtual ~MinecraftWorld() = default;
-//     virtual void getPlainsBiomeTexture(int nth_bio) const = 0;
-// };
-
-// #endif
+class MinecraftWorld {
+public:
+    virtual int getWorldId() const = 0;
+    virtual ~MinecraftWorld() = default;
+    
+    virtual std::string getWorldName() const = 0;
+};
+#endif // MINECRAFT_WORLD_H

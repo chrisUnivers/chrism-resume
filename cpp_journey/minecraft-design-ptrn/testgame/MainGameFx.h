@@ -3,7 +3,7 @@
 
 
 #include <gtest/gtest.h>
-#include "../MinecraftWorld/Worlds/SpawnWorldFactory.h"
+#include "../MinecraftWorld/Worlds/MainWorld.h"
 #include "../MinecraftWorld/Biomes/MainBiome.h"
 
 struct ExpectedPlainsBiomePlains {
