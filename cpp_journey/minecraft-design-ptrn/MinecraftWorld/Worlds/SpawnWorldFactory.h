@@ -25,8 +25,8 @@ public:
             factoryUtils_.createWorldBiomes(uniqueBiomes, allBiomes);
             std::vector<WorldTree> uniqueTrees;
             uniqueTrees.reserve(numOfAllTrees);
-            if (uniqueTrees.size() > 0) 
-                factoryUtils_.createWorldTree(treeTpls, uniqueTrees); 
+             
+            factoryUtils_.createWorldTree(treeTpls, uniqueTrees);
             return std::make_unique<MinecraftWorldInfo>(id, seed, uniqueBiomes, worldname, uniqueTrees, worldtype);
         }
         default:

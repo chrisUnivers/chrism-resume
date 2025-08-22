@@ -17,8 +17,16 @@ public:
     std::string getWorldName() const override {
         return worldInfo_->worldName_;
     }
+    
+
+    std::vector<std::unique_ptr<MinecraftBiome>>::const_iterator getWorldBiome() const override {
+        return worldInfo_->worldBiomes_.cbegin();
+    }
+
+    std::vector<WorldTree>::iterator getWorldTress() const override {
+        return worldInfo_->worldTrees_.begin();
+    }
+    
     ~SpawnWorld() = default;
-
-
 };
 #endif // SPAWN_WORLD_H

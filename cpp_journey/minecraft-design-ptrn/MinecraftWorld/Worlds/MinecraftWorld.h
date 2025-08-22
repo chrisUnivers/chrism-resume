@@ -13,5 +13,7 @@ public:
     
     virtual int getWorldId() const = 0;
     virtual std::string getWorldName() const = 0;
+    virtual std::vector<std::unique_ptr<MinecraftBiome>>::const_iterator getWorldBiome() const = 0;
+    virtual std::vector<WorldTree>::iterator getWorldTress() const = 0;
 };
 #endif // MINECRAFT_WORLD_H

@@ -76,11 +76,11 @@ TEST_F(MainGameTest, spawnworld_useworldfactorynotrees__Test) {
     WorldFactoryUtils wldUtils;
     spnwldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
 
-    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldBiomesInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldBiomesInputs_.trackBiomes_[1]}};
+    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldInputs_.trackBiomes_[1]}};
     
     std::vector<treeTypeTpl> wldTrees{};
 
-    std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(allBiomes, wldTrees, 0,gmWorldBiomesInputs_.worldNames_[0], WorldTypeNames::SPAWN_WORLD);
+    std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(allBiomes, wldTrees, 0,gmWorldInputs_.worldNames_[0], WorldTypeNames::SPAWN_WORLD);
     
     EXPECT_EQ(
         gmFxExpectedPLSB_.expected_biome_name,
@@ -93,11 +93,11 @@ TEST_F(MainGameTest, spawnworld_useworldfactoryaddtrees__Test) {
     WorldFactoryUtils wldUtils;
     spnwldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
 
-    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldBiomesInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldBiomesInputs_.trackBiomes_[1]}};
+    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldInputs_.trackBiomes_[1]}};
     
     std::vector<treeTypeTpl> wldTrees{std::tuple<int, WorldTreeType>(1, WorldTreeType::OAK_TREE), std::tuple<int, WorldTreeType>(3, WorldTreeType::SPRUCE_TREE)};
 
-    std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(allBiomes, wldTrees, 4,gmWorldBiomesInputs_.worldNames_[0], WorldTypeNames::SPAWN_WORLD);
+    std::unique_ptr<MinecraftWorldInfo> wldInfo = spnwldFactory->createWorldInfo(allBiomes, wldTrees, 4,gmWorldInputs_.worldNames_[0], WorldTypeNames::SPAWN_WORLD);
     
     EXPECT_EQ(
         gmFxExpectedPLSB_.expected_biome_name,
@@ -112,15 +112,45 @@ TEST_F(MainGameTest, spawnworld_createworld__test) {
     
     MainWorld mainWorld(std::move(spwnWldFactory));
 
-    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldBiomesInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldBiomesInputs_.trackBiomes_[1]}};
+    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldInputs_.trackBiomes_[1]}};
     
     std::vector<treeTypeTpl> wldTrees{std::tuple<int, WorldTreeType>(1, WorldTreeType::OAK_TREE), std::tuple<int, WorldTreeType>(3, WorldTreeType::SPRUCE_TREE)};
 
-    std::unique_ptr<MinecraftWorld> spwnWld = mainWorld.createWorld(allBiomes, wldTrees, 4, gmWorldBiomesInputs_.worldNames_[0], SPAWN_WORLD);
+    std::unique_ptr<MinecraftWorld> spwnWld = mainWorld.createWorld(allBiomes, wldTrees, 4, gmWorldInputs_.worldNames_[0], SPAWN_WORLD);
 
-    
+
     EXPECT_EQ(
         gmFxExpectedPLSB_.expected_wld_name,
         spwnWld->getWorldName()
+    );
+}
+TEST_F(MainGameTest, spawnworld_getworldtrees__Test) {
+    std::unique_ptr<WorldFactory> spwnWldFactory;
+    WorldFactoryUtils wldUtils;
+    spwnWldFactory = std::make_unique<SpawnWorldFactory>(wldUtils);
+    
+    MainWorld mainWorld(std::move(spwnWldFactory));
+
+    std::vector<baseBiomeTplBiome> allBiomes{{BiomeTypes::BIOME_PLAINS_BIOME, gmWorldInputs_.trackBiomes_[0]}, {BiomeTypes::BIOME_WOODLANDS_BIOME, gmWorldInputs_.trackBiomes_[1]}};
+
+    std::vector<treeTypeTpl> wldTrees{std::tuple<int, WorldTreeType>(1, WorldTreeType::OAK_TREE), std::tuple<int, WorldTreeType>(3, WorldTreeType::SPRUCE_TREE)};
+    
+    std::unique_ptr<MinecraftWorld> spwnWld = mainWorld.createWorld(allBiomes, wldTrees, 4, gmWorldInputs_.worldNames_[1], SPAWN_WORLD);
+    
+    EXPECT_EQ(
+        gmWorldInputs_.worldNames_[1],
+        spwnWld->getWorldName()
+    );
+    
+    EXPECT_EQ(
+        gmWorldInputs_.expected_wld_tree_names_[0],
+        spwnWld->getWorldTress()->treeName_
+    );
+
+    WorldTree tree = *(spwnWld->getWorldTress() + 2);
+    std::string treename = tree.treeName_;
+    EXPECT_EQ(
+        gmWorldInputs_.expected_wld_tree_names_[1],
+        treename
     );
 }
