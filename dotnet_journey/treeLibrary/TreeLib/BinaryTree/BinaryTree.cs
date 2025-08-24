@@ -85,5 +85,14 @@ namespace TreeLib.BinaryTree
                 numberOfNodes = Root.GetNumbOfNodes();
             return numberOfNodes;
         }
+
+        public IEnumerator<T> GetInorderEnumerator()
+        {
+            return new InorderEnumerator();
+        }
+
+        private class InorderEnumerator : IEnumerator<T>
+        {
+        }
     }
 }

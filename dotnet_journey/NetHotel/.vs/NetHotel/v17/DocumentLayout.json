@@ -1,0 +1,130 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|c:\\maya_dev\\vscode_resprojects\\resumekdot\\csharp_journey\\nethotel\\nht.nethotel.domain\\database\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|solutionrelative:nht.nethotel.domain\\database\\applicationcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|c:\\maya_dev\\vscode_resprojects\\resumekdot\\csharp_journey\\nethotel\\nht.nethotel.domain\\domainobjects\\hotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|solutionrelative:nht.nethotel.domain\\domainobjects\\hotel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|c:\\maya_dev\\vscode_resprojects\\resumekdot\\csharp_journey\\nethotel\\nht.nethotel.domain\\domainobjects\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|solutionrelative:nht.nethotel.domain\\domainobjects\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|c:\\maya_dev\\vscode_resprojects\\resumekdot\\csharp_journey\\nethotel\\nht.nethotel.domain\\domainobjects\\guest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|solutionrelative:nht.nethotel.domain\\domainobjects\\guest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|c:\\maya_dev\\vscode_resprojects\\resumekdot\\csharp_journey\\nethotel\\nht.nethotel.domain\\domainobjects\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|solutionrelative:nht.nethotel.domain\\domainobjects\\booking.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|c:\\maya_dev\\vscode_resprojects\\resumekdot\\csharp_journey\\nethotel\\nht.nethotel.domain\\domainobjects\\amenity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5EF631B5-AFAF-48CC-9C4C-FDC993B6D16D}|Nht.NetHotel.Domain\\Nht.NetHotel.Domain.csproj|solutionrelative:nht.nethotel.domain\\domainobjects\\amenity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Room.cs",
+              "DocumentMoniker": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Room.cs",
+              "RelativeDocumentMoniker": "Nht.NetHotel.Domain\\DomainObjects\\Room.cs",
+              "ToolTip": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Room.cs",
+              "RelativeToolTip": "Nht.NetHotel.Domain\\DomainObjects\\Room.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAFAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T16:47:05.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Guest.cs",
+              "DocumentMoniker": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Guest.cs",
+              "RelativeDocumentMoniker": "Nht.NetHotel.Domain\\DomainObjects\\Guest.cs",
+              "ToolTip": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Guest.cs",
+              "RelativeToolTip": "Nht.NetHotel.Domain\\DomainObjects\\Guest.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAAsAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T16:33:57.584Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Amenity.cs",
+              "DocumentMoniker": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Amenity.cs",
+              "RelativeDocumentMoniker": "Nht.NetHotel.Domain\\DomainObjects\\Amenity.cs",
+              "ToolTip": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Amenity.cs",
+              "RelativeToolTip": "Nht.NetHotel.Domain\\DomainObjects\\Amenity.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T16:30:23.781Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Hotel.cs",
+              "DocumentMoniker": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Hotel.cs",
+              "RelativeDocumentMoniker": "Nht.NetHotel.Domain\\DomainObjects\\Hotel.cs",
+              "ToolTip": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Hotel.cs",
+              "RelativeToolTip": "Nht.NetHotel.Domain\\DomainObjects\\Hotel.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAA2AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T16:29:53.348Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ApplicationContext.cs",
+              "DocumentMoniker": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\Database\\ApplicationContext.cs",
+              "RelativeDocumentMoniker": "Nht.NetHotel.Domain\\Database\\ApplicationContext.cs",
+              "ToolTip": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\Database\\ApplicationContext.cs",
+              "RelativeToolTip": "Nht.NetHotel.Domain\\Database\\ApplicationContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAYAAAABAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T16:26:56.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Booking.cs",
+              "DocumentMoniker": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Booking.cs",
+              "RelativeDocumentMoniker": "Nht.NetHotel.Domain\\DomainObjects\\Booking.cs",
+              "ToolTip": "C:\\maya_dev\\vscode_resProjects\\resumekdot\\csharp_journey\\NetHotel\\Nht.NetHotel.Domain\\DomainObjects\\Booking.cs",
+              "RelativeToolTip": "Nht.NetHotel.Domain\\DomainObjects\\Booking.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAApAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-06T11:09:40.123Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

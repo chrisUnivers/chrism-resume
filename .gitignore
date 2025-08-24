@@ -4,7 +4,7 @@ node_modules/
 build/
 bin/
 public/
-
+obj/
 # Compiled output
 dist/
 /tmp
@@ -31,7 +31,7 @@ yarn-error.log
 *.sublime-workspace
 
 # Visual Studio Code
-.vscode/*
+.vscode/
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
