@@ -93,6 +93,7 @@ namespace TreeLib.BinaryTree
 
         private class InorderEnumerator : IEnumerator<T>
         {
+            // stack librabry
         }
     }
 }
