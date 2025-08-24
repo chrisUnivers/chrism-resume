@@ -32,7 +32,7 @@ namespace TreeLib.StackLibrary
         }
         public bool IsEmpty()
         {
-            return (RootNode_ == null);
+            return RootNode_!.GetData() == null;
         }
         public void Clear()
         {

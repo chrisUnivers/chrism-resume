@@ -1,4 +1,6 @@
 ﻿using TreeLib.BinaryNodes;
+using TreeLib.BinaryTree;
+using TreeLib.StackLibrary;
 
 namespace TreeLib
 {
@@ -14,12 +16,32 @@ namespace TreeLib
             BinaryNode<string> nodeE = new(linkedNodeds[4]);
             BinaryNode<string> nodeF = new(linkedNodeds[5]);
             nodeA.LeftChild = nodeB;
+            nodeB.LeftChild = nodeE;
             nodeA.RightChild = nodeC;
+
             nodeB.RightChild = nodeD;
-            nodeD.LeftChild = nodeE;
-            nodeE.RightChild = nodeF;
+            nodeC.LeftChild = nodeF;
 
             ProcessNodes(nodeA);
+            BinaryTree<string> treeL = new(linkedNodeds[6]);
+            BinaryTree<string> treeR = new(linkedNodeds[4]);
+            BinaryTree<string> root = new();
+            int tree_set = root.SetTree(linkedNodeds[0], treeL, treeR);
+
+            IEnumerator<string> treeInOdrItr = root.GetInorderEnumerator();
+
+            try
+            {
+                while (treeInOdrItr.MoveNext())
+                {
+                    Console.WriteLine($"Next Data value is: {treeInOdrItr.Current}");
+                }
+            }
+            catch (MyEmptyStackException e)
+            {
+                Console.WriteLine(e.Message);
+            }       
+            
         }
         public static void ProcessNodes(BinaryNode<string> node)
         {

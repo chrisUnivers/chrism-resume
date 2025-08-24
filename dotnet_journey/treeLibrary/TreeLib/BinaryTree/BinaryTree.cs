@@ -1,4 +1,6 @@
+using System.Collections;
 using TreeLib.BinaryNodes;
+using TreeLib.StackLibrary;
 
 namespace TreeLib.BinaryTree
 {
@@ -7,7 +9,7 @@ namespace TreeLib.BinaryTree
         private BinaryNode<T>? Root { set; get; }
         public BinaryTree() { Root = null; }
 
-        public BinaryTree(T rootData) : this(rootData, null, null) { }
+        public BinaryTree(T rootData) => Root = new(rootData);
         public BinaryTree(T rootData, BinaryTree<T>? leftTree, BinaryTree<T>? rightTree)
         {
 
@@ -18,8 +20,8 @@ namespace TreeLib.BinaryTree
         {
             if ((leftTree is BinaryTree<T> nwLeftTree) && (rightTree is BinaryTree<T> nwRightTree))
             {
-
                 InitTree(rootData, nwLeftTree, nwRightTree);
+                return 1;
             }
             return -1;
         }
@@ -29,7 +31,7 @@ namespace TreeLib.BinaryTree
 
             if ((leftTree != null) && !leftTree.IsEmpty())
             {
-                Root.RightChild = leftTree.Root;
+                Root.LeftChild = leftTree.Root;
             }
             if ((rightTree != null) && !rightTree.IsEmpty())
             {
@@ -88,12 +90,58 @@ namespace TreeLib.BinaryTree
 
         public IEnumerator<T> GetInorderEnumerator()
         {
-            return new InorderEnumerator();
+            return new InorderEnumerator(Root!);
         }
 
         private class InorderEnumerator : IEnumerator<T>
         {
-            // stack librabry
+            private IStack<BinaryNode<T>> rootStack;
+            private BinaryNode<T> itrNode;
+            private BinaryNode<T> CurrentNode_;
+            public InorderEnumerator(BinaryNode<T> root)
+            {
+                rootStack = new LinkedStack<BinaryNode<T>>();
+                CurrentNode_ = root;
+                itrNode = CurrentNode_;
+            }
+            public T Current
+            {
+                get
+                {
+                    return CurrentNode_.Data!;
+                }
+            }
+            private bool HasNext() { return !rootStack.IsEmpty() || (CurrentNode_ != null); }
+            object IEnumerator.Current => this.itrNode;
+            public bool MoveNext()
+            {
+                BinaryNode<T>? nextNode = null;
+
+                bool mvNext = false;
+
+                while (itrNode != null)
+                {
+                    rootStack.Push(itrNode);
+                    itrNode = itrNode.LeftChild!;
+                }
+                
+                if (!(rootStack.IsEmpty()))
+                {
+                    nextNode = rootStack.Pop();
+                    CurrentNode_ = nextNode.Clone();
+                    itrNode = nextNode.RightChild!;
+                    mvNext = true;
+                }
+                else
+                    throw new MyEmptyStackException();
+                return mvNext;
+            }
+            public void Reset()
+            {
+                rootStack.Clear();
+            }
+
+            public void Dispose() {}
         }
     }
 }

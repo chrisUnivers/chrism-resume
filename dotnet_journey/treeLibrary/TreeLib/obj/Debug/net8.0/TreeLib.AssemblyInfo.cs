@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TreeLib")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c4532bc87cdc84df62556db8fdca7382285f228d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+abc4ab25c746d4261c0c9eb028457b38e927e772")]
 [assembly: System.Reflection.AssemblyProductAttribute("TreeLib")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TreeLib")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
