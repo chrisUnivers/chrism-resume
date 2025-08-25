@@ -18,13 +18,11 @@ namespace TreeLib.BinaryTree
 
         public int SetTree(T rootData, IBinaryTree<T> leftTree, IBinaryTree<T> rightTree)
         {
-            if ((leftTree is BinaryTree<T> nwLeftTree) && (rightTree is BinaryTree<T> nwRightTree))
-            {
-                InitTree(rootData, nwLeftTree, nwRightTree);
-                return 1;
-            }
-            return -1;
+
+            InitTree(rootData, (BinaryTree<T>)leftTree, (BinaryTree<T>)rightTree);
+            return 1;
         }
+
         private void InitTree(T rootData, BinaryTree<T>? leftTree, BinaryTree<T>? rightTree)
         {
             Root = new BinaryNode<T>(rootData);
@@ -51,17 +49,17 @@ namespace TreeLib.BinaryTree
 
         public T GetRootData()
         {
-            if (Root.Data != null)
-                return Root.Data;
+            if (!IsEmpty())
+                return Root!.Data!;
             else
                 throw new MyEmptyTreeExpection();
         }
         public void SetRootData(T rootData)
         {
-            Root.Data = rootData;
+            Root!.Data = rootData;
         }
 
-        public bool IsEmpty() { return Root.Data == null; }
+        public bool IsEmpty() { return Root == null; }
 
         public void Clear() => Root = null;
 
@@ -69,7 +67,7 @@ namespace TreeLib.BinaryTree
 
         protected BinaryNode<T> GetRootNode()
         {
-            return Root;
+            return Root!;
         }
 
         public int GetHeight()
@@ -91,6 +89,11 @@ namespace TreeLib.BinaryTree
         public IEnumerator<T> GetInorderEnumerator()
         {
             return new InorderEnumerator(Root!);
+        }
+
+        public IEnumerator<T> GetPreorderEnumerator()
+        {
+            return new PreorderEnumerator(Root!);
         }
 
         private class InorderEnumerator : IEnumerator<T>
@@ -124,7 +127,7 @@ namespace TreeLib.BinaryTree
                     rootStack.Push(itrNode);
                     itrNode = itrNode.LeftChild!;
                 }
-                
+
                 if (!(rootStack.IsEmpty()))
                 {
                     nextNode = rootStack.Pop();
@@ -141,7 +144,58 @@ namespace TreeLib.BinaryTree
                 rootStack.Clear();
             }
 
-            public void Dispose() {}
+            public void Dispose() { }
+        }
+        private class PreorderEnumerator : IEnumerator<T>
+        {
+            private IStack<BinaryNode<T>> rootStack;
+            private BinaryNode<T> itrNode;
+            private BinaryNode<T> CurrentNode_;
+            public PreorderEnumerator(BinaryNode<T> root)
+            {
+                rootStack = new LinkedStack<BinaryNode<T>>();
+                CurrentNode_ = root;
+                itrNode = CurrentNode_;
+            }
+            public T Current
+            {
+                get
+                {
+                    return CurrentNode_.Data!;
+                }
+            }
+            object IEnumerator.Current => this.itrNode;
+            public bool MoveNext()
+            {
+                BinaryNode<T>? nextNode = null;
+
+                bool mvNext = false;
+
+                if (itrNode != null)
+                {
+                    rootStack.Push(itrNode);
+                    
+                }
+
+                if (!(rootStack.IsEmpty()))
+                {
+                    nextNode = rootStack.Pop();
+                    CurrentNode_ = nextNode.Clone();
+                    if (nextNode.RightChild != null )
+                        rootStack.Push(nextNode.RightChild);
+                    itrNode = nextNode.LeftChild!;
+                    mvNext = true;
+                }
+                else
+                    throw new MyEmptyStackException();
+                return mvNext;
+            }
+            public void Reset()
+            {
+                rootStack.Clear();
+            }
+
+            public void Dispose() { }
         }
     }
 }

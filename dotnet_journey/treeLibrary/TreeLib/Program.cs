@@ -23,35 +23,51 @@ namespace TreeLib
             nodeC.LeftChild = nodeF;
 
             ProcessNodes(nodeA);
-            BinaryTree<string> treeL = new(linkedNodeds[6]);
-            BinaryTree<string> treeR = new(linkedNodeds[4]);
+            
+            BinaryTree<string> treeG = new("G");
+            BinaryTree<string> treeD = new("D");
+            BinaryTree<string> treeB = new("B");
+            BinaryTree<string> treeC = new("C");
+            BinaryTree<string> treeF = new("F");
+            BinaryTree<string> treeE = new("E");
             BinaryTree<string> root = new();
-            int tree_set = root.SetTree(linkedNodeds[0], treeL, treeR);
+            
+            int setF = treeF.SetTree(treeF.GetRootData(), null, treeG);
+            int setC = treeC.SetTree(treeC.GetRootData(), treeF, null);
+            int setB = treeB.SetTree(treeB.GetRootData(), treeD, treeE);
+            int tree_set = root.SetTree("A", treeB, treeC);
 
             IEnumerator<string> treeInOdrItr = root.GetInorderEnumerator();
+            IEnumerator<string> treePreOdrItr = root.GetPreorderEnumerator();
 
+            GetEnumerator(treePreOdrItr, "Inorder");
+            GetEnumerator(treeInOdrItr, "Preorder");
+
+        }
+        public static void ProcessNodes(BinaryNode<string> node)
+        {
+            if (node != null)
+            {
+                Console.WriteLine($"Node is: {node.Data}");
+                ProcessNodes(node.LeftChild!);
+                ProcessNodes(node.RightChild!);
+            }
+        }
+
+        public static void GetEnumerator(IEnumerator<string> itr, string itrName)
+        {
             try
             {
-                while (treeInOdrItr.MoveNext())
+                Console.WriteLine($"Enumerator: {itrName}");
+                while (itr.MoveNext())
                 {
-                    Console.WriteLine($"Next Data value is: {treeInOdrItr.Current}");
+                    Console.WriteLine($"Next Data value is: {itr.Current}");
                 }
             }
             catch (MyEmptyStackException e)
             {
                 Console.WriteLine(e.Message);
-            }       
-            
-        }
-        public static void ProcessNodes(BinaryNode<string> node)
-        {
-            if (node != null) {
-                Console.WriteLine($"Node is: {node.Data}");
-                ProcessNodes(node.LeftChild!);
-                ProcessNodes(node.RightChild!); 
             }
         }
-            
     }
-
 }
