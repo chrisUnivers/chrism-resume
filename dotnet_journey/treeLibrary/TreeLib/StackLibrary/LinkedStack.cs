@@ -1,9 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace TreeLib.StackLibrary
 {
 
     public class LinkedStack<T>(T? newT) : IStack<T>
     {
-        private NodeStack<T>? RootNode_ { set; get; } = new NodeStack<T>(newT);
+        private NodeStack<T>? RootNode_ { set; get; } = new NodeStack<T>(newT!);
         public LinkedStack() : this(default) { }
         public void Push(T newData) => RootNode_ = new NodeStack<T>(newData, RootNode_);
         public T Pop()
@@ -38,6 +40,7 @@ namespace TreeLib.StackLibrary
         {
             RootNode_ = null;
         }
+        [SuppressMessage("Compiler", "CS0693", Justification = "Same type is used")]
         private class NodeStack<T>
         {
             private T Data { set; get; }
@@ -54,7 +57,7 @@ namespace TreeLib.StackLibrary
             }
             public NodeStack<T> GetNextNode()
             {
-                return Next;
+                return Next!;
             }
         }
     }

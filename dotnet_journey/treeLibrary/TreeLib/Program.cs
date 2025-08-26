@@ -1,5 +1,6 @@
 ﻿using TreeLib.BinaryNodes;
 using TreeLib.BinaryTree;
+using TreeLib.HandleInputs;
 using TreeLib.StackLibrary;
 
 namespace TreeLib
@@ -23,7 +24,7 @@ namespace TreeLib
             nodeC.LeftChild = nodeF;
 
             ProcessNodes(nodeA);
-            
+            BinaryTree<string> treeH = new("H");
             BinaryTree<string> treeG = new("G");
             BinaryTree<string> treeD = new("D");
             BinaryTree<string> treeB = new("B");
@@ -31,18 +32,20 @@ namespace TreeLib
             BinaryTree<string> treeF = new("F");
             BinaryTree<string> treeE = new("E");
             BinaryTree<string> root = new();
-            
-            int setF = treeF.SetTree(treeF.GetRootData(), null, treeG);
-            int setC = treeC.SetTree(treeC.GetRootData(), treeF, null);
+
+            int setF = treeF.SetTree(treeF.GetRootData(), null!, treeG);
+            int setC = treeC.SetTree(treeC.GetRootData(), treeF, treeH);
+
             int setB = treeB.SetTree(treeB.GetRootData(), treeD, treeE);
             int tree_set = root.SetTree("A", treeB, treeC);
 
             IEnumerator<string> treeInOdrItr = root.GetInorderEnumerator();
             IEnumerator<string> treePreOdrItr = root.GetPreorderEnumerator();
 
-            GetEnumerator(treePreOdrItr, "Inorder");
-            GetEnumerator(treeInOdrItr, "Preorder");
+            GetEnumerator(treeInOdrItr, "Inorder");
+            GetEnumerator(treePreOdrItr, "Preorder");
 
+            int readFile = ProcessInputFile("./Inputs/treeInputs.txt");
         }
         public static void ProcessNodes(BinaryNode<string> node)
         {
@@ -69,5 +72,18 @@ namespace TreeLib
                 Console.WriteLine(e.Message);
             }
         }
+        public static int ProcessInputFile(string filepath)
+        {
+            Console.WriteLine("Processing File Input!");
+            using (StreamReader reader = new(filepath))
+            {
+                CreateTreeFromFile<string> treeFile = new(reader);
+                treeFile.ProcessFile();
+                IBinaryTree<string> root = treeFile.CreateTree();
+                IEnumerator<string> treePreOdrItr = root.GetPreorderEnumerator();
+                GetEnumerator(treePreOdrItr, "PreOrdr");
+            }
+            return 0;
+        } 
     }
 }

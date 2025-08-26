@@ -46,13 +46,11 @@ namespace TreeLib.BinaryTree
 
             if ((rightTree != null) && (rightTree != this)) { rightTree.Clear(); }
         }
-
         public T GetRootData()
         {
             if (!IsEmpty())
                 return Root!.Data!;
-            else
-                throw new MyEmptyTreeExpection();
+            return default!;
         }
         public void SetRootData(T rootData)
         {
@@ -86,6 +84,20 @@ namespace TreeLib.BinaryTree
             return numberOfNodes;
         }
 
+        public override bool Equals(object? obj)
+        {
+            if ((obj == null) || GetType() != obj.GetType())
+                return false;
+            BinaryTree<T>? othr = (BinaryTree<T>)obj;
+
+            if (Root != null)
+                return Root!.Data!.Equals(othr.Root!.Data);
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         public IEnumerator<T> GetInorderEnumerator()
         {
             return new InorderEnumerator(Root!);
@@ -174,14 +186,14 @@ namespace TreeLib.BinaryTree
                 if (itrNode != null)
                 {
                     rootStack.Push(itrNode);
-                    
+
                 }
 
                 if (!(rootStack.IsEmpty()))
                 {
                     nextNode = rootStack.Pop();
                     CurrentNode_ = nextNode.Clone();
-                    if (nextNode.RightChild != null )
+                    if (nextNode.RightChild != null)
                         rootStack.Push(nextNode.RightChild);
                     itrNode = nextNode.LeftChild!;
                     mvNext = true;
