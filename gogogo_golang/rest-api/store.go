@@ -19,3 +19,7 @@ func NewStore(db *sql.DB) *Storage {
 func (s *Storage) CreateUser() error {
 	return nil
 }
+
+func (s *Storage) CreateTask(t *Task) (*Task, error) {
+
+}
