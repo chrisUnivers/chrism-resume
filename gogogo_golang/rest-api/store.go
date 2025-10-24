@@ -4,6 +4,7 @@ import "database/sql"
 
 type Store interface {
 	CreateUser() error
+	CreateTask(t *Task) (*Task, error)
 }
 
 type Storage struct {

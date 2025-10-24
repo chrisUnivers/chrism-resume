@@ -48,7 +48,7 @@ func (s *TasksService) handleCreateTask(w http.ResponseWriter, r *http.Request) 
 }
 
 func (s *TasksService) handleGetTask(w http.ResponseWriter, r *http.Request) {
-
+	// to handle get requests.
 }
 
 func validateTaskPayload(task *Task) error {
