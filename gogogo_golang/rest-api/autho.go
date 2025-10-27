@@ -4,8 +4,11 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func WithJWTAuth(handlerFunc http.HandlerFunc, store Store) http.HandlerFunc {
@@ -41,7 +44,6 @@ func WithJWTAuth(handlerFunc http.HandlerFunc, store Store) http.HandlerFunc {
 	}
 }
 
-// Handle unauthorized access
 func permissionDenied(w http.ResponseWriter) {
 	WriteJSON(w, http.StatusUnauthorized, ErrorResponse{
 		Error: fmt.Errorf("permission denied").Error(),
@@ -73,4 +75,27 @@ func validateJWT(t string) (*jwt.Token, error) {
 
 		return []byte(secret), nil
 	})
+}
+
+func HashPassword(password string) (string, error) {
+	hash, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		return "", err
+	}
+
+	return string(hash), nil
+}
+
+func CreateJWT(secret []byte, userID int64) (string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodPS256.SigningMethodRSA, jwt.MapClaims{
+		"userID":    strconv.Itoa(int(userID)),
+		"expiresAt": time.Now().Add(time.Hour * 24 * 120).Unix(),
+	})
+
+	tokesnString, err := token.SignedString(secret)
+	if err != nil {
+		return "", err
+	}
+
+	return tokesnString, nil
 }

@@ -21,8 +21,8 @@ func initConfig() Config {
 		Port:       getEnv("PORT", "8080"),
 		DBUser:     getEnv("DB_USER", "root"),
 		DBPassword: getEnv("DB_PASSWORD", "password"),
-		DBAddress:  fmt.Sprint("%s:%s", getEnv("DB_HOST", "127.0.0.1"), getEnv("DB_PORT", "3306")),
-		DBName:     getEnv("DB_NAME", "projectmanager"),
+		DBAddress:  fmt.Sprintf("%s:%s", getEnv("DB_HOST", "127.0.0.1"), getEnv("DB_PORT", "3306")),
+		DBName:     getEnv("DB_NAME", "taskscreationDb"),
 		JWTSecret:  getEnv("JWT_SECRET", "randomjwtsecretkey"),
 	}
 }

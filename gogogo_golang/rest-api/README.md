@@ -3,9 +3,12 @@
     + make run
   * To run the tests use:
     + make test
+  * Make sure you have a local MySql running for this application to run.
 
 ### Endpoints used(use something like postman):
-  * Post request for creating a user
+* End point for creating a user:
+    + http://localhost:3000/api/v1/users/register
+  * JSON postman for creating a user
     + Postman json:
     {
       "email": "chris@mail.com"
@@ -13,5 +16,11 @@
       "lastName": "Findlay"
       "password": "okKeys331"
     }
+  * End point for creating a task: 
+    + +  http://localhost:3000/api/v1/tasks
   * Post request for creating a task:
-    +  http://localhost:3000/api/v1/tasks
+    + {
+      "name": "day to day tasks"
+      "projectID":    "1",
+			"assignedToID": "16",
+    }
