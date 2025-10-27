@@ -24,3 +24,8 @@
       "projectID":    "1",
 			"assignedToID": "16",
     }
+
+* Building Dockerfile:
+  * docker build -t golang-rest-api .
+* Running Dockerfile:
+  * docker run
